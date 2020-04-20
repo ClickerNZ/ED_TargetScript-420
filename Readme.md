@@ -33,7 +33,7 @@ The formatting used herein suits the GUI console and not the editor.
 UPDATE:
 - Versions 331 and later now include the ability to read/process any of the key/value pairs within the
 status.json file that Elite Dangerous writes to the journal folder. 
-- Version 410 and 410a an external C++ based exe file (thanks to CMDR Touille) which resides and runs in the ED Journal file location. This program monitors status.json and sends the Flags key value via a TCP socket to TARGET.
+- Version 410 and 410a uses an external C++ based exe file (thanks to CMDR Touille) which resides and runs in the ED Journal file location. This program monitors status.json and sends the Flags key value via a TCP socket to TARGET.
 Together, these enable the script to align all of the state tracking I need.
 - Version 410b no longer uses the external C++ file. I've replaced this with an REXEC statement to run fnsReadStatusJson() every 500 ms.
 - Version 420 contains changes required for ED 3.7 - Fleet Carriers
@@ -47,7 +47,7 @@ When publishing or sharing this script the following should be included in the z
 - ED_TCPCallback.exe (+ ED_TCPCallback.cpp) - no longer required 
 - Voice.exe (users can find this on github and check out the source if they wish)
 - sounder.exe (users can find this on github via the same author as voice.exe)
-- target_enhanced.tmh (as of version 4.0.0, I use a modified target.tmh file)
+- target_enhanced.tmh As of version 4.0.0, I use a modified target.tmh file which itself was modified by Sedenion
 (whenever Thrustmaster update their TARGET software, I will update it and provide a new version here)
 - Windows batch file (SAMPLE_Launcher.cmd) to use to launch Elite Dangerous, my TARGET script and supporting apps)
 - The Elite Dangerous .bind file created to support this script
@@ -94,6 +94,11 @@ USAGE and SHARING:
 If you have obtained a copy of this script, feel free to use the ideas and methods for your own use and I 
 encourage you to share these with other like minded players.
 This software uses the MIT license which can be found at the root of this package/repository.
+
+CREDITS:
+Original script by Aussiedroid.
+Contribution and ideas lifted from Touille and Darkcyde.
+Modified target.tmh was sourced from Sedenion.
 
 DISCLAIMER:
 This software is a work in progress. 
