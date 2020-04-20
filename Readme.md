@@ -97,8 +97,8 @@ This software uses the MIT license which can be found at the root of this packag
 
 CREDITS:
 Original script by Aussiedroid.
-Contribution and ideas lifted from Touille and Darkcyde
-Modified target.tmh was sourced from Sedenion
+Contribution and ideas lifted from Touille and Darkcyde.
+Modified target.tmh was sourced from Sedenion.
 
 DISCLAIMER:
 This software is a work in progress. 
