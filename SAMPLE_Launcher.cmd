@@ -1,7 +1,7 @@
 @echo off
 
 echo.
-echo VERSION 4.1.0b
+echo VERSION 4.2.0
 echo.
 
 

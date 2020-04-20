@@ -1,5 +1,5 @@
 
-Version 4.1.0b
+Version 4.2.0
 
 HISTORY: 
 This script started with Aussiedoids' most excellent and extremely comprehensive ED script version 3.1.0
@@ -36,6 +36,7 @@ status.json file that Elite Dangerous writes to the journal folder.
 - Version 410 and 410a an external C++ based exe file (thanks to CMDR Touille) which resides and runs in the ED Journal file location. This program monitors status.json and sends the Flags key value via a TCP socket to TARGET.
 Together, these enable the script to align all of the state tracking I need.
 - Version 410b no longer uses the external C++ file. I've replaced this with an REXEC statement to run fnsReadStatusJson() every 500 ms.
+- Version 420 contains changes required for ED 3.7 - Fleet Carriers
 
 PACKAGE CONTENTS: 
 When publishing or sharing this script the following should be included in the zipped package;

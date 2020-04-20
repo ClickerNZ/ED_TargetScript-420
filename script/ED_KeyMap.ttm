@@ -3,7 +3,7 @@
 //	CMDR Clicker's Elite Dangerous Thrustmaster Warthog + TFRP Script	//
 //----------------------------------------------------------------------//
 
-// This file: ED_Keymap.tmh (v4.1.0b) ... supports Elite Dangerous v3.7 (Fleet Carriers)
+// This file: ED_Keymap.tmh (v4.2.0) ... supports Elite Dangerous v3.7 (Fleet Carriers)
 
 // Refer Change Log.txt in same folder
 
@@ -37,8 +37,8 @@
 //----------------------------------------------------------------------//
 
 	define VMajor		 						4						// Script Version Major Value			ie. 2.x.x
-	define VMinor		 						1						// Script Version Minor Value			ie. x.3.x
-	define VPoint								"0b_DEV"				// Script Version Point Update			ie. x.x.4
+	define VMinor		 						2						// Script Version Minor Value			ie. x.3.x
+	define VPoint								"0_DEV"					// Script Version Point Update			ie. x.x.4
 
 	define KBLayout 							KB_ENG					// Default Keyboard Layout
 
