@@ -1,0 +1,124 @@
+
+//----------------------------------------------------------------------//
+//	CMDR Clicker's Elite Dangerous Thrustmaster Warthog + TFRP Script	//
+//----------------------------------------------------------------------//
+
+// This file: ED_UserSettings.tmh (v4.1.0b) ... supports Elite Dangerous v3.7 (Fleet Carriers)
+
+// Refer Change Log.txt in same folder
+
+// LEGEND: 
+// ========================================================
+// fnName()					refer to ED_Functions file
+// initName()				refer to ED_Functions file
+// fnsName()				refer to ED_StateTracker file
+// tgName()					refer to ED_Toggles file
+// mName					refer to ED_Macros file
+// Global Defines			refer to ED_KeyMap file
+// Global Variables			refer to ED_GlobalVars file
+// User Config Settings		refer to ED_UserSettings file
+// ========================================================
+
+// START
+
+//---------------//
+// LED intensity //
+//---------------//
+	
+	int	SetLED	 				= 43;					// Set LED Backlight Level on Throttle
+														// Level 0: 0	- 42 (off)
+														// Level 1: 43	- 85
+														// Level 2: 86	- 128
+														// Level 3: 129 - 171
+														// Level 4: 172	- 214
+														// Level 5: 215 - 255
+
+//----------------//
+// Status.json    //
+//----------------//
+
+	// WARNING:		This script relies on and makes extensive use of 'status.json' key values
+	//				If the script cannot find status.json, it will abort.
+
+	// NOTE:		Set the 'alias' below to point to the Elite Dangerous journal folder / status.json file
+	//				The below path is usually where the Elite Dangerous journal file can be found.
+	//				Just replace '<username>' with your windows username.
+	
+	alias StatusFile			= "C:\\Users\\Dennis\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
+	
+	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. 
+
+
+//----------------//
+// Text To Speech //
+//----------------//
+
+	// Refer fnTextToSpeech(text) function for usage etc
+	// Set voicepath to where you copied voice.exe. Add any command line arguments you want within 'VoiceCMD'!
+	// Run voice.exe in a command prompt (from where you copied it) with no arguments etc to see a list of options
+	// VoiceVolume should be set to the relative volume level (%) for voice.exe 
+	// VoiceCMD is example on how to use command line arguments. Rate = 2, voice = "Catherine" (must be installed)
+
+	int		EnableVoice			= 1; 					// 0 = Disable, 1 = Enable. Enable this if you wish to use "voice.exe". 
+														// Toggled via tgTxt2Speech();
+														
+	alias	VoicePath			= "d:\\Thrustmaster\\ED_TargetScript\\voice.exe";
+	int		VoiceVolume			= 75;												// Volume set at 75%
+	alias	VoiceCMD			= "-r 2 -n \"Microsoft Catherine\"";
+
+//------------------//
+// WAV Sound Player //
+//------------------//
+
+	// Refer fnSoundFX() function for usage etc
+	// Set SoundPath to where you copied sounder.exe. 
+	// Set WAVPath to where you copied any wav files you wish to use
+	// Set 'SoundCMD' for any command line arguments you wish to use 
+	// Run sounder.exe in a command prompt (from where you copied it) with no arguments etc to see a list of options
+
+	int		EnableSoundFX		= 1; 					// 0 = Disable, 1 = Enable. Enable this if you wish to use "sounder.exe". 
+	alias	SoundPath			= "d:\\Thrustmaster\\ED_TargetScript\\sounder.exe";
+	alias	WAVPath				= "d:\\Thrustmaster\\ED_TargetScript\\sounds\\";
+	alias	SoundCMD			= "";
+
+
+//---------//
+// TIMINGS //
+//---------//
+
+	// These delay settings affect how fast the script executes key presses etc.
+	// If you find the macros are dropping characters, then the delay is too short.
+	// "LongPress" is a personal setting. I find a half second is about right for me.
+	
+	define PulseTime 			33						// PULSE+ Delay time (ms) - Used as key-hold-down time.
+	define DelayTime 			99						// D() Delay time 	 (ms) - Used in macros as the time between releasing one key and pressing the next.
+	define LongPress	 		500						// Tempo Delay 		 (ms) - Used in Tempos. ie hold switch/button for 0.5 seconds for alternate function
+	
+	define DiscoDelay			6100					// Discovery scanner 'hold-trigger' timer (6.1 seconds).
+
+
+//--------------------------//
+// GENERAL STATUS VARIABLES //
+//--------------------------//
+
+	int		AutoHanger			= 0;					// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't - TESTING
+
+
+//-------------//
+// AXIS CURVES //
+//-------------//
+
+	// The below curve arrays are set for "off", "mild" and "medium"
+	// Eg 	AP Switch set at APPAT	= (Curve=0, Zoom=0)
+	//		AP Switch set to APAH	= (Curve=1, Zoom=0)
+	//		AP Switch set to APALT	= (Curve=2, Zoom=-1)
+	// I use a common Deadzone for each. Set to 1
+	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
+
+//								APPAT	APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
+	short JS_CURVE[] 		= {	0,		1,      2};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	short JS_ZOOM[]  		= {	0,		0,     -1};		// Set zoom level 
+
+	define JS_DEADZONE 		1							// Set the JS Deadzone
+	
+
