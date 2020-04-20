@@ -33,7 +33,7 @@ The formatting used herein suits the GUI console and not the editor.
 UPDATE:
 - Versions 331 and later now include the ability to read/process any of the key/value pairs within the
 status.json file that Elite Dangerous writes to the journal folder. 
-- Version 410 and 410a an external C++ based exe file (thanks to CMDR Touille) which resides and runs in the ED Journal file location. This program monitors status.json and sends the Flags key value via a TCP socket to TARGET.
+- Version 410 and 410a uses an external C++ based exe file (thanks to CMDR Touille) which resides and runs in the ED Journal file location. This program monitors status.json and sends the Flags key value via a TCP socket to TARGET.
 Together, these enable the script to align all of the state tracking I need.
 - Version 410b no longer uses the external C++ file. I've replaced this with an REXEC statement to run fnsReadStatusJson() every 500 ms.
 - Version 420 contains changes required for ED 3.7 - Fleet Carriers
