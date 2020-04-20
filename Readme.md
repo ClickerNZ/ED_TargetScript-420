@@ -47,7 +47,7 @@ When publishing or sharing this script the following should be included in the z
 - ED_TCPCallback.exe (+ ED_TCPCallback.cpp) - no longer required 
 - Voice.exe (users can find this on github and check out the source if they wish)
 - sounder.exe (users can find this on github via the same author as voice.exe)
-- target_enhanced.tmh (as of version 4.0.0, I use a modified target.tmh file)
+- target_enhanced.tmh As of version 4.0.0, I use a modified target.tmh file which itself was modified by Sedenion
 (whenever Thrustmaster update their TARGET software, I will update it and provide a new version here)
 - Windows batch file (SAMPLE_Launcher.cmd) to use to launch Elite Dangerous, my TARGET script and supporting apps)
 - The Elite Dangerous .bind file created to support this script
@@ -94,6 +94,11 @@ USAGE and SHARING:
 If you have obtained a copy of this script, feel free to use the ideas and methods for your own use and I 
 encourage you to share these with other like minded players.
 This software uses the MIT license which can be found at the root of this package/repository.
+
+CREDITS:
+Original script by Aussiedroid.
+Contribution and ideas lifted from Touille and Darkcyde
+Modified target.tmh was sourced from Sedenion
 
 DISCLAIMER:
 This software is a work in progress. 
