@@ -126,9 +126,9 @@ include "ED_CommsControl.tmh"
 			);
 			
 		MapKeyRUMD(&Joystick, TG1,		// TG1 RELEASE
-			0,
-			EXEC("ActKey(PrimaryFire);"),
-			0
+			0,																								// RU -
+			EXEC("ActKey(PrimaryFire);"),																	// RM - Release trigger 
+			0																								// RD - 
 			);
 			
 		MapKey(&Joystick, TG2, 0);		// (Gun Trigger - Stage 2)											// <not currently used>
@@ -155,9 +155,9 @@ include "ED_CommsControl.tmh"
 			);
 			
 		MapKeyRUMD(&Joystick, S2,		// S2 RELEASE
-			0,
-			EXEC("ActKey(SecondaryFire);"),
-			0
+			0,																								// RU -
+			EXEC("ActKey(SecondaryFire);"),																	// RM - Release trigger 
+			0																								// RD -
 			);
 
 
@@ -220,10 +220,10 @@ include "ED_CommsControl.tmh"
 //		(Data Management Switch)		// Power (PIP) Management
 //		------------------------
 
-		MapKey(&Joystick, H3U, EXEC("fnPIPManager(ENG);"));
-		MapKey(&Joystick, H3D, PULSE+BalancePower);
-		MapKey(&Joystick, H3L, EXEC("fnPIPManager(SYS);"));
-		MapKey(&Joystick, H3R, EXEC("fnPIPManager(WEP);"));
+		MapKey(&Joystick, H3U, EXEC("fnPIPManager(ENG);"));												// Fire Engine focussed PIP sequence
+		MapKey(&Joystick, H3D, PULSE+BalancePower);														// Balance PIP sequence
+		MapKey(&Joystick, H3L, EXEC("fnPIPManager(SYS);"));												// Fire System focussed PIP sequence
+		MapKey(&Joystick, H3R, EXEC("fnPIPManager(WEP);"));												// Fire Weapon focussed PIP sequence
 		
 //		(Countermeasures Management Switch)		// Countermeasures and camera/FSS Zoom
 //		-----------------------------------
@@ -246,10 +246,10 @@ include "ED_CommsControl.tmh"
 			CameraBlurOut																				// D - Camera Blur - OUT
 			);
 
-		MapKeyRUMD(&Joystick, H4L,
-			0,																							// U - 
-			EXEC("ActKey(ChargeECM); printf(\"Fired !\\x0a\");"),										// M - Fire ECM
-			0																							// D - 
+		MapKeyRUMD(&Joystick, H4L,				// RELEASE
+			0,																							// RU - 
+			EXEC("ActKey(ChargeECM); printf(\"Fired !\\x0a\");"),										// RM - Fire ECM when trigger is released
+			0																							// RD - 
 			);
 // ---			
 		MapKeyUMD(&Joystick, H4R,
@@ -275,7 +275,6 @@ include "ED_CommsControl.tmh"
 			PULSE+ShowConnectionStatus,							// U - Display Bandwidth counters only. Alt = "mShowGameStats"
 			PULSE+ResetHeadOrientation,							// M - default - reset EDTracker centre
 			0													// D - 
-//			PULSE+SystemMap										// D - Go to System Map view
 			);
 
 // 		(Left Throttle Button)	// Headlook On/Off / External Camera
@@ -334,9 +333,9 @@ include "ED_CommsControl.tmh"
 			EXEC("fnMicControl(1);")							// O - Push to Talk
 			);
 			
-		MapKeyRIO(&Throttle, MSP, 								// MSP Release
-			0, 													// I - do nothing
-			EXEC("fnMicControl(0);")							// O - Release PTT 
+		MapKeyRIO(&Throttle, MSP, 			// RELEASE	
+			0, 													// RI - do nothing
+			EXEC("fnMicControl(0);")							// RO - Release PTT 
 			);
 
 //		(Speed Brake)		// Reverse Throttle function modifiers
@@ -348,7 +347,7 @@ include "ED_CommsControl.tmh"
 			EXEC("tgReverseThrust(2);")							// D - Align Switch only	- Deploy Speedbrake only (no Reverse)
 			);
 
-		MapKeyR(&Throttle, SPDF, EXEC("tgReverseThrust(1);"));	// Turn off Reverse Throttle
+		MapKeyR(&Throttle, SPDF, EXEC("tgReverseThrust(1);"));	// RELEASE - Turn off Reverse Throttle
 		
 		MapKey(&Throttle, SPDB, PULSE+EngineBoost);				// Boost
 
@@ -422,9 +421,9 @@ include "ED_CommsControl.tmh"
 			);
 			
 		MapKeyRUMD(&Throttle, FLAPU,				// RELEASE
-			0,																				// U -
-			PULSEGalaxyMap,																	// M - Galaxy View - OFF
-			0																				// D -
+			0,																				// RU -
+			PULSE+GalaxyMap,																// RM - Galaxy View - OFF
+			0																				// RD -
 			);
 			
 		MapKey(&Throttle, FLAPM, 0);
@@ -436,9 +435,9 @@ include "ED_CommsControl.tmh"
 			);
 			
 		MapKeyRUMD(&Throttle, FLAPD,				// RELEASE
-			0,																				// U -
-			PULSE+SystemMap,																// M - System Map - OFF
-			PULSE+LED(&Throttle, LED_INTENSITY, SetLED)										// D - Turn Throttle Base LEDs on
+			0,																				// RU -
+			PULSE+SystemMap,																// RM - System Map - OFF
+			PULSE+LED(&Throttle, LED_INTENSITY, SetLED)										// RD - Turn Throttle Base LEDs on
 			);
 
 //		(Auxiliary Power Unit)

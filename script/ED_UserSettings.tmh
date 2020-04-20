@@ -44,7 +44,7 @@
 	//				The below path is usually where the Elite Dangerous journal file can be found.
 	//				Just replace '<username>' with your windows username.
 	
-	alias StatusFile			= "C:\\Users\\Dennis\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
+	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
 	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. 
 
