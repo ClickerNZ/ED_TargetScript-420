@@ -19,6 +19,15 @@
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
+
+// Index:	Line		FUNCTION
+//			Line 54: 	int fnsGetStatusFileInfo()
+//			Line 99: 	int fnsReadStatusJson()
+//			Line 165: 	int fnsGetKeyValue()
+//			Line 310: 	int fnsProcessFlags()
+//			Line 511: 	int fnsProcessGuiFocus()
+//			Line 549: 	int fnsStartCheck()
+	
 // START
 
 	// Global Variables defined here...
@@ -85,7 +94,8 @@
 	int ReadErrorCount = 0;
 	int ReadErrorSent = 0;
 	
-	//
+	// ----------
+	
 	int fnsReadStatusJson() {
 	
 		int 	fp;
@@ -292,6 +302,7 @@
 
 	// End of fnsGetKeyValue()
 
+
 	// FUNCTION: Read and process "Flags" value from "status.json"
 	// Input: 'UpdateLEDs', 1 = update, 0 = no update					// <<<<<<<<<<<<< Remove the "update LEDs feature once we get this all working again.
 	// Output: Flags value
@@ -420,7 +431,7 @@
 				}
 			}
 
-			if (fLanded != ld) {
+			if (fLanded != ld) {		// Framework for future functionality
 				if (fLanded) {
 					VoiceTxt = "Landed";
 				}
@@ -430,7 +441,7 @@
 //				fnTextToSpeech(VoiceTxt);
 			}
 			
-			if (fDocked != dk) {
+			if (fDocked != dk) {		// Framework - currently testing - may not be viable in current form without additional information from journal
 				if (fDocked) {							
 					VoiceTxt = "Docked"; 
 					if (AutoHanger) {
@@ -494,6 +505,7 @@
 	}
 	// END of fnsProcessFlags()
 
+
 	// FUNCTION: Read and process 'GuiFocus' key value in status.json
 
 	int fnsProcessGuiFocus() {
@@ -530,7 +542,8 @@
 			return GUIFocus;
 		}
 	}
-	
+
+
 	// FUNCTION: Initial check to see if game is already running after we've restarted the script.
 	
 	int fnsStartCheck() {
