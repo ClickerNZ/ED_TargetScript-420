@@ -101,8 +101,8 @@
 // GENERAL STATUS VARIABLES //
 //--------------------------//
 
-	int		AutoHanger			= 0;					// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't - TESTING
-
+	int		AutoHanger			= 0; //  !! TESTING !!	// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't
+	
 
 //-------------//
 // AXIS CURVES //
@@ -120,5 +120,6 @@
 	short JS_ZOOM[]  		= {	0,		0,     -1};		// Set zoom level 
 
 	define JS_DEADZONE 		1							// Set the JS Deadzone
-	
+
+
 // END
