@@ -7,8 +7,6 @@
 
 // Refer Change Log.txt in same folder
 
-// mEnterHanger is different in Fleet Carriers 
-
 // LEGEND: 
 // ========================================================
 // fnName()					refer to ED_Functions file
@@ -20,6 +18,24 @@
 // Global Variables			refer to ED_GlobalVars file
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
+
+
+// Index:	Line		FUNCTION
+//			Line 35:	fnCustomCommands()
+//			Line 61:	mRequestDock 
+//			Line 74:	mDeploySRV 
+//			Line 86:	mBoardShip 
+//			Line 103:	mShowGameStats
+//			Line 108:	mFastModeSwitch0 
+//			Line 119:	mFastModeSwitch1 
+//			Line 133:	mFastModeSwitch2
+//			Line 146:	mReportCrimesToggle
+//			Line 167:	mNAVBeaconWing
+//			Line 192:	mNAVBeaconOff
+//			Line 216:	mClearChatBox
+//			Line 228:	mEnterHanger
+//			Line 255:	mLaunch
+
 
 // START
 

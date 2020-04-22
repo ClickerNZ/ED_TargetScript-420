@@ -19,6 +19,24 @@
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
+
+// Index:	Line		FUNCTION
+//			Line 48: 	int tgTxt2Speech()
+//			Line 71: 	int tgEnhancedFAOFF()
+//			Line 101: 	int tgTriggerMode()
+//			Line 137: 	int tgLights()
+//			Line 195: 	int tgSilentRunning()
+//			Line 225: 	int tgCargoScoop()
+//			Line 254: 	int tgLandingGear()
+//			Line 292: 	int tgReverseThrust()
+//			Line 322: 	int tgHardpoints()
+//			Line 350: 	int tgHUDMode()
+//			Line 365: 	int tgFSSMode()
+//			Line 392: 	int tgPlanetView()
+//			Line 414: 	int tgWarpDrive()
+//			Line 472: 	int tgExtCamera()
+	
+	
 // START
 
 //---------//

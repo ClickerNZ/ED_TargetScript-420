@@ -19,6 +19,24 @@
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
+
+// Index:	Line		FUNCTION
+//			Line 35:	fnCustomCommands()
+//			Line 61:	mRequestDock 
+//			Line 74:	mDeploySRV 
+//			Line 86:	mBoardShip 
+//			Line 103:	mShowGameStats
+//			Line 108:	mFastModeSwitch0 
+//			Line 119:	mFastModeSwitch1 
+//			Line 133:	mFastModeSwitch2
+//			Line 146:	mReportCrimesToggle
+//			Line 167:	mNAVBeaconWing
+//			Line 192:	mNAVBeaconOff
+//			Line 216:	mClearChatBox
+//			Line 228:	mEnterHanger
+//			Line 257:	mLaunch
+
+
 // START
 
 	int	mRequestDock, mDeploySRV, mShowGameStats, mReportCrimesToggle, mNAVBeaconWing, mNAVBeaconOff;
@@ -78,7 +96,7 @@
 			PULSE+UIDown, D(200),
 			PULSE+UIUp, D(200),
 			PULSE+UIUp, D(200),
-			PULSE+UISelect, D(500),			// Testing...until the macro is reliable
+//			PULSE+UISelect, D(500),								// Testing...until the macro is reliable
 			LOCK);
 
 		// MACRO: Display the combined OSD FPS & Bandwidth meters

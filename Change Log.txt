@@ -1,8 +1,9 @@
 // CMDR Clicker Thrustmaster TARGET Script Change Log //
 
-v4.2.0	- Ported code from 4.1.0b
+v4.2.0	- Point Release
+		- Ported code from 4.1.0b
 		- Update Enter Hanger Macro to cater for new menus
-		- 
+		- Added index section to function .tmh files
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)

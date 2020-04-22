@@ -19,6 +19,38 @@
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
+// Index:	Line		FUNCTION
+//			Line 61: 	int initJoystickAxis()
+//			Line 70: 	int initThrottleAxis()
+//			Line 91: 	int initTFRPRudder()
+//			Line 99: 	int initTextToSpeech()
+//			Line 114: 	int initSoundFX()
+//			Line 134: 	int fnNotValid()
+//			Line 150: 	int fnSetJoystickCurves()
+//			Line 186: 	int fnSetSliderCurve()
+//			Line 209: 	int fnGetFlightMode()
+//			Line 228: 	int fnFlashLED()
+//			Line 240: 	int fnSetLEDs()
+//			Line 272: 	int fnFlashStart()
+//			Line 298: 	int fnTextToSpeech()
+//			Line 328: 	int fnVoiceVolume()
+//			Line 382: 	int fnSoundFX()
+//			Line 404: 	int fnGameStarted()
+//			Line 453: 	int fnPIPMode()
+//			Line 501: 	int fnPIPManager()
+//			Line 538: 	int fnPIPMapper()
+//			Line 578: 	int fnAdvFireControl()
+//			Line 635: 	int fnAdvancedSCB()
+//			Line 667: 	int fnHeatsink()
+//			Line 681: 	int fnChaff()
+//			Line 692: 	int fnDeploySRV()
+//			Line 723: 	int fnRequestDock()
+//			Line 734: 	int fnHangerServices()
+//			Line 788: 	int fnModeSwitch()
+//			Line 822: 	int fnPrintState()
+//			Line 833: 	int fnStateDump()
+//			Line 933: 	int fnDebugStates()
+
 // START
 
 //--------------------------//
@@ -147,6 +179,7 @@
 			printf("Joystick Curves[%s]	: LDZ=0, CDZ=%d, RDZ=0, Curve= %d, Zoom= %d\x0a", JSCurveSetting, JS_DEADZONE, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
 	}
 
+
 	// FUNCTION:	Set context driven DX-SLIDER curves
 	// Parameter:	0 = linear, 1 or 2 = non-linear
 
@@ -170,6 +203,7 @@
 			printf("Slider Curve Profile:	%d\x0a", x);
 	}
 
+
 	// FUNCTION: Determine current flight mode and set Slider Curves appropriately
 	
 	int fnGetFlightMode() {
@@ -187,6 +221,7 @@
 		
 	}
 
+
 	// FUNCTION:	Flashes state LED when toggled
 	// Parameter:	"LEDx" where x = 1 - 5
 
@@ -197,6 +232,7 @@
 			counter = counter + 1;
 		}
 	}
+
 
 	// FUNCTION: Sets Status LEDs according to state flags
 	// Argumants: x ... not used
@@ -230,6 +266,7 @@
 
 	}
 
+
 	// FUNCTION: Flashes all LEDs on Throttle to signify game has loaded
 
 	int fnFlashStart() {
@@ -241,7 +278,8 @@
 			i = i + 1;
 		}
 	}
-	
+
+
 	// FUNCTION: 	Text to Speech using voice.exe
 	// Requires: 	Voice.exe available in path set in ED_UserSettings (VoicePath)
 	//				VoiceCMD must also be set correctly in ED_UserSettings.tmh 
@@ -328,6 +366,7 @@
 		fnTextToSpeech(&c);											// send to TextToSpeech
 	}
 
+
 	// FUNCTION:	Play WAV file sound effects
 	// Parameter:	wavfile = Name of wav file to be played. '.wav' is optional
 	//				vol = volume% (some wav files are much quieter than others)
@@ -358,6 +397,7 @@
 			
 		}
 	}
+
 
 	// FUNCTION:	Announce Game Start and initialise stuff
 	
@@ -405,6 +445,7 @@
 		printf("\x0a\Script running....waiting for input...\x0a\x0a");
 				
 	}
+
 
 	// FUNCTION: Sets PIP profiles
 	// Parameter: 0 = Reset PIPMode to 0. 1 = Increment PIPMode (0-4)
@@ -490,6 +531,7 @@
 		}		
 	}
 
+
 	// FUNCTION: Sets Auto-PIP Mapping & then Sends Keystrokes.
 	// Parameters:  (Max, Min, Bal). Valid = SYS, ENG, WEP, MID (refer EDGlabalVars.tmh)
 
@@ -520,6 +562,7 @@
 		}
 	}
 
+
 	// FUNCTION:	Perform Primary and Secondary trigger actions
 	// Parameter:	x = 0 (Primary Normal), x = 1 (Primary shifted), x = 2 (Secondary Normal), x = 3 (Secondary shifted)
 	// Requires:	'FireModeP' and 'FireModeS' to be set to 0 (Disco Scanner), or 1 (press2fire/press2stop)
@@ -530,6 +573,7 @@
 	int TriggerStateP = 0;
 	int TriggerStateS = 0;
 
+	// ------------------------------------------------
 	
 	int fnAdvFireControl(int x) {
 
@@ -582,6 +626,7 @@
 
 	}
 
+
 	// FUNCTION:	Normal flight: 		Fire Shield Cell Bank or two and followup with a heatsink
 	//				Supercruise+FSS:	Zoom Function for FSS
 	//				Camera Mode:		Zoom IN function
@@ -616,6 +661,7 @@
 		}
 	}
 
+
 	// FUNCTION: Deploy Heatsink / FSS Zoom
 	
 	int fnHeatsink() {
@@ -629,6 +675,7 @@
 		}
 	}
 
+
 	// FUNCTION: Deploy Chaff
 	
 	int fnChaff() {
@@ -637,6 +684,7 @@
 			printf("!!!   Chaff  Fired   !!!\x0a");
 		}
 	}
+
 
 	// FUNCTION: Deploy/Recover SRV. Set Slider Curve and Lights flag.
 	// Parameter: 0 = Deploy SRV, 1 = Board ship
@@ -669,6 +717,7 @@
 		}
 	}
 
+
 	// FUNCTION: Calls Request Dock macro. Set power to shields
 
 	int fnRequestDock() {
@@ -677,6 +726,7 @@
 		printf("\x0a=	Docking request sent	=\x0a");
 		printf("=	    Power to shields	=\x0a\x0a");
 	}
+
 
 	// FUNCTION: Enter/Exit Hanger
 	// Parameter: 0 = Exit, 1 = Enter
@@ -697,7 +747,7 @@
 						ActKey(PULSE+KEYON+mEnterHanger);
 						InHanger = 1;
 					}
-//					else {														// Not Required
+//					else {														// Not Required?
 //						VoiceTxt = "We're already in the hanger commander";
 //						printf("%s\x0a", VoiceTxt);
 //						fnTextToSpeech(VoiceTxt);
@@ -729,7 +779,8 @@
 			}
 		}
 	}
-	
+
+
 	// FUNCTION:	Menulog
 	// Parameter:	'mode'. Valid = 0, 1 or 2
 	// WARNING:		Only works if menu selection is at home position, otherwise unpredicatable result!
@@ -760,6 +811,7 @@
 		printf("\x0a\x0a\Game has reloaded\x0a");
 		fnGameStarted();
 	}
+
 
 //----------------------//
 // REPORT SCRIPT STATES //										// (Optimised Formatting for TARGET GUI)
@@ -819,15 +871,15 @@
 
 		int TOD = " NOW ";
 
-		system("time /T > c:\\tod.txt");				// Create a timestamp
+		system("time /T > c:\\tod.txt");				// Create local timestamp
 
 		int fp = fopen("c:\\tod.txt", "r");
 		if (fp) {
-			fread(TOD, 1, 5, fp);						// Read the timestamp
+			fread(TOD, 1, 5, fp);						// Read local timestamp
 			fclose(fp);
 		}
 
-		myResult = fnsGetKeyValue("timestamp", 2);		// sets 'keyvalue' char array to timestamp
+		myResult = fnsGetKeyValue("timestamp", 2);		// sets 'keyvalue' char array to status.json timestamp
 
 		printf("\x0aShip System States @ %s       JSON-Timestamp: %s       Flags: %u\x0a", TOD, &keyvalue, Flags);
 		printf("-----------------------------------------------------------------------------------------------------------------------------------------------\x0a");
@@ -873,6 +925,7 @@
 			printf("-----------------------------------------------------------------------------------------------------------------------------------------------\x0a");
 		}
 	}
+
 
 	// FUNCTION:	Turn Debug ON/OFF then dump states
 	// Parameter:	x = 1 (DebugON) or 0 (DebugOFF)

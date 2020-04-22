@@ -29,6 +29,14 @@
 
 // STATUS:		TESTING
 
+// Index:	Line		FUNCTION
+//			Line 78:	initCommsChannels()
+//			Line 111:	fnChannelSelect()
+//			Line 142:	fnMicControl()
+//			Line 251:	tgPTTMode()
+//			Line 260:	fnCommStatus()
+		
+
 // Global Vars
 // =================================================================================================== 
 	define MuteChannel1			L_ALT+USB[0x3B]			// LALT+F2		(Map this to VoiceAttack)
