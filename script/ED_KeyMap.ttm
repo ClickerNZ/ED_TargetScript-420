@@ -30,6 +30,7 @@
 // Do not assign  ALT+F4 to a variable	(L_ALT+USB[0x3D] or R_ALT+USB[0x3D])
 // PULSE will send an ALT+F4 to the current active window and close it!
 
+
 // START
 
 //----------------------------------------------------------------------//
@@ -46,7 +47,8 @@
 // BINDINGS																//
 //----------------------------------------------------------------------//
 
-// NOTE: If you change any of these you must also change binding in game
+// NOTE:	If you change any of these you must also change binding in game
+//			This includes the commented ones!
 
 		// WEAPON CONTROL //
 	define PrimaryFire 							DX1						// JOY 1 (Also mapped to RSHIFT+1 in ED Bindings)
@@ -247,7 +249,7 @@
 		// MISCELLANEOUS //
 //	define InternalVoiceCommsPTT 				USB[0x  ]				// <not mapped>
 	define ExtCamera		 					USB[0x5D] 				// NUMPAD 5
-//	define ExtCameraSRV							USB[0x5E]				// NUMPAD 6
+//	define ExtCameraSRV							USB[0x5D]				// NUMPAD 5
 	define OrbitLines	 						USB[0x2E] 				// =
 	define HideShipGUI 							L_CTL+L_ALT+USB[0x0A]	// LCTRL+LALT+G
 	define HideCameraGUI						L_ALT+USB[0x0A]			// LALT+G
