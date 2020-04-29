@@ -44,7 +44,6 @@ When publishing or sharing this script the following should be included in the z
 - The license file
 - ED_Main.tmc, ED_Functions.tmh, ED_Macros.ttm, ED_Toggles.tmh,  
 - ED_StateTracker.tmh, ED_KeyMap.tmh, ED_GlobalVars.tmh, ED_UserSettings.tmh 
-- ED_TCPCallback.exe (+ ED_TCPCallback.cpp) - no longer required 
 - Voice.exe (users can find this on github and check out the source if they wish)
 - sounder.exe (users can find this on github via the same author as voice.exe)
 - target_enhanced.tmh As of version 4.0.0, I use a modified target.tmh file which itself was modified by Sedenion
@@ -67,14 +66,7 @@ Example c:\Thrustmaster\ED_TargetScript
 3) Copy voice.exe and sounder to c:\Thrustmaster\ED_TargetScript\ and set correct path in the ED_UserSettings.tmh file for
 both VoicePath and VoiceCMD variables
 
-3a) Copy Sounds folder to c:\Thrustmaster\ED_TargetScript\ and set correct path in ED_UserSettings file 
-
-4) - THIS IS NO LONGER REQUIRED - Copy ED_TCPCallback.exe to wherever ED writes its status.json files.
-This is usually %userprofile%\saved games\frontier developments\elite dangerous\
-Then, create a shortcut to this exe on your desktop and run it when you run the game.
-Or, ideally, include a 'start' statement in the windows batch file launcher program included in this package.
-If you are adventurous (and know how), you can hard code the status.json file path into ED_TCPCallback.cpp and recompile.
-This will allow you to copy and run ED_TCPCallback.exe from anywhere you want (eg. c:\Thrustmaster\ED_TargetScript\ED_TCPCallback\)
+4) Copy Sounds folder to c:\Thrustmaster\ED_TargetScript\ and set correct path in ED_UserSettings file 
 
 5) Print out and/or study the image files within the 'Maps' folder.
 
