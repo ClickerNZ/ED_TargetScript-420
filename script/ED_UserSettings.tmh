@@ -44,7 +44,8 @@
 	//				The below path is usually where the Elite Dangerous journal file can be found.
 	//				Just replace '<username>' with your windows username.
 	
-	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
+//	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
+	alias StatusFile			= "C:\\Users\\clicker\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
 	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. 
 
@@ -57,14 +58,14 @@
 	// Set voicepath to where you copied voice.exe. Add any command line arguments you want within 'VoiceCMD'!
 	// Run voice.exe in a command prompt (from where you copied it) with no arguments etc to see a list of options
 	// VoiceVolume should be set to the relative volume level (%) for voice.exe 
-	// VoiceCMD is example on how to use command line arguments. Rate = 2, voice = "Catherine" (must be installed)
+	// VoiceCMD is example on how to use command line arguments. Rate = 1, voice = "Catherine" (must be installed)
 
 	int		EnableVoice			= 1; 					// 0 = Disable, 1 = Enable. Enable this if you wish to use "voice.exe". 
 														// Toggled via tgTxt2Speech();
 														
 	alias	VoicePath			= "d:\\Thrustmaster\\ED_TargetScript\\voice.exe";
 	int		VoiceVolume			= 75;												// Volume set at 75%
-	alias	VoiceCMD			= "-r 2 -n \"Microsoft Catherine\"";
+	alias	VoiceCMD			= "-r 1 -n \"Microsoft Catherine\"";
 
 //------------------//
 // WAV Sound Player //
@@ -116,7 +117,7 @@
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 
 //								APPAT	APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
-	short JS_CURVE[] 		= {	0,		1,      2};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	short JS_CURVE[] 		= {	0,		1,      3};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
 	short JS_ZOOM[]  		= {	0,		0,     -1};		// Set zoom level 
 
 	define JS_DEADZONE 		1							// Set the JS Deadzone
