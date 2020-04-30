@@ -81,10 +81,12 @@
 		
 		// Slew Control Mapping...
 		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axis
-		SetSCurve(&Throttle, SCX, 0, 20, 0, 2, -1);
+//		SetSCurve(&Throttle, SCX, 0, 20, 0, 2, -1);
+		SetSCurve(&Throttle, SCX, 0, 10, 0, 0, 0);
 		
 		MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control Y Axis
-		SetSCurve(&Throttle, SCY, 0, 20, 0, 2, -1);
+//		SetSCurve(&Throttle, SCY, 0, 20, 0, 2, -1);
+		SetSCurve(&Throttle, SCY, 0, 10, 0, 0, 0);
 	}
 
 	// FUNCTION: Initialise Rudder
@@ -131,15 +133,16 @@
 
 	// FUNCTION:	Announce if function called is not valid
 	
-	int fnNotValid(int fnName) {
+	int fnNotValid(int fnName, int reason) {
 		char fntxt;
 		Dim(&fntxt, 100);										// Increase buffersize if required
 		fntxt[0] = 0;
-		strcat(&fntxt, fnName);
-		strcat(&fntxt, " not valid at this time.");
+//		strcat(&fntxt, fnName);
+//		strcat(&fntxt, " not valid at this time.");
+		sprintf(&fntxt, "%s not available at this time, %s", fnName, reason);
 		
-		fnTextToSpeech(&fntxt);
-		printf("!!! Function: %s - is not valid at this time !!!\x0a", fnName);		
+		fnTextToSpeech(&fntxt, 0);
+		printf("!!! Function: %s !!!\x0a", &fntxt);		
 	}
 	
 
@@ -173,7 +176,7 @@
 			printf("-----------------------------------------------------------------------------------------------------------------------------------------------\x0a");
 		}
 		else {
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 		}			
 		if (print)
 			printf("Joystick Curves[%s]	: LDZ=0, CDZ=%d, RDZ=0, Curve= %d, Zoom= %d\x0a", JSCurveSetting, JS_DEADZONE, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
@@ -228,7 +231,7 @@
 	int fnFlashLED(int x) {
 		int counter = 0;																			// Flashes LED# (parsed as parameter when calling) odd number of times.
 		while (counter < 11) {																		// Odd number TOGGLES LED.
-			DeferCall(counter*100, &ActKey, PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT^x));	// Loop effectively issues 11 DeferCalls at ~80 mSec apart
+			DeferCall(counter*100, &ActKey, PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT^x));	// Loop effectively issues 11 DeferCalls at ~100 mSec apart
 			counter = counter + 1;
 		}
 	}
@@ -237,7 +240,8 @@
 	// FUNCTION: Sets Status LEDs according to state flags
 	// Argumants: x ... not used
 	
-	int fnSetLEDs(int x) {
+//	int fnSetLEDs(int x) {
+	int fnSetLEDs() {
 	
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0)); 		// set GLOBAL LED ON
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)); 		// set LED 1 OFF
@@ -283,29 +287,36 @@
 	// FUNCTION: 	Text to Speech using voice.exe
 	// Requires: 	Voice.exe available in path set in ED_UserSettings (VoicePath)
 	//				VoiceCMD must also be set correctly in ED_UserSettings.tmh 
-	// Parameter:	Text string to convert to speech
-	// Usage1:		fnTextToSpeech("This is test number 1");
+	// Parameter:	Text string to convert to speech, 'VolumeOverride' to override current volume setting 
+	// Usage1:		fnTextToSpeech("This is test number 1", 0);	// says the text at default volume%
 	
 	// Usage2:		int VoiceTxt = "This is test number 2";
-	//				fnTextToSpeech(VoiceTxt);
+	//				fnTextToSpeech(VoiceTxt, 100);				// says the text at 100% volume
 	
 	// Usage3:		char VoiceTxt; Dim(&VoiceTxt, 16); VoiceTxt[0] = 0;
 	//				int tString = "This is test ";
 	//				int test = 3;
 	//				sprintf(&VoiceTxt, "%s number %d", tString, test);
-	//				fnTextToSpeech(&VoiceTxt);
+	//				fnTextToSpeech(&VoiceTxt, 50);				//says the text at 50% volume 
 	
-	int fnTextToSpeech(int text) {
+	int fnTextToSpeech(int text, int VolumeOverride) {
 		char volume;
 		Dim (&volume, 4);
 		volume[0] = 0;
-		
-		if (VoiceVolume) {
-			sprintf(&volume, "%d", VoiceVolume);		
+
+		if (VolumeOverride > 0) {
+			sprintf(&volume, "%d", VolumeOverride);
 		}
 		else {
-			strcat(&volume, "75");
+			sprintf(&volume, "%d", VoiceVolume);
 		}
+		
+//		if (VoiceVolume) {
+//			sprintf(&volume, "%d", VoiceVolume);		
+//		}
+//		else {
+//			strcat(&volume, "75");
+//		}
 		
 		if (EnableVoice) {
 			Dim(&SysCmd, 255);										// Increase buffersize if required
@@ -363,7 +374,7 @@
 		sprintf(&c, "Voice volume %s %d percent", VolTxt, VoiceVolume);
 		
 		printf("%s\x0a", &c);										// print our string
-		fnTextToSpeech(&c);											// send to TextToSpeech
+		fnTextToSpeech(&c, 0);										// send to TextToSpeech
 	}
 
 
@@ -380,7 +391,6 @@
 	// Example:		fnSoundFX("wding", 100, 5);
 	
 	int fnSoundFX(int wavfile, int vol, int loops) {
-
 
 		if (EnableSoundFX) {
 			Dim(&SysCmd, 255);										// Increase buffersize if required
@@ -415,6 +425,7 @@
 		
 		// Align toggle switches and internal status flags if required
 		if (Throttle[EACON])	DeferCall(999, &tgSilentRunning, 1);
+//		if (&&swSilentRunning)	DeferCall(999, &tgSilentRunning, 1);
 		if (Throttle[RDRNRM])	DeferCall(999, &tgCargoScoop, 1);
 		if (Throttle[SPDF])		tgReverseThrust();
 		if (fDocked) 			InHanger = 1;
@@ -439,7 +450,7 @@
 		printf("VoiceVolume	= %d\x0a", VoiceVolume);
 
 		VoiceTxt = "Welcome back Commander";
-		fnTextToSpeech(VoiceTxt);
+		fnTextToSpeech(VoiceTxt, 0);
 
 		fnPrintState();
 		printf("\x0a\Script running....waiting for input...\x0a\x0a");
@@ -490,7 +501,7 @@
 				VoiceTxt = "Pipmode 5 3+3";
 			}
 
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 			printf("PIPMode(%d):		%s	>>\x0a", PIPMode, PIPTxt);
 		}
 	}
@@ -691,6 +702,7 @@
 
 	int fnDeploySRV(int x) {
 		int fnName;
+		int reason;
 		
 		if (x == DEPLOY) {
 			fnName = "Deploy SRV";
@@ -699,8 +711,9 @@
 				printf("SRV:			DEPLOYED	>>\x0a");
 			}
 			else {
-				fnNotValid(fnName);
-				printf("Cannot Deploy SRV at this time\x0a");
+				reason = "we are not landed";
+				fnNotValid(fnName, reason);
+//				printf("Cannot Deploy SRV at this time\x0a");
 			}
 		}
 		else {															// RECOVER
@@ -708,11 +721,17 @@
 			if (fSRV & fSRVTurretRetracted) {	
 				ActKey(PULSE+KEYON+mBoardShip);
 				printf("SRV:			RECOVERED	<<\x0a");
-				DeferCall(14000, &fnPIPMapper, SYS);
+				DeferCall(14000, &fnPIPMapper, SYS);					// PIPs to Shields 
 			}
 			else {
-				fnNotValid(fnName);
-				printf("Cannot Recover SRV at this time\x0a");
+				if (!fSRV) {
+					reason = "not in SRV";
+				}
+				if (!fSRVTurretRetracted) {
+					reason = "turret not retracted";
+				}
+				fnNotValid(fnName, reason);
+//				printf("Cannot Recover SRV at this time\x0a");
 			}
 		}
 	}
@@ -734,7 +753,7 @@
 	int fnHangerServices(int x) {
 		int fnName = "Hanger Services";
 		int GUIMode;
-
+		int reason;
 
 		if (GameLoaded) {
 			if(fDocked) {
@@ -742,7 +761,7 @@
 					if(!InHanger) {
 						VoiceTxt = "Enter Hanger and Station Services";
 						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt);
+						fnTextToSpeech(VoiceTxt, 0);
 						fnPIPMapper();
 						ActKey(PULSE+KEYON+mEnterHanger);
 						InHanger = 1;
@@ -750,32 +769,36 @@
 //					else {														// Not Required?
 //						VoiceTxt = "We're already in the hanger commander";
 //						printf("%s\x0a", VoiceTxt);
-//						fnTextToSpeech(VoiceTxt);
+//						fnTextToSpeech(VoiceTxt, 0);
 //					}					
 				}
 				else {				
 					fnName = "Launch Sequence";
 					GUIMode = fnsProcessGuiFocus();
-					if(GUIMode == GUI_StationSvcs) {	
-						fnNotValid(fnName);
-						VoiceTxt = "Exit Station Services before selecting launch";
-						printf("%s\x0a", VoiceTxt);
-						DeferCall(2500, &fnTextToSpeech, VoiceTxt);
+					if(GUIMode == GUI_StationSvcs) {
+						reason = "Exit Station services";
+						fnNotValid(fnName, reason);
+//						VoiceTxt = "Exit Station Services before selecting launch";
+//						printf("%s\x0a", VoiceTxt);
+						printf("%s\x0a", reason);
+//						DeferCall2(2500, &fnTextToSpeech, VoiceTxt, 0);
 					}
 					else {	
 						VoiceTxt = "Initiating launch sequence";
 						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt);						
+						fnTextToSpeech(VoiceTxt, 0);						
 						ActKey(PULSE+KEYON+mLaunch);
 						InHanger = 0;
 					}
 				}
 			}
-			else {			
-				fnNotValid(fnName);
-				VoiceTxt = "You are not docked at a station services facility"; 
-				printf("%s\x0a", VoiceTxt);
-				DeferCall(2500, &fnTextToSpeech, VoiceTxt);
+			else {
+				reason = "You are not docked at a station services facility";
+				fnNotValid(fnName, reason);
+//				VoiceTxt = "You are not docked at a station services facility"; 
+//				printf("%s\x0a", VoiceTxt);
+				printf("%s\x0a", reason);
+//				DeferCall2(2500, &fnTextToSpeech, VoiceTxt, 0);
 			}
 		}
 	}
