@@ -27,8 +27,9 @@
 // included files //
 // -------------- //
 
-include "target-enhanced.tmh"			// This is my modified version of targetdx128.tmh
-// include "target.tmh"
+include "target.tmh"
+include "target-extras.tmh"					// Additions to target.tmh (without editing target.tmh directly)
+// include "target-enhanced.tmh"			// This is my modified version of targetdx128.tmh
 
 // target.tmh "include" is mandatory.
 // target.tmh has an include statement for defines.tmh and hid.tmh. 
@@ -80,7 +81,8 @@ include "ED_CommsControl.tmh"
 		SetKBLayout(KBLayout);
 
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_INTENSITY, SetLED)); 				// Set overall LED back-light intensity...
-		fnSetLEDs(0);
+//		fnSetLEDs(0);
+		fnSetLEDs();
 		
 		fnCustomCommands();														// Initialise Custom Macros (See EDMacros.tmh)
 		
@@ -388,6 +390,7 @@ include "ED_CommsControl.tmh"
 //		(Enhanced Attitude Control (EAC) Arm/Off)
 //		-----------------------------------------
 
+//		sprintf(&swSilentRunning, "Throttle[EACON]");
 		MapKey(&Throttle, EACON, EXEC("tgSilentRunning(ON);"));
 		MapKey(&Throttle, EACOFF, EXEC("tgSilentRunning(OFF);"));
 
@@ -472,7 +475,8 @@ include "ED_CommsControl.tmh"
 		MapKeyUMD(&Throttle, EFRNORM,
 			0,																				// U - 
 			EXEC("GameLoaded = 0;"),														// U - Reset GameLoaded flag
-			EXEC("fnSetLEDs(0);")															// D - Reset LEDs
+//			EXEC("fnSetLEDs(0);")															// D - Reset LEDs
+			EXEC("fnSetLEDs();")															// D - Reset LEDs
 			);
 			
 		MapKey(&Throttle, EFROVER, 0);														// <not currently used>
