@@ -188,8 +188,8 @@ define MODE_EXCLUDED	0
 define MODE_KEEPENABLED	1
 define MODE_FILTERED	2
 int Exclude(alias a){ Configure(&a, MODE_EXCLUDED); }
-int Filter(alias a) { Configure(&a, MODE_FILTERED); }			// Clicker
-int KeepEnabled(alias a) { Configure(&a, MODE_KEEPENABLED); }	// Clicker
+// int Filter(alias a) { Configure(&a, MODE_FILTERED); }			// Clicker
+// int KeepEnabled(alias a) { Configure(&a, MODE_KEEPENABLED); }	// Clicker
 int Configure(alias a, int mode){ a[0] = mode; }
 int Select(alias id)
 { 
