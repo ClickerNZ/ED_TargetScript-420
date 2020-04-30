@@ -27,9 +27,9 @@
 // included files //
 // -------------- //
 
-include "target.tmh"
-include "target-extras.tmh"					// Additions to target.tmh (without editing target.tmh directly)
-// include "target-enhanced.tmh"			// This is my modified version of targetdx128.tmh
+// include "target.tmh"
+// include "target-extras.tmh"				// Additions to target.tmh (without editing target.tmh directly)
+include "targetdx128.tmh"					// This is my modified version of targetdx128.tmh
 
 // target.tmh "include" is mandatory.
 // target.tmh has an include statement for defines.tmh and hid.tmh. 
@@ -389,8 +389,7 @@ include "ED_CommsControl.tmh"
 
 //		(Enhanced Attitude Control (EAC) Arm/Off)
 //		-----------------------------------------
-
-//		sprintf(&swSilentRunning, "Throttle[EACON]");
+		
 		MapKey(&Throttle, EACON, EXEC("tgSilentRunning(ON);"));
 		MapKey(&Throttle, EACOFF, EXEC("tgSilentRunning(OFF);"));
 
