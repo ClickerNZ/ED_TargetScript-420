@@ -1,6 +1,9 @@
 
 Version 4.2.0
 
+STATUS: BETA
+Under development. Changes happening often.
+
 HISTORY: 
 This script started with Aussiedoids' most excellent and extremely comprehensive ED script version 3.1.0
 and was modified to mimic my old Saitek X-55 basic configuration. I have since decided to use the advanced
