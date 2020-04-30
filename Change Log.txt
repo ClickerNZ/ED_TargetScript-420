@@ -4,6 +4,13 @@ v4.2.0	- Point Release
 		- Ported code from 4.1.0b
 		- Update Enter Hanger Macro to cater for new menus
 		- Added index section to function .tmh files
+		- Refactor some toggles to remove unneccessary flag assignments
+		- Add second parameter, 'reason' to fnNotValid ()
+		- Add second parameter, 'VolumeOverride' to fnTextToSpeech()
+		- Remove unused paramter from fnSetLEDs()
+		- Move my target.tmh tweaks inside target-enhanced.tmh to target-extras.tmh and revert main.tmc call to 'include target.tmh' and add an 'include target-extras.tmh'
+		- Add DeferCall0() and DeferCall2() functions to target-extras.tmh to cater for called functions with 0 or 2 parameters - TO BE TESTED
+		- Tweak Slew control curves
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
