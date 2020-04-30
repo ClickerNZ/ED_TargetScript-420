@@ -424,10 +424,10 @@
 		fnFlashStart();
 		
 		// Align toggle switches and internal status flags if required
-		if (Throttle[EACON])	DeferCall(999, &tgSilentRunning, 1);
-//		if (&&swSilentRunning)	DeferCall(999, &tgSilentRunning, 1);
+		if (Throttle[EACON])	DeferCall(999, &tgSilentRunning, 1);		
 		if (Throttle[RDRNRM])	DeferCall(999, &tgCargoScoop, 1);
-		if (Throttle[SPDF])		tgReverseThrust();
+		if (Throttle[SPDF])		DeferCall(999, &tgReverseThrust, 0);
+		
 		if (fDocked) 			InHanger = 1;
 		
 		if (!ConnectionStatus) {
