@@ -1,0 +1,18 @@
+
+// from target.tmh...
+// int DeferCall(int delay, alias proc, int param){ PostEvent(EV_USR, &proc, param, delay); }
+
+// add aa defercall with 0 params
+int DeferCall0(int delay, alias proc){ PostEvent(EV_USR, &proc, delay); }
+
+// add aa defercall with 2 params
+int DeferCall2(int delay, alias proc, int param1, int param2){ PostEvent(EV_USR, &proc, param1, param2, delay); }
+
+// add simpler mode_filtered construct
+int Filter(alias a) { Configure(&a, MODE_FILTERED); }
+
+// add simpler mode_keepenabled construct
+int KeepEnabled(alias a) { Configure(&a, MODE_KEEPENABLED); }
+
+
+
