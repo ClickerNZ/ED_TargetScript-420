@@ -22,19 +22,19 @@
 
 // Index:	Line		FUNCTION
 //			Line 48: 	int tgTxt2Speech()
-//			Line 71: 	int tgEnhancedFAOFF()
-//			Line 101: 	int tgTriggerMode()
-//			Line 137: 	int tgLights()
-//			Line 195: 	int tgSilentRunning()
-//			Line 225: 	int tgCargoScoop()
-//			Line 254: 	int tgLandingGear()
-//			Line 292: 	int tgReverseThrust()
-//			Line 322: 	int tgHardpoints()
-//			Line 350: 	int tgHUDMode()
-//			Line 365: 	int tgFSSMode()
-//			Line 392: 	int tgPlanetView()
-//			Line 414: 	int tgWarpDrive()
-//			Line 472: 	int tgExtCamera()
+//			Line 73: 	int tgEnhancedFAOFF()
+//			Line 103: 	int tgTriggerMode()
+//			Line 139: 	int tgLights()
+//			Line 197: 	int tgSilentRunning()
+//			Line 227: 	int tgCargoScoop()
+//			Line 256: 	int tgLandingGear()
+//			Line 293: 	int tgReverseThrust()
+//			Line 323: 	int tgHardpoints()
+//			Line 358: 	int tgHUDMode()
+//			Line 373: 	int tgFSSMode()
+//			Line 400: 	int tgPlanetView()
+//			Line 421: 	int tgWarpDrive()
+//			Line 481: 	int tgExtCamera()
 	
 	
 // START
@@ -49,17 +49,19 @@
 		if (VoiceExists) {
 			EnableVoice = !EnableVoice;
 			if(EnableVoice) {
-				VoiceTxt = "Text to speech, Enabled";
-				fnTextToSpeech(VoiceTxt);
-				printf("TextToSpeech: ON\x0a");
+				VoiceTxt = "Text to speech: Enabled";
+//				fnTextToSpeech(VoiceTxt, 0);
+//				printf("TextToSpeech: ON\x0a");
 			}
 			else {
 				EnableVoice = 1;
-				VoiceTxt = "Text to speech, Disabled";
-				fnTextToSpeech(VoiceTxt);
+				VoiceTxt = "Text to speech: Disabled";
+//				fnTextToSpeech(VoiceTxt, 0);
 				EnableVoice = 0;
-				printf("TextToSpeech: OFF\x0a");
+//				printf("TextToSpeech: OFF\x0a");
 			}
+			printf("%s\x0a", VoiceText);
+			fnTextToSpeech(VoiceTxt, 0);			
 		}
 		else {
 			printf("Voice.exe is not present\x0a");
@@ -70,6 +72,7 @@
 
 	int tgEnhancedFAOFF() {
 		int fnName = "Flight Assist";
+		int reason;
 
 		if (!fSupercruise) {
 			ActKey(PULSE+KEYON+FlightAssist);
@@ -89,8 +92,9 @@
 			
 		}
 		else {
-			fnNotValid(fnName);
-			printf("Flight Assist not available whilst in Supercruise\x0a");
+			reason = "we are currently in Supercruise";
+			fnNotValid(fnName, reason);
+//     		printf("Flight Assist not available whilst in Supercruise\x0a");
 		}
 
 	}
@@ -111,7 +115,7 @@
 				VoiceTxt = "Primary trigger action, hold 6.1 seconds";
 			}
 			
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 			printf("%s\x0a", VoiceTxt);
 		}
 		
@@ -124,7 +128,7 @@
 				VoiceTxt = "Secondary trigger action, hold 6.1 seconds";
 			}
 		
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 			printf("%s\x0a", VoiceTxt);
 		}
 	}
@@ -184,7 +188,7 @@
 				printf("Night Vision:		OFF		<<\x0a");
 				VoiceTxt = "Night Vision Off";
 			}
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 		}
 	}
 
@@ -194,27 +198,31 @@
 
 	int tgSilentRunning(int x) {
 		int fnName = "Silent Running";
+		int reason;
 		
-		if (!fSupercruise & !fSRV) {
+		if (!fSupercruise & !fSRV) {		
+			if(!fSilentRunning) {									// Was OFF, turn on...
+				printf("Silent Running:		ACTIVATED	!!\x0a");
+			}
+			else {													// Was ON, turn off...
+				printf("Silent Running:		DEACTIVATED	<<\x0a");
+			}
 			if (x != fSilentRunning) {
 				ActKey(PULSE+KEYON+SilentRunning);
 				fnFlashLED(LED3);
-				fSilentRunning = !fSilentRunning;					// Do we need a slight delay here for status.json to "catch up" ??? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-			}
-			if(fSilentRunning)
-				printf("Silent Running:		ACTIVATED	!!\x0a");
-			else
-				printf("Silent Running:		DEACTIVATED	<<\x0a");
-				
+			}	
 		}
 		else if (x) {
-			fnNotValid(fnName);
+//			fnNotValid(fnName);
 			if (fSupercruise) {
+				reason = "we are in supercruise";
 				printf("Silent Running not a valid selection in Supercruise\x0a");
 			}
 			if (fSRV) {
+				reason = "we are in the SRV";
 				printf("Silent Running not a valid selection in SRV\x0a");
 			}
+			fnNotValid(fnName, reason);			
 		}
 	}
 
@@ -224,26 +232,31 @@
 
 	int tgCargoScoop(int x) {
 		int fnName = "Cargo Scoop";
+		int reason;
+		
 		if (!fSupercruise & !fDocked & !fLanded) {
+			if(!fCargoScoop) {										// Was RETRACTED, Deploy...
+				printf("Cargo Scoop:		DEPLOYED	>>\x0a");
+			}
+			else {													// Was DEPLOYED, Retract...
+				printf("Cargo Scoop:		RETRACTED	<<\x0a");
+			}
 			if (x != fCargoScoop) {
 				ActKey(PULSE+KEYON+CargoScoop);
 				fnFlashLED(LED4);
-				fCargoScoop = !fCargoScoop;							// Do we need a slight delay here for status.json to "catch up" ??? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-			}
-			if(fCargoScoop)
-				printf("Cargo Scoop:		DEPLOYED	>>\x0a");
-			else
-				printf("Cargo Scoop:		RETRACTED	<<\x0a");
-				
+			}				
 		}
 		else if (x) {
-			fnNotValid(fnName);
+//			fnNotValid(fnName);
 			if (fSupercruise) {
+				reason = "we are in supercruise";
 				printf("Cannot deploy Cargo Scoop whilst in Supercruise\x0a");
 			}
 			if (fDocked) {
+				reason = "we are docked";
 				printf("Cannot deploy Cargo Scoop whilst docked\x0a");
 			}
+			fnNotValid(fnName, reason);			
 		}		
 	}
 
@@ -253,44 +266,47 @@
 
 	int tgLandingGear(int Speedbrake) {
 		int fnName = "Landing Gear";
+		int reason;
 		int GearString;
 		
 		if (!fSupercruise & !fSRV & !fLanded & !fDocked) {
 			GearString = "Landing Gear:";
 			if(Speedbrake) GearString = "Speed Brake:";
-			ActKey(PULSE+KEYON+LandingGear);
-			fnFlashLED(LED5);
-			fLandingGear = !fLandingGear;							// Do we need a slight delay here for status.json to "catch up" ??? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-			if (fLandingGear) {
+			if (!fLandingGear) {										// Was RETRACTED, Deploy...
 				printf("%s		DEPLOYED	>>\x0a", GearString);
 			}
-			else {
+			else {														// Was DEPLOYED, Retract...
 				printf("%s		RETRACTED	<<\x0a", GearString);
 				if (Speedbrake) {										// Speedbrake retract...
 					SpeedbrakeDeployed = 0;								// ...reset the flag (avoids having to use 2nd DeferCall() in tgReverseThrust())
 				}
 			}
+			ActKey(PULSE+KEYON+LandingGear);
+			fnFlashLED(LED5);
 		}
 		else {
-			fnNotValid(fnName);
-
+//			fnNotValid(fnName);
 			if (fSupercruise) {
-				printf("Cannot deploy landing gear whilst in supercruise\x0a");
+				reason = "we are in supercruise";
+//				printf("Cannot deploy landing gear whilst in supercruise\x0a");
 			}
 			if (fSRV) {
-				printf("Cannot toggle landing gear whilst in SRV\x0a");			
+				reason = "we are in SRV";
+//				printf("Cannot toggle landing gear whilst in SRV\x0a");			
 			}
 			if (fLanded | fDocked) {
-				printf("Cannot toggle landing gear when landed\x0a");			
-			}	
+				reason = "we are landed";
+//				printf("Cannot toggle landing gear when landed\x0a");			
+			}
+			fnNotValid(fnName, reason);			
 		}
-
 	}
 
 	// TOGGLE: Reverse Thrusters
 
 	int tgReverseThrust(int EnableSpeedBrake) {
 		int fnName = "Reverse";
+		int reason;
 		
 		if (!fSupercruise) {
 			if(EnableSpeedBrake != 2) {												// [PSB] held when Reverse toggled fixes misaligned switch
@@ -311,7 +327,8 @@
 				printf("Throttle:			FORWARD	>>\x0a");
 		}
 		else {
-			fnNotValid(fnName);
+			reason = "we are in supercruise";
+			fnNotValid(fnName, reason);
 			printf("Cannot select reverse whilst in Supercruise\x0a");
 		}
 
@@ -320,26 +337,36 @@
 	// TOGGLE: Hardpoints
 
 	int tgHardpoints() {
+		int fnName;
+		int reason;
+		
 		if (!fSupercruise) {
-			ActKey(PULSE+KEYON+DeployHardpoints);					// Depoy Hardpoints only if we're not in Supercruise			
 			if(fMainShip) {
-				fHardpoints = !fHardpoints;							// Toggle the status flag
-				if (fHardpoints)
+				fnName = "Deploy Hardpoints";
+				if (!fHardpoints) {
 					printf("Hardpoints:		DEPLOYED	>>\x0a");
-				else
+				}
+				else {
 					printf("Hardpoints:		RETRACTED	>>\x0a");
 				}
+			}
 			if(fSRV) {
-				if(fSRVTurretRetracted)
+				fnName = "Deploy Turret";
+				if(fSRVTurretRetracted) {
+					reason = "move away from the ship";
+					fnNotValid(fnName, reason);
 					printf("Turret Retracted: Move away from ship\x0a");
+				}
 				else {
-					fSRVTurretView = !fSRVTurretView;
-					if (fSRVTurretView)
+					if (!fSRVTurretView) {
 						printf("Turret View:		Enabled		>>\x0a");
-					else
+					}
+					else {
 						printf("Turret View:		Disabled		<<\x0a");
+					}
 				}						
 			}
+			ActKey(PULSE+KEYON+DeployHardpoints);					// Depoy Hardpoints only if we're not in Supercruise
 		}
 		else
 			tgHUDMode();											// If we're in Supercruise, just toggle the HUD Mode
@@ -348,11 +375,11 @@
 	// TOGGLE: Analysis/Combat HUD Modes
 
 	int tgHUDMode() {
-//		fHUDAnalysis = !fHUDAnalysis;							//Redundant?
 		if (fHUDAnalysis) {
 			printf("HUD Mode:		COMBAT	>>\x0a");			// Switching to Combat Mode
-			if (FSSMode)
+			if (FSSMode) {
 				FSSMode = 0;
+			}
 		}
 		else {
 			printf("HUD Mode:		ANALYSIS	>>\x0a");		// Swicthing to Analysis Mode
@@ -364,6 +391,7 @@
 
 	int tgFSSMode() {
 		int fnName = "FSS Mode";
+		int reason;
 		
 		fnsProcessGuiFocus();									// Get current FSSMode flag
 		
@@ -381,8 +409,9 @@
 			}
 		}
 		else {
-			fnNotValid(fnName);
-			printf("FSS Mode not available unless in Supercruise\x0a");
+			reason = "we are not in supercruise";
+			fnNotValid(fnName, reason);
+			printf("FSS Mode only available in Supercruise\x0a");
 		}
 
 	}
@@ -391,20 +420,21 @@
 
 	int tgPlanetView() {
 		int fnName = "Toggle Planet View";
+		int reason;
 		
-		fnsProcessGuiFocus();
+		fnsProcessGuiFocus();									// Get SAAMode flag
 		
 		if (SAAMode) {
 			ActKey(PULSE+KEYON+FBView);
 			printf("Planet View:	TOGGLED		<>\x0a");
 			VoiceTxt = "Toggle planet view";
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 0);
 		}
 		else {
-			fnNotValid(fnName);
-			printf("Cannot select toggle Planetview unless we're in SAAMode\x0a");
+			reason = "must be in SAA Mode";
+			fnNotValid(fnName, reason);
+//			printf("Toggle Planetview only available in SAAMode\x0a");
 		}
-
 	}
 
 	// TOGGLE: Warp Drive
@@ -415,6 +445,7 @@
 		int EngineText;
 		int WarpDrive;
 		int fnName;
+		int reason;
 		
 		if (JumpType) {
 			fnName = "Warp Drive";
@@ -430,20 +461,26 @@
 		if (fFSDCharging) {
 			printf("%s	CANCELLED	<<\x0a", EngineText);
 			ActKey(PULSE+KEYON+WarpDrive);
+			VoiceTxt = "Warp Drive Cancelled";
+			fnTextToSpeech(VoiceTxt, 0);
 			return 0;
 		}
 		if (fFSDCooldown) {
 			printf("%s	COOLDOWN	<<\x0a", EngineText);
-			VoiceTxt = "Cooldown in progress";
-			fnTextToSpeech(VoiceTxt);
-			DeferCall(2000, &fnNotValid, fnName);
+//			VoiceTxt = "Cooldown in progress";
+			reason = "cooldown in progress";
+//			fnTextToSpeech(VoiceTxt, 0);
+//			DeferCall2(2000, &fnNotValid, fnName, reason);
+			fnNotValid(fnName, reason);
 			return 0;
 		}
 		if (fMassLocked) {
 			printf("%s	MASSLOCKED	<<\x0a", EngineText);
-			VoiceTxt = "We are currently Masslocked";			
-			fnTextToSpeech(VoiceTxt);
-			DeferCall(2000, &fnNotValid, fnName);
+			reason = "we are currently masslocked";
+//			VoiceTxt = "We are currently Masslocked";			
+//			fnTextToSpeech(VoiceTxt, 0);
+//			DeferCall2(2000, &fnNotValid, fnName, reason);
+			fnNotValid(fnName, reason);
 			return 0;
 		}
 		if (fsdJump) {
