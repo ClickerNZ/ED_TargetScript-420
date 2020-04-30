@@ -49,13 +49,14 @@
 
 	int fnCustomCommands() {
 
-		// Initialise char arrays for status.json
-		Dim(&myJson, 512);
+		// Initialise char arrays for various functions
+		Dim(&myJson, 512);			// Initilise status.json string variables
 		myJson[0] = 0;
 
 		Dim(&lastJson, 512); 
 		lastJson[0]=0;
-
+		
+		// Initialise macros
 
 		// MACRO: Auto-Docking Request
 		mRequestDock = CHAIN(
