@@ -338,6 +338,9 @@
 				fnSetLEDs();											// Turn off Status LEDs
 				VoiceTxt = "Game halted.";
 				fnTextToSpeech(VoiceTxt, 0);
+				if (ReverseThrust) {
+					ReverseThrust = !ReverseThrust;
+				}
 			}
 		}
 		else {															// Flags != 0
