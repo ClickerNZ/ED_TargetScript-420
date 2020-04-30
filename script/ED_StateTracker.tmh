@@ -112,7 +112,7 @@
 					printf("File Read Error Count = %d : status.json\x0a", ReadErrorCount);
 					if (!ReadErrorSent) {
 						VoiceTxt = "File Read Error count exceeded";
-						fnTextToSpeech(VoiceTxt);
+						fnTextToSpeech(VoiceTxt, 100);
 						ReadErrorSent = 1;
 					}
 				}
@@ -144,7 +144,7 @@
 			VoiceVolume = 100;
 			VoiceTxt = "FATAL ERROR: Status.jason file not found";
 			printf("\x0a\FATAL ERROR: Status.json file not found\x0a");
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech(VoiceTxt, 100);
 			Abort();
 		}
 		
@@ -334,9 +334,10 @@
 			if(GameLoaded == 1) {
 				GameLoaded = 0;
 				printf("\x0a - Game has stopped - \x0a\x0a");
-				fnSetLEDs(0);											// Turn off Status LEDs
+//				fnSetLEDs(0);											// Turn off Status LEDs
+				fnSetLEDs();											// Turn off Status LEDs
 				VoiceTxt = "Game halted.";
-				fnTextToSpeech(VoiceTxt);
+				fnTextToSpeech(VoiceTxt, 0);
 			}
 		}
 		else {															// Flags != 0
@@ -398,20 +399,21 @@
 							printf("Uninitiated Drop Detected\x0a");
 						}
 						
-						fnTextToSpeech(VoiceTxt);
+						fnTextToSpeech(VoiceTxt, 0);
 						
 						if (fInterdicted | fDanger) {
-							VoiceTxt = "Warning! Danger!";
+//							VoiceTxt = "Warning! Danger!";
 							printf("!!! DANGER DETECTED !!!\x0a");
-							fnTextToSpeech(VoiceTxt);
+//							fnTextToSpeech(VoiceTxt, 100);
 							if (fHUDAnalysis) {
 								tgHUDMode();							// Select Combat HUD
 							}
 							if (!fHardpoints) {
 								tgHardpoints();
 							}
-							VoiceTxt = "Combat Mode Initiated";
-							DeferCall(2000, &fnTextToSpeech, VoiceTxt);	// Sound warning
+							VoiceTxt = "Warning! Danger! Combat Mode Initiated";
+//							DeferCall2(2000, &fnTextToSpeech, VoiceTxt, 0);	// Sound warning
+							fnTextToSpeech(VoiceTxt, 100);				// Sound warning 
 						}
 					}
 					else {												// Initiated drop
@@ -438,7 +440,7 @@
 				else {
 					VoiceTxt = "Lift off";
 				}
-//				fnTextToSpeech(VoiceTxt);
+//				fnTextToSpeech(VoiceTxt, 0);
 			}
 			
 			if (fDocked != dk) {		// Framework - currently testing - may not be viable in current form without additional information from journal
@@ -453,7 +455,7 @@
 					InHanger = 0;					
 				}
 				printf("Docked status: %s\x0a", VoiceTxt);					
-//				fnTextToSpeech(VoiceTxt);
+//				fnTextToSpeech(VoiceTxt, 0);
 			}
 									
 			if (fa != fFAOff | lt != fLights | sr != fSilentRunning | cs != fCargoScoop | lg != fLandingGear | sh != fMainShip) UpdateLEDs = 1;
@@ -495,7 +497,8 @@
 				printf("===============\x0a");
 			}
 			
-			if (UpdateLEDs) fnSetLEDs(0);
+//			if (UpdateLEDs) fnSetLEDs(0);
+			if (UpdateLEDs) fnSetLEDs();
 
 			if(GameLoaded == 0) {			// Game started...as opposed to re-started.
 				fnGameStarted();
