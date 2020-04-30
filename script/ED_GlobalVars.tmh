@@ -54,8 +54,6 @@
 	int FireModeP			= 0;		// 0 = Press to fire/Release to Stop, 1 = Press to fire, Press again to stop
 	int FireModeS			= 0;		// 0 = Press to fire/Release to Stop, 1 = Press to fire, Press again to stop
 	
-	alias swSilentRunning	= "";		// Assign "dev[btn]" in ed_main()
-
 	define SYS				1			// Used in fnPIPMapper for managing System  PIPs (see EDFunctions.tmh) (DO NOT modify!)
 	define ENG				2			// Used in fnPIPMapper for managing Engine  PIPs (see EDFunctions.tmh) (DO NOT modify!)
 	define WEP				3			// Used in fnPIPMapper for managing Weapon  PIPs (see EDFunctions.tmh) (DO NOT modify!)
