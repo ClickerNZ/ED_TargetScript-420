@@ -9,7 +9,12 @@ v4.2.0	- Point Release
 		- Add second parameter, 'VolumeOverride' to fnTextToSpeech()
 		- Remove unused paramter from fnSetLEDs()
 		- Tweak Slew control curves
-		- Update targetdx128.tmh with my tweaks. Move DX33-120 defines to top of script. Add ThrottleMap mappings for DX34-DX55
+		- Create targetdx64enh.tmh from targetdx128.tmh and add my tweaks. Move DX33-64 defines to top of script. Add ThrottleMap mappings for DX34-DX55
+		- Extend Joystick Curves to include global variables for all 3 deadzones
+		- Decouple Rudder from Joystick Curves and create independant curve variables etc.
+		- Add User Setting for FA-OFF Curves and printinfo
+		- Tweak tgEnhancedFAOFF() code
+		- Tweak fnModeSwitch{} and fnGameStarted()
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
