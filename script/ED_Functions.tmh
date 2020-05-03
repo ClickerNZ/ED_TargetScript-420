@@ -72,7 +72,7 @@
 		
 		// Throttle mapping...
 		MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);					// Set Left Throttle. Right throttle not used.
-		SetSCurve(&Throttle, THR_LEFT, 0, 0, 0, 0, 0);
+		SetSCurve(&Throttle, THR_LEFT, 0, 0, 0, 0, 0);											// No curves for Throttle
 		printf("done\x0a");
 
 		// Slider Mapping...
@@ -82,18 +82,18 @@
 		// Slew Control Mapping...
 		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axis
 //		SetSCurve(&Throttle, SCX, 0, 20, 0, 2, -1);
-		SetSCurve(&Throttle, SCX, 0, 10, 0, 0, 0);
+		SetSCurve(&Throttle, SCX, 0, 10, 0, 0, 0);												// Set static curves for slew control
 		
 		MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control Y Axis
 //		SetSCurve(&Throttle, SCY, 0, 20, 0, 2, -1);
-		SetSCurve(&Throttle, SCY, 0, 10, 0, 0, 0);
+		SetSCurve(&Throttle, SCY, 0, 10, 0, 0, 0);												// Set static curves for slew control
 	}
 
 	// FUNCTION: Initialise Rudder
 	int initTFRPRudder() {																		// Initialise Thrustmaster TFRP Rudder
 		printf("Rudder Axis	... ");
 		MapAxis(&TFRPRudder, TRUDDER, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-		SetSCurve(&TFRPRudder, TRUDDER, 0, 0, 0, 0, 0);		
+		SetSCurve(&TFRPRudder, TRUDDER, 0, 10, 0, 0, 0);										// Set initial Rudder curves 	
 		printf("done		");
 	}
 
@@ -167,9 +167,9 @@
 			VoiceTxt = "Curves medium";			
 		}
 		
-		SetSCurve(&Joystick, JOYX, 0, JS_DEADZONE, 0, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
-		SetSCurve(&Joystick, JOYY, 0, JS_DEADZONE, 0, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
-		SetSCurve(&TFRPRudder, TRUDDER, 0, JS_DEADZONE, 0, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
+		SetSCurve(&Joystick, JOYX,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
+		SetSCurve(&Joystick, JOYY,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
+		SetSCurve(&TFRPRudder, TRUDDER, Rudder_L_DZ,	Rudder_C_DZ,	Rudder_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
 
 		if (StartupLock) {
 			printf("Joystick & Pedal Curves	... done.\x0a");
@@ -178,8 +178,10 @@
 		else {
 			fnTextToSpeech(VoiceTxt, 0);
 		}			
-		if (print)
-			printf("Joystick Curves[%s]	: LDZ=0, CDZ=%d, RDZ=0, Curve= %d, Zoom= %d\x0a", JSCurveSetting, JS_DEADZONE, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
+		if (print) {
+			printf("Joystick Curves[%s]	: LDZ=%d, CDZ=%d,  RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Joystick_L_DZ, Joystick_C_DZ, Joystick_R_DZ, Joystick_Curve[profile], Joystick_Zoom[profile]);
+			printf("Rudder Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Rudder_L_DZ, Rudder_C_DZ, Rudder_R_DZ, Rudder_Curve[profile], Rudder_Zoom[profile]);
+		}
 	}
 
 
@@ -810,27 +812,51 @@
 
 	int fnModeSwitch(int mode) {
 		int GUIMode;
+		int counter = 0;
+		char VoiceTxt; Dim(&VoiceTxt, 70); VoiceTxt[0] = 0;
+		int Mode;
+		int ReloadDelay;
+		
+		if (fMainShip) {
+			ReloadDelay = 11;
+		}
+		if (fSRV) {
+			ReloadDelay = 11;
+		}
 
 		printf("Mode Switch Triggered\x0a");
 		if (mode == 0) {
+			Mode = "Open";
 			ActKey(PULSE+KEYON+mFastModeSwitch0);												// Selects OPEN mode
 		}
 		else if (mode == 1) {
+			Mode = "Private group";
 			ActKey(PULSE+KEYON+mFastModeSwitch1);												// Selects PRIVATE mode
 		}
 		else {
+			Mode = "Solo";
 			ActKey(PULSE+KEYON+mFastModeSwitch2);												// Selects SOLO mode
 		}
 
-		GUIMode = fnsProcessGuiFocus();
-		
+//		GUIMode = fnsProcessGuiFocus();
+//		printf("GUIMode = %d\x0a", GUIMode);
+
+		sprintf(&VoiceTxt, "Mode switch to %s selected, please wait for game reload", Mode);
+		fnTextToSpeech(&VoiceTxt, 0);
 		printf("\x0a\Wait for game to finish loading ");
 
-		while (GUIMode != GUI_None) {															// Wait for game to finish reloading
+		if (ReverseThrust) {																	// Game always starts with Forward Thrust
+			ReverseThrust = 0;
+		}
+		
+//		while (GUIMode != GUI_None) {															// Wait for game to finish reloading
+		while (counter < ReloadDelay) {
 			printf(".");
 			Sleep(1000);
-			GUIMode = fnsProcessGuiFocus();			
+			counter = counter + 1;
+//			GUIMode = fnsProcessGuiFocus();			
 		}
+		
 		printf("\x0a\x0a\Game has reloaded\x0a");
 		fnGameStarted();
 	}
