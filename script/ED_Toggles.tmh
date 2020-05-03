@@ -75,28 +75,23 @@
 		int reason;
 
 		if (!fSupercruise) {
-			ActKey(PULSE+KEYON+FlightAssist);
-			fnFlashLED(LED1);
-			fFAOff = !fFAOff;					// Do we need a slight delay here for status.json to "catch up" ??? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-			if (!fFAOff) {
-				printf("FA-ON  ");
-				if (Throttle[APPAT])	fnSetJoystickCurves(NONE, NOPRINT);
-				if (Throttle[APAH])		fnSetJoystickCurves(MILD, NOPRINT);
-				if (Throttle[APALT])	fnSetJoystickCurves(MEDIUM, NOPRINT);
+			if (fFAOff) {
+				printf("FA-ON Curves:\x0a");
+				if (Throttle[APPAT])	fnSetJoystickCurves(NONE, CurveInfo);
+				if (Throttle[APAH])		fnSetJoystickCurves(MILD, CurveInfo);
+				if (Throttle[APALT])	fnSetJoystickCurves(MEDIUM, CurveInfo);
 			}
 			else {
-				printf("FA-OFF  ");
-				fnSetJoystickCurves(MEDIUM, NOPRINT);
-			}
-			printf("Curves[%s]	: LDZ=0, CDZ=%d, RDZ=0, Curve= %d, Zoom= %d\x0a", JSCurveSetting, JS_DEADZONE, JS_CURVE[JSProfile], JS_ZOOM[JSProfile]);
-			
+				printf("FA-OFF Curves:\x0a");
+				fnSetJoystickCurves(FAOFFCurves, CurveInfo);
+			}			
+			ActKey(PULSE+KEYON+FlightAssist);
+			fnFlashLED(LED1);
 		}
 		else {
 			reason = "we are currently in Supercruise";
 			fnNotValid(fnName, reason);
-//     		printf("Flight Assist not available whilst in Supercruise\x0a");
 		}
-
 	}
 	
 	// TOGGLE:		Cycle between 'Hold for 6.1 secs' and 'press to fire, press to stop'
@@ -307,10 +302,12 @@
 	int tgReverseThrust(int EnableSpeedBrake) {
 		int fnName = "Reverse";
 		int reason;
-		
+
+
 		if (!fSupercruise) {
+		
 			if(EnableSpeedBrake != 2) {												// [PSB] held when Reverse toggled fixes misaligned switch
-				ActKey(PULSE+KEYON+ReverseThrottle);
+					ActKey(PULSE+KEYON+ReverseThrottle);
 			}
 			ReverseThrust = !ReverseThrust;
 			if (ReverseThrust) {
@@ -331,7 +328,6 @@
 			fnNotValid(fnName, reason);
 			printf("Cannot select reverse whilst in Supercruise\x0a");
 		}
-
 	}
 
 	// TOGGLE: Hardpoints
