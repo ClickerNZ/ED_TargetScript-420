@@ -110,17 +110,28 @@
 //-------------//
 
 	// The below curve arrays are set for "off", "mild" and "medium"
-	// Eg 	AP Switch set at APPAT	= (Curve=0, Zoom=0)
-	//		AP Switch set to APAH	= (Curve=1, Zoom=0)
-	//		AP Switch set to APALT	= (Curve=2, Zoom=-1)
-	// I use a common Deadzone for each. Set to 1
+	// Eg 	AP Switch set at APPAT	= (Curve = 0, Zoom = 0 )
+	//		AP Switch set to APAH	= (Curve = 1, Zoom = 0 )
+	//		AP Switch set to APALT	= (Curve = 3, Zoom = -1)
+	// 
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 
 //								APPAT	APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
-	short JS_CURVE[] 		= {	0,		1,      3};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	short JS_ZOOM[]  		= {	0,		0,     -1};		// Set zoom level 
+	short Joystick_Curve[] 	= {	0,		1,		3};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	short Rudder_Curve[]	= { 0,		1,		4};		
 
-	define JS_DEADZONE 		1							// Set the JS Deadzone
+	short Joystick_Zoom[]	= {	0,		0,     -1};		// Set Joystick zoom profiles 
+	short Rudder_Zoom[]		= { 0,		0,		0};		// Set Rudder zoom profiles
+	
+	define Joystick_L_DZ 		0						// Set Joystich Left	Deadzone
+	define Joystick_C_DZ 		1						// Set Joystick Centre	Deadzone
+	define Joystick_R_DZ 		0						// Set Joystick Right	Deadzone
+	
+	define Rudder_L_DZ			0						// Set Rudder Left 		Deadzone
+	define Rudder_C_DZ			10						// Set Rudder Centre	Deadzone
+	define Rudder_R_DZ			0						// Set Rudder Right		Deadzone
 
-
+	define FAOFFCurves			MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
+	define CurveInfo			PRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
+	
 // END
