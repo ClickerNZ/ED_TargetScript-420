@@ -27,9 +27,7 @@
 // included files //
 // -------------- //
 
-// include "target.tmh"
-// include "target-extras.tmh"				// Additions to target.tmh (without editing target.tmh directly)
-include "targetdx128.tmh"					// This is my modified version of targetdx128.tmh
+include "targetdx64enh.tmh"					// This is my modified version of targetdx128.tmh
 
 // target.tmh "include" is mandatory.
 // target.tmh has an include statement for defines.tmh and hid.tmh. 
