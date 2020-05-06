@@ -21,12 +21,12 @@
 
 
 // Index:	Line		FUNCTION
-//			Line 54: 	int fnsGetStatusFileInfo()
-//			Line 99: 	int fnsReadStatusJson()
-//			Line 165: 	int fnsGetKeyValue()
-//			Line 310: 	int fnsProcessFlags()
-//			Line 511: 	int fnsProcessGuiFocus()
-//			Line 549: 	int fnsStartCheck()
+//			Line 52: 	int fnsGetStatusFileInfo()
+//			Line 97: 	int fnsReadStatusJson()
+//			Line 170: 	int fnsGetKeyValue()
+//			Line 308: 	int fnsProcessFlags()
+//			Line 512: 	int fnsProcessGuiFocus()
+//			Line 550: 	int fnsStartCheck()
 	
 // START
 
@@ -37,8 +37,6 @@
 	char	lastJson; 	
 	int		newJson			= 0;								// set when myJson != lastJson...we then call fnsProcessFlags();
 
-	char 	keyvalue;
-		
 	int 	fnReturn		= 0;								// Return -1 if error
 	int 	FileIOError		= 0;								// Set if get errors reading files
 
@@ -91,13 +89,14 @@
 
 	// GlobalVars
 	
-	int ReadErrorCount = 0;
-	int ReadErrorSent = 0;
+	int		ReadErrorCount = 0;
+	int		ReadErrorSent = 0;
 	
 	// ----------
 	
 	int fnsReadStatusJson() {
-	
+
+		int VoiceTxt;
 		int 	fp;
 		int 	buf = 512;
 		int		myResult;	
@@ -157,10 +156,16 @@
 	// FUNCTION:	Extract json key value from status.json:
 	// Input:		Key (pattern = string), value vtype (0=float, 1=int, 2=string)
 	// Output:		Return key value
-	// Valid Patterns(type);
+	// Valid Patterns(vtype);
 	//				Flags(1), Pips(2), Firegroup(1), GuiFocus(1), FuelMain(0), FuelReservoir(0)
 	//				Cargo(1), LegalState(2), Latitude(0), Longitude(0), Altitude(1), Heading(1)
 	//				BodyName(2), PlanetRadius(1), timestamp(2), event(2)
+
+	// GlobalVars
+
+	char	keyvalue;	
+
+	// ----------
 
 	int fnsGetKeyValue(alias pattern, int vtype) {
 
@@ -176,8 +181,10 @@
 		int 	chrpnt		= 0;									// character pointer used to determine where key value ends
 		int		EndValue	= 0;									// flag to set when we hit the end of value
 		
-		char 	thischr;											// char variable to detect end of value via a ',' or '}' or ' '
-		char	myStr;
+		char 	thischr;	Dim(&thischr, 2);		thischr[0]	= 0;	// char variable to detect end of value via a ',' or '}' or ' '
+		char	myStr;		Dim(&myStr, PatLen);	myStr[0] 	= 0;
+
+		Dim(&keyvalue, 64);		keyvalue[0] = 0;					// keyvalue char is a global (used in status dump)
 
 		float	fkeyvalue;											// cater for floating point key values
 		int		ikeyvalue;
@@ -188,9 +195,6 @@
 		int		DimSize = 0;		
 		
 		// Find the Key (pattern) ...
-
-		Dim(&myStr, PatLen);
-		myStr[0] = 0;
 		
 		int Start = 0;
 		int TheEnd = strlen(&myJson)-PatLen;
@@ -220,13 +224,7 @@
 		valstart = Start + PatLen + 2;							// start of value we're after
 
 		chrpnt = 0;
-		
-		DimSize = Dim(&thischr, 2);								// Dim 'thischr' to 2 as getting garbage in 'thischar' when set to '1'
-		thischr[0] = 0;											
-		
-		DimSize = Dim(&keyvalue, 64);							// arbitrary size	
-		keyvalue[0] = 0;
-		
+						
 		myResult = strcmp(&pattern, "Pips");
 		
 		if (myResult == 0) {
@@ -271,7 +269,7 @@
 				if (myResult == 0 & (vtype == 0 | vtype == 1)) EndValue = 1;
 
 				myResult = strcmp(&thischr, "\"");
-				if (myResult == 0 & vtype == 2) EndValue = 1;
+				if (myResult == 0 & vtype == 2) EndValue = 1;			
 				
 				if (EndValue == 0) strcat(&keyvalue, &thischr);
 				
@@ -295,8 +293,8 @@
 		}
 
 		if (vtype == 2) {											// Just remove leading quote
-			strdel(&keyvalue, 0, 0);
-			return 0;															
+			strdel(&keyvalue, 0, 0);								// Use the global keyvalue on return
+			return 0;
 		}
 	}
 
@@ -308,6 +306,8 @@
 	// Output: Flags value
 
 	int fnsProcessFlags(int UpdateLEDs) {
+
+		int VoiceTxt;
 
 		int ll = fLatLong;												// Track in/out of orbit
 		int sc = fSupercruise;											// Track Supercruise changes
@@ -334,7 +334,6 @@
 			if(GameLoaded == 1) {
 				GameLoaded = 0;
 				printf("\x0a - Game has stopped - \x0a\x0a");
-//				fnSetLEDs(0);											// Turn off Status LEDs
 				fnSetLEDs();											// Turn off Status LEDs
 				VoiceTxt = "Game halted.";
 				fnTextToSpeech(VoiceTxt, 0);
@@ -405,9 +404,7 @@
 						fnTextToSpeech(VoiceTxt, 0);
 						
 						if (fInterdicted | fDanger) {
-//							VoiceTxt = "Warning! Danger!";
 							printf("!!! DANGER DETECTED !!!\x0a");
-//							fnTextToSpeech(VoiceTxt, 100);
 							if (fHUDAnalysis) {
 								tgHUDMode();							// Select Combat HUD
 							}
@@ -415,7 +412,6 @@
 								tgHardpoints();
 							}
 							VoiceTxt = "Warning! Danger! Combat Mode Initiated";
-//							DeferCall2(2000, &fnTextToSpeech, VoiceTxt, 0);	// Sound warning
 							fnTextToSpeech(VoiceTxt, 100);				// Sound warning 
 						}
 					}
@@ -457,7 +453,7 @@
 					VoiceTxt = "Undocked";
 					InHanger = 0;					
 				}
-				printf("Docked status: %s\x0a", VoiceTxt);					
+//				printf("Docked status: %s\x0a", VoiceTxt);					
 //				fnTextToSpeech(VoiceTxt, 0);
 			}
 									
@@ -500,7 +496,6 @@
 				printf("===============\x0a");
 			}
 			
-//			if (UpdateLEDs) fnSetLEDs(0);
 			if (UpdateLEDs) fnSetLEDs();
 
 			if(GameLoaded == 0) {			// Game started...as opposed to re-started.
@@ -593,9 +588,6 @@
 		
 		if(Flags != 0) {
 			fnsProcessFlags(0);
-//			if(GameLoaded == 0) {					// Script has been restarted but game already running
-//				fnGameStarted();
-//			}
 		}
 		else {
 			fnSoundFX("tada", 100, 1);
