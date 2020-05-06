@@ -7,8 +7,8 @@
 
 // Refer Change Log.txt in same folder
 
-// Keyboard key mappings below which are commented out are not used within the script.
-// These are mapped within ED Control bindings and are provided here as reference.
+// Keyboard key mappings below which are commented out are not used within this script.
+// These are provided here as reference to what I've used in the game bindings
 // If you change anything here, you must ensure you also change within the control
 // bindings of the game.
 
@@ -29,6 +29,10 @@
 
 // Do not assign  ALT+F4 to a variable	(L_ALT+USB[0x3D] or R_ALT+USB[0x3D])
 // PULSE will send an ALT+F4 to the current active window and close it!
+
+						//   -- NOTE --   //
+
+// TARGET Script editor will sound a 'brrringg' noise if you assign ALT+F3
 
 
 // START
@@ -301,7 +305,8 @@
 //	PSB  = DX14				//						EORIGN = DX32																								//
 //	------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// REFERENCE: DEFAULT THRUSTMASTER COMBINED DX MAPPINGS //	target.tmh // DX33-55 requires targetdx128.tmh marked with *, otherwise no DX > 32					//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------//
+// REFERENCE: DEFAULT THRUSTMASTER COMBINED DX MAPPINGS //	target.tmh // DX33-55 requires targetdx64enh.tmh marked with *, otherwise no DX > 32				//
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //																																								//
 //	JOYSTICK:	//			//	Trim Control: //		//	TMS Hat:	//		//	DMS Hat:	//		//	CMS Hat:	//										//
@@ -326,6 +331,7 @@
 //	CHB  = DX36*			------------------------------------------------------------------------------------------------------------------------------------//
 //	PSF  = DX37*			//	EACON  = DX50*		EOLIGN = DX52*					APUON = DX53*		  RDRNRM = DX54* 			LDGH = DX55*				//
 //	PSB  = DX38*			//						EORIGN = DX51*																								//
+//	------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // REFERENCE: USB KEY DEFINITIONS //																															//
