@@ -47,8 +47,8 @@
 //	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	alias StatusFile			= "C:\\Users\\clicker\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
-	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. 
-
+	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. (ie 500 = read status.json twice a second)
+										// You may see issues if this is set too small. If you do, raise this value to 750 or 1000
 
 //----------------//
 // Text To Speech //
@@ -84,7 +84,7 @@
 
 
 //---------//
-// TIMINGS //
+// Timings //
 //---------//
 
 	// These delay settings affect how fast the script executes key presses etc.
@@ -99,39 +99,52 @@
 
 
 //--------------------------//
-// GENERAL STATUS VARIABLES //
+// General Status Variables //
 //--------------------------//
 
 	int		AutoHanger			= 0; //  !! TESTING !!	// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't
+	int		CommsModule			= 0; //		Required whilst ED_CommsControl not loaded
+
+//-------------//
+// Axis Curves //
+//-------------//
+
+	define	FAOFFCurves				MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
+	define	CurveInfo				PRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
+
+	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
+	// The below constructs support S-Curves
+
+	// Define the deadzones
+	// --------------------
+	define	Joystick_L_DZ 			0						// Set Joystich Left	Deadzone
+	define	Joystick_C_DZ 			1						// Set Joystick Centre	Deadzone
+	define	Joystick_R_DZ 			0						// Set Joystick Right	Deadzone
+
+	define	Rudder_L_DZ				0						// Set Rudder Left 		Deadzone
+	define	Rudder_C_DZ				10						// Set Rudder Centre	Deadzone
+	define	Rudder_R_DZ				0						// Set Rudder Right		Deadzone
 	
+	define	Slew_L_DZ				0						// Set Slew Left		Deadzone
+	define	Slew_C_DZ				10						// Set Slew Centre		Deadzone
+	define	Slew_R_DZ				0						// Set Slew Right		Deadzone
 
-//-------------//
-// AXIS CURVES //
-//-------------//
-
-	// The below curve arrays are set for "off", "mild" and "medium"
+	// The below curve arrays are set for "off", "mild" and "medium" and controlled via the Autopilot switch
 	// Eg 	AP Switch set at APPAT	= (Curve = 0, Zoom = 0 )
 	//		AP Switch set to APAH	= (Curve = 1, Zoom = 0 )
 	//		AP Switch set to APALT	= (Curve = 3, Zoom = -1)
 	// 
-	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 
-//								APPAT	APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
-	short Joystick_Curve[] 	= {	0,		1,		3};		// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	short Rudder_Curve[]	= { 0,		1,		4};		
-
-	short Joystick_Zoom[]	= {	0,		0,     -1};		// Set Joystick zoom profiles 
-	short Rudder_Zoom[]		= { 0,		0,		0};		// Set Rudder zoom profiles
+	// Define curve & zoom arrays
+	// --------------------------   APPAT   APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
+	short	Joystick_Curve[] 	= {	0,		1,		3	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	short	Joystick_Zoom[]		= {	0,		0,     -1	};	// Set Joystick zoom profiles
 	
-	define Joystick_L_DZ 		0						// Set Joystich Left	Deadzone
-	define Joystick_C_DZ 		1						// Set Joystick Centre	Deadzone
-	define Joystick_R_DZ 		0						// Set Joystick Right	Deadzone
+	short	Rudder_Curve[]		= { 0,		1,		4	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	short	Rudder_Zoom[]		= { 0,		0,		0	};	// Set Rudder zoom profiles
 	
-	define Rudder_L_DZ			0						// Set Rudder Left 		Deadzone
-	define Rudder_C_DZ			10						// Set Rudder Centre	Deadzone
-	define Rudder_R_DZ			0						// Set Rudder Right		Deadzone
+	short	Slew_Curve[]		= {	0,		0,		0	};	// Set Slew Curve
+	short	Slew_Zoom[]			= {	0,		0,		0	};	// Set Slew Zoom	
 
-	define FAOFFCurves			MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
-	define CurveInfo			PRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
 	
 // END
