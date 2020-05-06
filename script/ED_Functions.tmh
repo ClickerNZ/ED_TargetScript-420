@@ -22,34 +22,34 @@
 // Index:	Line		FUNCTION
 //			Line 61: 	int initJoystickAxis()
 //			Line 70: 	int initThrottleAxis()
-//			Line 91: 	int initTFRPRudder()
-//			Line 99: 	int initTextToSpeech()
-//			Line 114: 	int initSoundFX()
-//			Line 134: 	int fnNotValid()
-//			Line 150: 	int fnSetJoystickCurves()
-//			Line 186: 	int fnSetSliderCurve()
-//			Line 209: 	int fnGetFlightMode()
-//			Line 228: 	int fnFlashLED()
-//			Line 240: 	int fnSetLEDs()
-//			Line 272: 	int fnFlashStart()
-//			Line 298: 	int fnTextToSpeech()
-//			Line 328: 	int fnVoiceVolume()
-//			Line 382: 	int fnSoundFX()
-//			Line 404: 	int fnGameStarted()
-//			Line 453: 	int fnPIPMode()
-//			Line 501: 	int fnPIPManager()
-//			Line 538: 	int fnPIPMapper()
-//			Line 578: 	int fnAdvFireControl()
-//			Line 635: 	int fnAdvancedSCB()
-//			Line 667: 	int fnHeatsink()
-//			Line 681: 	int fnChaff()
-//			Line 692: 	int fnDeploySRV()
-//			Line 723: 	int fnRequestDock()
-//			Line 734: 	int fnHangerServices()
-//			Line 788: 	int fnModeSwitch()
-//			Line 822: 	int fnPrintState()
-//			Line 833: 	int fnStateDump()
-//			Line 933: 	int fnDebugStates()
+//			Line 86: 	int initTFRPRudder()
+//			Line 92: 	int initTextToSpeech()
+//			Line 107: 	int initSoundFX()
+//			Line 127: 	int fnNotValid()
+//			Line 142: 	int fnSetJoystickCurves()
+//			Line 196: 	int fnSetSliderCurve()
+//			Line 219: 	int fnGetFlightMode()
+//			Line 238: 	int fnFlashLED()
+//			Line 249: 	int fnSetLEDs()
+//			Line 281: 	int fnFlashStart()
+//			Line 307: 	int fnTextToSpeech()
+//			Line 337: 	int fnVoiceVolume()
+//			Line 391: 	int fnSoundFX()
+//			Line 412: 	int fnGameStarted()
+//			Line 466: 	int fnPIPMode()
+//			Line 517: 	int fnPIPManager()
+//			Line 554: 	int fnPIPMapper()
+//			Line 594: 	int fnAdvFireControl()
+//			Line 650: 	int fnAdvancedSCB()
+//			Line 682: 	int fnHeatsink()
+//			Line 696: 	int fnChaff()
+//			Line 714: 	int fnDeploySRV()
+//			Line 751: 	int fnRequestDock()
+//			Line 770: 	int fnHangerServices()
+//			Line 816: 	int fnModeSwitch()
+//			Line 869: 	int fnPrintState()
+//			Line 880: 	int fnStateDump()
+//			Line 979: 	int fnDebugStates()
 
 // START
 
@@ -68,33 +68,24 @@
 
 	//FUNCTION: Initialise Throttle Axes
 	int initThrottleAxis() {																	// Set Default Throttle Axis
-		printf("Throttle Axis			... ");
 		
 		// Throttle mapping...
 		MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);					// Set Left Throttle. Right throttle not used.
-		SetSCurve(&Throttle, THR_LEFT, 0, 0, 0, 0, 0);											// No curves for Throttle
-		printf("done\x0a");
+		printf("Throttle Axis			... done\x0a");
 
 		// Slider Mapping...
 		MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);					// Set Friction Control Axis Curve (Sensor Range Zoom Scaling)
 		fnSetSliderCurve(1);
 		
 		// Slew Control Mapping...
-		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axis
-//		SetSCurve(&Throttle, SCX, 0, 20, 0, 2, -1);
-		SetSCurve(&Throttle, SCX, 0, 10, 0, 0, 0);												// Set static curves for slew control
-		
+		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axi		
 		MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control Y Axis
-//		SetSCurve(&Throttle, SCY, 0, 20, 0, 2, -1);
-		SetSCurve(&Throttle, SCY, 0, 10, 0, 0, 0);												// Set static curves for slew control
 	}
 
 	// FUNCTION: Initialise Rudder
 	int initTFRPRudder() {																		// Initialise Thrustmaster TFRP Rudder
-		printf("Rudder Axis	... ");
 		MapAxis(&TFRPRudder, TRUDDER, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-		SetSCurve(&TFRPRudder, TRUDDER, 0, 10, 0, 0, 0);										// Set initial Rudder curves 	
-		printf("done		");
+		printf("Rudder Axis	... done		");
 	}
 
 	// FUNCTION: Initialise Text To Speech Engine	
@@ -137,8 +128,6 @@
 		char fntxt;
 		Dim(&fntxt, 100);										// Increase buffersize if required
 		fntxt[0] = 0;
-//		strcat(&fntxt, fnName);
-//		strcat(&fntxt, " not valid at this time.");
 		sprintf(&fntxt, "%s not available at this time, %s", fnName, reason);
 		
 		fnTextToSpeech(&fntxt, 0);
@@ -151,6 +140,8 @@
 	// Parameter:	print = 0 to supress console print of Curve settings, 1 to print
 
 	int fnSetJoystickCurves(int profile, int print) {
+
+		int VoiceTxt;
 
 		JSProfile = profile;
 		
@@ -166,10 +157,23 @@
 			JSCurveSetting = "MEDIUM";
 			VoiceTxt = "Curves medium";			
 		}
-		
-		SetSCurve(&Joystick, JOYX,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
-		SetSCurve(&Joystick, JOYY,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
-		SetSCurve(&TFRPRudder, TRUDDER, Rudder_L_DZ,	Rudder_C_DZ,	Rudder_R_DZ,	Joystick_Curve[profile], Joystick_Zoom[profile]);
+
+		// Set Joystick curves and force re-read of axes
+		SetSCurve(&Joystick, JOYX,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
+		SetSCurve(&Joystick, JOYY,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
+		DefEventHandler(EV_HID_INPUT_DATA, &Joystick, JOYX);
+		DefEventHandler(EV_HID_INPUT_DATA, &Joystick, JOYY);
+
+		// Set Rudder curve and force re-read of axis
+		SetSCurve(&TFRPRudder, TRUDDER, Rudder_L_DZ,	Rudder_C_DZ,	Rudder_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
+		DefEventHandler(EV_HID_INPUT_DATA, &TFRPRudder, TRUDDER);
+
+		// Set Slew Control curves and force re-read of axes 
+		SetSCurve(&Throttle, SCX, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom[profile]);
+		SetSCurve(&Throttle, SCY, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom[profile]);
+		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, SCX);
+		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, SCY);
+
 
 		if (StartupLock) {
 			printf("Joystick & Pedal Curves	... done.\x0a");
@@ -181,6 +185,7 @@
 		if (print) {
 			printf("Joystick Curves[%s]	: LDZ=%d, CDZ=%d,  RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Joystick_L_DZ, Joystick_C_DZ, Joystick_R_DZ, Joystick_Curve[profile], Joystick_Zoom[profile]);
 			printf("Rudder Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Rudder_L_DZ, Rudder_C_DZ, Rudder_R_DZ, Rudder_Curve[profile], Rudder_Zoom[profile]);
+			printf("Slew Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Slew_L_DZ, Slew_C_DZ, Slew_R_DZ, Slew_Curve[profile], Slew_Zoom[profile]);
 		}
 	}
 
@@ -240,9 +245,7 @@
 
 
 	// FUNCTION: Sets Status LEDs according to state flags
-	// Argumants: x ... not used
 	
-//	int fnSetLEDs(int x) {
 	int fnSetLEDs() {
 	
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0)); 		// set GLOBAL LED ON
@@ -312,14 +315,7 @@
 		else {
 			sprintf(&volume, "%d", VoiceVolume);
 		}
-		
-//		if (VoiceVolume) {
-//			sprintf(&volume, "%d", VoiceVolume);		
-//		}
-//		else {
-//			strcat(&volume, "75");
-//		}
-		
+				
 		if (EnableVoice) {
 			Dim(&SysCmd, 255);										// Increase buffersize if required
 			SysCmd[0] = 0;
@@ -437,11 +433,16 @@
 			ConnectionStatus = 1;										// tracks if above has already been turned on
 		}
 		
-		if (!CommsInitialised) {
-			initCommsChannels();										// Initialise Voice Communications 
-			CommsInitialised = 1;
+		if (CommsModule) {
+			if (!CommsInitialised) {
+				initCommsChannels();									// Initialise Voice Communications 
+				CommsInitialised = 1;
+			}
 		}
-
+		else {
+			printf("\x0a\- ED_CommsControl.tmh not loaded -\x0a\x0a");
+		}
+		
 		if(EnableVoice) {
 			VoiceStatus = "Enabled";
 		}
@@ -451,8 +452,7 @@
 		printf("VoiceStatus	= %d - %s\x0a", EnableVoice, VoiceStatus);
 		printf("VoiceVolume	= %d\x0a", VoiceVolume);
 
-		VoiceTxt = "Welcome back Commander";
-		fnTextToSpeech(VoiceTxt, 0);
+		fnTextToSpeech("Welcome back Commander", 0);
 
 		fnPrintState();
 		printf("\x0a\Script running....waiting for input...\x0a\x0a");
@@ -464,6 +464,8 @@
 	// Parameter: 0 = Reset PIPMode to 0. 1 = Increment PIPMode (0-4)
 
 	int fnPIPMode(int x) {
+
+		int VoiceTxt;
 		
 		if (!StartupLock) {
 			if (x == 0) {
@@ -507,6 +509,7 @@
 			printf("PIPMode(%d):		%s	>>\x0a", PIPMode, PIPTxt);
 		}
 	}
+
 
 	// FUNCTION: Determines PIP Profile, constructs and parses PIPMapper parameters
 	// Parameters: Main PIP Power assignment
@@ -636,7 +639,6 @@
 				TriggerStateS = !TriggerStateS;
 			}		
 		}
-
 	}
 
 
@@ -692,9 +694,16 @@
 	// FUNCTION: Deploy Chaff
 	
 	int fnChaff() {
+		int fnName = "Chaff";
+		int reason;
+		
 		if(!fSupercruise) {
 			ActKey(PULSE+KEYON+FireChaffLauncher);
 			printf("!!!   Chaff  Fired   !!!\x0a");
+		}
+		else {
+			reason = "we are in supercruise";
+			fnNotValid(fnName, reason);
 		}
 	}
 
@@ -715,7 +724,6 @@
 			else {
 				reason = "we are not landed";
 				fnNotValid(fnName, reason);
-//				printf("Cannot Deploy SRV at this time\x0a");
 			}
 		}
 		else {															// RECOVER
@@ -733,7 +741,6 @@
 					reason = "turret not retracted";
 				}
 				fnNotValid(fnName, reason);
-//				printf("Cannot Recover SRV at this time\x0a");
 			}
 		}
 	}
@@ -742,10 +749,18 @@
 	// FUNCTION: Calls Request Dock macro. Set power to shields
 
 	int fnRequestDock() {
-		ActKey(PULSE+KEYON+mRequestDock);
-		fnPIPMapper(SYS,ENG);
-		printf("\x0a=	Docking request sent	=\x0a");
-		printf("=	    Power to shields	=\x0a\x0a");
+		int fnName = "Docking request";
+		int reason;
+		if (!fSupercruise) {
+			ActKey(PULSE+KEYON+mRequestDock);
+			fnPIPMapper(SYS,ENG);
+			printf("\x0a=	Docking request sent	=\x0a");
+			printf("=	    Power to shields	=\x0a\x0a");
+		}
+		else {
+			reason = "we are in supercruise";
+			fnNotValid(fnName, reason);
+		}
 	}
 
 
@@ -756,7 +771,8 @@
 		int fnName = "Hanger Services";
 		int GUIMode;
 		int reason;
-
+		int VoiceTxt;
+		
 		if (GameLoaded) {
 			if(fDocked) {
 				if(x) {	
@@ -768,11 +784,6 @@
 						ActKey(PULSE+KEYON+mEnterHanger);
 						InHanger = 1;
 					}
-//					else {														// Not Required?
-//						VoiceTxt = "We're already in the hanger commander";
-//						printf("%s\x0a", VoiceTxt);
-//						fnTextToSpeech(VoiceTxt, 0);
-//					}					
 				}
 				else {				
 					fnName = "Launch Sequence";
@@ -780,10 +791,6 @@
 					if(GUIMode == GUI_StationSvcs) {
 						reason = "Exit Station services";
 						fnNotValid(fnName, reason);
-//						VoiceTxt = "Exit Station Services before selecting launch";
-//						printf("%s\x0a", VoiceTxt);
-						printf("%s\x0a", reason);
-//						DeferCall2(2500, &fnTextToSpeech, VoiceTxt, 0);
 					}
 					else {	
 						VoiceTxt = "Initiating launch sequence";
@@ -797,10 +804,6 @@
 			else {
 				reason = "You are not docked at a station services facility";
 				fnNotValid(fnName, reason);
-//				VoiceTxt = "You are not docked at a station services facility"; 
-//				printf("%s\x0a", VoiceTxt);
-				printf("%s\x0a", reason);
-//				DeferCall2(2500, &fnTextToSpeech, VoiceTxt, 0);
 			}
 		}
 	}
@@ -838,23 +841,18 @@
 			ActKey(PULSE+KEYON+mFastModeSwitch2);												// Selects SOLO mode
 		}
 
-//		GUIMode = fnsProcessGuiFocus();
-//		printf("GUIMode = %d\x0a", GUIMode);
-
 		sprintf(&VoiceTxt, "Mode switch to %s selected, please wait for game reload", Mode);
 		fnTextToSpeech(&VoiceTxt, 0);
 		printf("\x0a\Wait for game to finish loading ");
 
-		if (ReverseThrust) {																	// Game always starts with Forward Thrust
+		if (ReverseThrust) {																	// Game always resets Reverse Thrust
 			ReverseThrust = 0;
 		}
 		
-//		while (GUIMode != GUI_None) {															// Wait for game to finish reloading
-		while (counter < ReloadDelay) {
+		while (counter < ReloadDelay) {															// Wait for game to finish reloading
 			printf(".");
 			Sleep(1000);
 			counter = counter + 1;
-//			GUIMode = fnsProcessGuiFocus();			
 		}
 		
 		printf("\x0a\x0a\Game has reloaded\x0a");
@@ -881,7 +879,6 @@
 
 	int fnStateDump() {
 
-		int myResult;
 		int myJsonTimeStamp;
 
 		int AL, AR, BL, CR, DA, FA, FM, HB, HD, HI, HM, HP, JT;
@@ -928,7 +925,7 @@
 			fclose(fp);
 		}
 
-		myResult = fnsGetKeyValue("timestamp", 2);		// sets 'keyvalue' char array to status.json timestamp
+		fnsGetKeyValue("timestamp", 2);		// sets 'keyvalue' char array to status.json timestamp
 
 		printf("\x0aShip System States @ %s       JSON-Timestamp: %s       Flags: %u\x0a", TOD, &keyvalue, Flags);
 		printf("-----------------------------------------------------------------------------------------------------------------------------------------------\x0a");
