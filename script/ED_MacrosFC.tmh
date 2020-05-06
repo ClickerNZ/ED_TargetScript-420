@@ -21,7 +21,7 @@
 
 
 // Index:	Line		FUNCTION
-//			Line 35:	fnCustomCommands()
+//			Line 50:	fnCustomCommands()
 //			Line 61:	mRequestDock 
 //			Line 74:	mDeploySRV 
 //			Line 86:	mBoardShip 
