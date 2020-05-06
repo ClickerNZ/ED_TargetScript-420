@@ -7,6 +7,10 @@
 
 // Refer Change Log.txt in same folder
 
+// NOTE:	All user related settings can be found in the ED_UserSettings.tmh file
+//			Changing any of the below global variables will have s ignificant effect on the script
+//			and may cause errors. Change these at your own risk
+
 // LEGEND: 
 // ========================================================
 // fnName()					refer to ED_Functions file
@@ -25,11 +29,11 @@
 // DEFAULT STATES //   					// GLOBAL VARIABLE INITIALISATION, DESCRIPTION & USAGE
 //----------------//
 
-	int Debug				= 0;		// Debug mode for testing. 0 = OFF, 1 = ON
+	int Debug				= 0;		// Debug mode for testing. 0 = OFF, 1 = ON. Prints additional info to console
 	int ShowFlags			= 0;		// Set/Reset in fnDebugStates() and used in fnsProcessFlags()
 		
 	int VoiceExists;					// Initialised here and set in initTextToSpeech()
-	int VoiceTxt;						// Use this variable to parse your text. eg 'fnTextToSpeech(VoiceTxt);'
+//	int VoiceTxt;						// Use this variable to parse your text. eg 'fnTextToSpeech(VoiceTxt);' (moved to local var)
 	int SounderExists;					// Initialised here and set in initSoundFX()
 	
 	char SysCmd;						// We build SysCmd dynamically in functions which want to send a "system(&SysCmd);"
