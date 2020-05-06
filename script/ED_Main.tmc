@@ -27,13 +27,13 @@
 // included files //
 // -------------- //
 
-include "targetdx64enh.tmh"					// This is my modified version of targetdx128.tmh
+include "targetdx64enh.tmh"				// This is my modified version of targetdx128.tmh
 
-// target.tmh "include" is mandatory.
-// target.tmh has an include statement for defines.tmh and hid.tmh. 
-// hid.tmh has an include statement for sys.tmh
-// The above listed files are all bundled with the TARGET software, therefore you do not need
-// to package them with your script bundle.
+// 'target.tmh' include is mandatory.
+// target.tmh will include defines.tmh and hid.tmh. 
+// hid.tmh will include sys.tmh
+// These are bundled with the TARGET software, therefore you only need to package with   
+// your script bundle if you have modified them.
 
 include "ED_GlobalVars.tmh"				// These six files make up my script bundle
 include "ED_Keymap.ttm"					// The order that these are 'included' matters
@@ -79,7 +79,6 @@ include "ED_Macros.tmh"
 		SetKBLayout(KBLayout);
 
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_INTENSITY, SetLED)); 				// Set overall LED back-light intensity...
-//		fnSetLEDs(0);
 		fnSetLEDs();
 		
 		fnCustomCommands();														// Initialise Custom Macros (See EDMacros.tmh)
@@ -160,7 +159,6 @@ include "ED_Macros.tmh"
 			0																								// RD -
 			);
 
-
 // 		(Nosewheel Steering Button)
 //		---------------------------
 
@@ -239,7 +237,7 @@ include "ED_Macros.tmh"
 			EXEC("fnHeatsink();"),																		// M - Fire Heat Sink
 			CameraZoomOut																				// D - Camera/FSS Zoom - OUT
 			);
-// ---			
+
 		MapKeyUMD(&Joystick, H4L,
 			0,																							// U -
 			EXEC("ActKey(KEYON+ChargeECM); printf(\"! ECM Charging...\");"),							// M - Charge ECM (Electronic Counter Measures)
@@ -251,7 +249,7 @@ include "ED_Macros.tmh"
 			EXEC("ActKey(ChargeECM); printf(\"Fired !\\x0a\");"),										// RM - Fire ECM when trigger is released
 			0																							// RD - 
 			);
-// ---			
+
 		MapKeyUMD(&Joystick, H4R,
 			0,																							// U -
 			EXEC("fnChaff();"),																			// M - Fire Chaff
@@ -310,41 +308,6 @@ include "ED_Macros.tmh"
 		MapKey(&Throttle, MSR, 0);								// Reserved for Communications functions
 		MapKey(&Throttle, MSP, 0);								// Reserved for Communications functions
 		
-/*		// Use IO so we don't accidentally change channels when we push-to-talk
-
-		MapKeyIO(&Throttle, MSU,
-			EXEC("fnChannelSelect(CHNLUP);"),					// I - Channel Up
-			0													// O - do nothing
-			);
-			
-		MapKeyIO(&Throttle, MSD, 
-			EXEC("fnChannelSelect(CHNLDN);"),					// I - Channel Down
-			0													// O - do nothing
-			);
-			
-		// Use IO so we don't accisnetally toggle PTT mode when we push-to-talk
-			
-		MapKeyIO(&Throttle, MSL, 
-			EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-			0													// O - do nothing
-			);
-			
-		MapKeyIO(&Throttle, MSR, 
-			EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-			0													// O - do nothing
-			);
-		
-		MapKeyIO(&Throttle, MSP, 
-			EXEC("fnCommStatus();"),							// I - Announce current Comms Status
-			EXEC("fnMicControl(1);")							// O - Push to Talk
-			);
-			
-		MapKeyRIO(&Throttle, MSP, 			// RELEASE	
-			0, 													// RI - do nothing
-			EXEC("fnMicControl(0);")							// RO - Release PTT 
-			);
-*/
-
 //		(Speed Brake)		// Reverse Throttle function modifiers
 //		-------------
 
@@ -479,7 +442,6 @@ include "ED_Macros.tmh"
 		MapKeyUMD(&Throttle, EFRNORM,
 			0,																				// U - 
 			EXEC("GameLoaded = 0;"),														// U - Reset GameLoaded flag
-//			EXEC("fnSetLEDs(0);")															// D - Reset LEDs
 			EXEC("fnSetLEDs();")															// D - Reset LEDs
 			);
 			
