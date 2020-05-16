@@ -484,9 +484,9 @@
 		ActKey(PULSE+KEYON+ExtCamera);
 		if(CameraMode) {
 			printf("External Camera:	ON\x0a");
-			Sleep(100);
-			ActKey(PULSE+KEYON+EnterFreeCameraMode);
-			ActKey(PULSE+KEYON+HideCameraGUI);
+//			Sleep(100);
+			DeferCall(100, &ActKey, PULSE+KEYON+EnterFreeCameraMode);
+			DeferCall(200, &ActKey, PULSE+KEYON+HideCameraGUI);
 		}
 		else {
 			printf("External Camera:	OFF\x0a");
