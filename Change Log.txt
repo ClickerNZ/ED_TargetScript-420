@@ -7,7 +7,7 @@ v4.2.0	- Point Release
 		- Refactor some toggles to remove unneccessary flag assignments
 		- Add second parameter, 'reason' to fnNotValid ()
 		- Add second parameter, 'VolumeOverride' to fnTextToSpeech()
-		- Remove unused paramter from fnSetLEDs()
+		- Remove unused parameter from fnSetLEDs()
 		- Tweak Slew control curves
 		- Create targetdx64enh.tmh from targetdx128.tmh and add my tweaks. Move DX33-64 defines to top of script. Add ThrottleMap mappings for DX34-DX55
 		- Extend Joystick Curves to include global variables for all 3 deadzones
@@ -16,6 +16,11 @@ v4.2.0	- Point Release
 		- Tweak tgEnhancedFAOFF() code
 		- Tweak fnModeSwitch{} and fnGameStarted()
 		- Remove Communications functions for now - these need to be tested before releasing
+		- Create fnDRShip() function to track when Ship is dismissed or recalled
+		- Remove Zoom factors from curve arrays (static Zoom set to 0)
+		- Add and report on Slider Profile when it changes
+		- Create fnsMyStates() function to save and load non 'status.json' variables we want to track
+		- Replace Sleep() with DeferCall when triggering use of FreeCamera
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
