@@ -21,12 +21,13 @@
 
 
 // Index:	Line		FUNCTION
-//			Line 52: 	int fnsGetStatusFileInfo()
-//			Line 97: 	int fnsReadStatusJson()
-//			Line 170: 	int fnsGetKeyValue()
-//			Line 308: 	int fnsProcessFlags()
-//			Line 512: 	int fnsProcessGuiFocus()
-//			Line 550: 	int fnsStartCheck()
+//			Line 53: 	int fnsGetStatusFileInfo()
+//			Line 98: 	int fnsReadStatusJson()
+//			Line 171: 	int fnsGetKeyValue()
+//			Line 309: 	int fnsProcessFlags()
+//			Line 516: 	int fnsProcessGuiFocus()
+//			Line 554: 	int fnsStartCheck()
+//			line 606:	int fnsMyStates()
 	
 // START
 
@@ -337,6 +338,8 @@
 				fnSetLEDs();											// Turn off Status LEDs
 				VoiceTxt = "Game halted.";
 				fnTextToSpeech(VoiceTxt, 0);
+				DeferCall(1100, &fnsMyStates, SAVE);					// Save my status variables 
+				
 				if (ReverseThrust) {
 					ReverseThrust = !ReverseThrust;
 				}
@@ -440,6 +443,7 @@
 					VoiceTxt = "Lift off";
 				}
 //				fnTextToSpeech(VoiceTxt, 0);
+				ShipDismissed = 0;
 			}
 			
 			if (fDocked != dk) {		// Framework - currently testing - may not be viable in current form without additional information from journal
@@ -593,6 +597,111 @@
 			fnSoundFX("tada", 100, 1);
 		}
 	}
+
+	// FUNCTION:	Save states not included in status.json
+	// PURPOSE:		Save current status of certain variables when mode switching or restarting the game
+	// REQUIRES:	'MyStatusFile' path to be set correctly within ED_UserSettings.tmh file
+	// PARAMETERS:	action = SAVE or LOAD
+	
+	int fnsMyStates(int action)	{
+
+		int fnName = "MyStates";
+		int reason;
+		int fp;														// General File Pointer Variable 
+		int fpresult;
+		int FileError = 0;
+		int maxbuf = 64;
+		int buf;
+		int padding;
+
+		char MyVars;
+		char dummy; Dim(&dummy, maxbuf); dummy[0] = 0;
+		char GetVar; Dim(&GetVar, 8);  GetVar[0] = 0;				// Temp variable to extract out individual vars
 		
+		sprintf(&dummy, "{ \"VoiceVolume\":%03d, \"ShipDismissed\":%d }", VoiceVolume, ShipDismissed);	// add leading zeros to VoiceVolume so static length = 3 chars
+		
+		buf = strlen(&dummy);
+		strdel(&dummy, buf+1, maxbuf);
+		
+		Dim(&MyVars, buf+1);
+		MyVars[0] = 0;
+
+		if (action == SAVE)	{
+
+			strcat(&MyVars, &dummy);
+						
+			if (Debug) {
+				printf("MyStates: %s\x0a", &MyVars);
+			}
+			
+			fp = fopen(&MyStatusFile, "w");							// creates the file if it doesn't exist
+			
+			if (fp) {
+				fpresult = fwrite(&MyVars, 1, buf, fp);				// Write MyStates to file
+				fclose(fp);
+				
+				if (fpresult == 0) {
+					fnTextToSpeech("Error writing MyStates to status file", 100);
+					printf("Error writing MyStates to status file\x0a");
+				}	
+				else {
+					if (Debug) {
+						printf("MyStates successfully saved: %s\x0a", &MyVars);
+					}
+					else {
+						printf("MyStates successfully saved\x0a");
+					}
+				}
+			}
+			else {
+				fnTextToSpeech("Error writing to My Status File", 0); 
+				printf("Error opening file to write: %s\x0a", &MyStatusFile);
+			}		
+		}
+		
+		else if (action == LOAD) {
+
+			fp = fopen(&MyStatusFile, "r");							// open file to read
+			
+			if (fp) {
+				fpresult = fread(&MyVars, 1, buf, fp);				// Load MyStates from file
+				fclose(fp);	
+				strdel(&MyVars, buf, maxbuf);						// Garbage removal
+				
+				if (fpresult > 0) {									// Read from file was successful
+					strsub(&GetVar, &MyVars, 16, 18);
+					VoiceVolume = ieval(&GetVar);					// Extract VoiceVolume
+					
+					strsub(&GetVar, &MyVars, 37, 38);
+					ShipDismissed = ieval(&GetVar);					// Extract ShipDismissed
+					
+					if (Debug) {
+						printf("\x0a\MyStates successfully loaded: %s\x0a", &MyVars);
+						printf("VoiceVolume	= [%d]\x0a", VoiceVolume);
+						printf("ShipDismissed	= [%d]\x0a", ShipDismissed); 
+					}
+					else {
+						printf("\x0a\MyStates successfully loaded\x0a");
+					}					
+				}
+				else {
+					fnTextToSpeech("Error reading MyStates from status file", 100);
+					printf("Error reading MyStates from status file\x0a");				
+				}
+			}
+			else {
+				fnTextToSpeech("Non fatal error, my Status File not found or invalid, check con sole message", 0); 
+				printf("\x0a\!!! Non-Fatal Error opening file to read: %s\x0a", &MyStatusFile);
+				printf("This can happen if changes were made to the variables selected for save and reload\x0a");
+			}		
+		}
+		
+		else {
+			reason = "action not valid";
+			fnNotValid(fnName, reason);
+			printf("fnsMyStates Action = %d\x0a", action);
+		}
+	}
+	
 
 // END
