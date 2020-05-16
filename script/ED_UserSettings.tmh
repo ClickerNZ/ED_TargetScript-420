@@ -45,10 +45,22 @@
 	//				Just replace '<username>' with your windows username.
 	
 //	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
+
+//	example...
 	alias StatusFile			= "C:\\Users\\clicker\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
 	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. (ie 500 = read status.json twice a second)
 										// You may see issues if this is set too small. If you do, raise this value to 750 or 1000
+
+//----------------//
+// MyStatusFile   //
+//----------------//
+
+	// NOTE:		Set the 'alias' below to point to where you want to save and load script variables that are not tracked via status.json
+	//				I've included an example below but so long as you create the folder structure, you can put this anywhere
+	
+	alias MyStatusFile			= "d:\\Thrustmaster\\ED_TargetScript\\MyStatusFile.json";
+
 
 //----------------//
 // Text To Speech //
@@ -58,14 +70,14 @@
 	// Set voicepath to where you copied voice.exe. Add any command line arguments you want within 'VoiceCMD'!
 	// Run voice.exe in a command prompt (from where you copied it) with no arguments etc to see a list of options
 	// VoiceVolume should be set to the relative volume level (%) for voice.exe 
-	// VoiceCMD is example on how to use command line arguments. Rate = 1, voice = "Catherine" (must be installed)
+	// VoiceCMD is example on how to use command line arguments. -r <rate> (>0 = faster, <0 = slower), voice = "Catherine" (must be installed)
 
 	int		EnableVoice			= 1; 					// 0 = Disable, 1 = Enable. Enable this if you wish to use "voice.exe". 
 														// Toggled via tgTxt2Speech();
 														
 	alias	VoicePath			= "d:\\Thrustmaster\\ED_TargetScript\\voice.exe";
 	int		VoiceVolume			= 75;												// Volume set at 75%
-	alias	VoiceCMD			= "-r 1 -n \"Microsoft Catherine\"";
+	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
 
 //------------------//
 // WAV Sound Player //
@@ -115,36 +127,36 @@
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 	// The below constructs support S-Curves
 
-	// Define the deadzones
-	// --------------------
-	define	Joystick_L_DZ 			0						// Set Joystich Left	Deadzone
+	// Define the deadzones and zoom factor
+	// ------------------------------------
+	define	Joystick_L_DZ 			0						// Set Joystick Left	Deadzone
 	define	Joystick_C_DZ 			1						// Set Joystick Centre	Deadzone
 	define	Joystick_R_DZ 			0						// Set Joystick Right	Deadzone
-
+	define	Joystick_Zoom			0						// Set Joystick Zoom factor
+	
 	define	Rudder_L_DZ				0						// Set Rudder Left 		Deadzone
 	define	Rudder_C_DZ				10						// Set Rudder Centre	Deadzone
 	define	Rudder_R_DZ				0						// Set Rudder Right		Deadzone
+	define	Rudder_Zoom				0						// Set Rudder Zoom factor
 	
 	define	Slew_L_DZ				0						// Set Slew Left		Deadzone
-	define	Slew_C_DZ				10						// Set Slew Centre		Deadzone
+	define	Slew_C_DZ				15						// Set Slew Centre		Deadzone
 	define	Slew_R_DZ				0						// Set Slew Right		Deadzone
+	define	Slew_Zoom				0						// Set Slew Zoom factor 
 
 	// The below curve arrays are set for "off", "mild" and "medium" and controlled via the Autopilot switch
-	// Eg 	AP Switch set at APPAT	= (Curve = 0, Zoom = 0 )
-	//		AP Switch set to APAH	= (Curve = 1, Zoom = 0 )
-	//		AP Switch set to APALT	= (Curve = 3, Zoom = -1)
+	// Eg 	AP Switch set at APPAT	= (Curve = 0)
+	//		AP Switch set to APAH	= (Curve = 1)
+	//		AP Switch set to APALT	= (Curve = 4)
 	// 
 
 	// Define curve & zoom arrays
 	// --------------------------   APPAT   APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
-	short	Joystick_Curve[] 	= {	0,		1,		3	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	short	Joystick_Zoom[]		= {	0,		0,     -1	};	// Set Joystick zoom profiles
+	short	Joystick_Curve[] 	= {	0,		1,		4	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
 	
 	short	Rudder_Curve[]		= { 0,		1,		4	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	short	Rudder_Zoom[]		= { 0,		0,		0	};	// Set Rudder zoom profiles
 	
 	short	Slew_Curve[]		= {	0,		0,		0	};	// Set Slew Curve
-	short	Slew_Zoom[]			= {	0,		0,		0	};	// Set Slew Zoom	
 
 	
 // END
