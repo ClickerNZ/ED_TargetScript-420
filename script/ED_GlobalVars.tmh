@@ -33,7 +33,6 @@
 	int ShowFlags			= 0;		// Set/Reset in fnDebugStates() and used in fnsProcessFlags()
 		
 	int VoiceExists;					// Initialised here and set in initTextToSpeech()
-//	int VoiceTxt;						// Use this variable to parse your text. eg 'fnTextToSpeech(VoiceTxt);' (moved to local var)
 	int SounderExists;					// Initialised here and set in initSoundFX()
 	
 	char SysCmd;						// We build SysCmd dynamically in functions which want to send a "system(&SysCmd);"
@@ -57,6 +56,7 @@
 	int OrbitalCruise		= 0;		// Track when entering Orbital Cruise
 	int FireModeP			= 0;		// 0 = Press to fire/Release to Stop, 1 = Press to fire, Press again to stop
 	int FireModeS			= 0;		// 0 = Press to fire/Release to Stop, 1 = Press to fire, Press again to stop
+	int ShipDismissed		= 0;		// Assume the ship is landed nearby when in SRV
 	
 	define SYS				1			// Used in fnPIPMapper for managing System  PIPs (see EDFunctions.tmh) (DO NOT modify!)
 	define ENG				2			// Used in fnPIPMapper for managing Engine  PIPs (see EDFunctions.tmh) (DO NOT modify!)
@@ -86,6 +86,8 @@
 	define SLOW				3			// used for fnSetJoyStickCurves()
 	define NOPRINT			0			// suppress console message
 	define PRINT			1			// don't
+	define SAVE				1			// used in fnsMyStates()
+	define LOAD				0			// used in fnsMyStates()
 	
 	int JSCurveSetting;
 	int DXCurveSetting;
