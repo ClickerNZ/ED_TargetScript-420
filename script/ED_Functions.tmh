@@ -20,36 +20,37 @@
 // ========================================================
 
 // Index:	Line		FUNCTION
-//			Line 61: 	int initJoystickAxis()
-//			Line 70: 	int initThrottleAxis()
-//			Line 86: 	int initTFRPRudder()
-//			Line 92: 	int initTextToSpeech()
-//			Line 107: 	int initSoundFX()
-//			Line 127: 	int fnNotValid()
-//			Line 142: 	int fnSetJoystickCurves()
-//			Line 196: 	int fnSetSliderCurve()
-//			Line 219: 	int fnGetFlightMode()
-//			Line 238: 	int fnFlashLED()
-//			Line 249: 	int fnSetLEDs()
-//			Line 281: 	int fnFlashStart()
-//			Line 307: 	int fnTextToSpeech()
-//			Line 337: 	int fnVoiceVolume()
-//			Line 391: 	int fnSoundFX()
-//			Line 412: 	int fnGameStarted()
-//			Line 466: 	int fnPIPMode()
-//			Line 517: 	int fnPIPManager()
-//			Line 554: 	int fnPIPMapper()
-//			Line 594: 	int fnAdvFireControl()
-//			Line 650: 	int fnAdvancedSCB()
-//			Line 682: 	int fnHeatsink()
-//			Line 696: 	int fnChaff()
-//			Line 714: 	int fnDeploySRV()
-//			Line 751: 	int fnRequestDock()
-//			Line 770: 	int fnHangerServices()
-//			Line 816: 	int fnModeSwitch()
-//			Line 869: 	int fnPrintState()
-//			Line 880: 	int fnStateDump()
-//			Line 979: 	int fnDebugStates()
+//			Line 62: 	int initJoystickAxis()
+//			Line 71: 	int initThrottleAxis()
+//			Line 87: 	int initTFRPRudder()
+//			Line 93: 	int initTextToSpeech()
+//			Line 108: 	int initSoundFX()
+//			Line 128: 	int fnNotValid()
+//			Line 143: 	int fnSetJoystickCurves()
+//			Line 197: 	int fnSetSliderCurve()
+//			Line 226: 	int fnGetFlightMode()
+//			Line 245: 	int fnFlashLED()
+//			Line 256: 	int fnSetLEDs()
+//			Line 288: 	int fnFlashStart()
+//			Line 314: 	int fnTextToSpeech()
+//			Line 344: 	int fnVoiceVolume()
+//			Line 398: 	int fnSoundFX()
+//			Line 419: 	int fnGameStarted()
+//			Line 473: 	int fnPIPMode()
+//			Line 524: 	int fnPIPManager()
+//			Line 561: 	int fnPIPMapper()
+//			Line 601: 	int fnAdvFireControl()
+//			Line 657: 	int fnAdvancedSCB()
+//			Line 689: 	int fnHeatsink()
+//			Line 703: 	int fnChaff()
+//			Line 721: 	int fnDeploySRV()
+//			line 758:	int fnDRShip()
+//			Line 787: 	int fnRequestDock()
+//			Line 806: 	int fnHangerServices()
+//			Line 852: 	int fnModeSwitch()
+//			Line 906: 	int fnPrintState()
+//			Line 917: 	int fnStateDump()
+//			Line 1016: 	int fnDebugStates()
 
 // START
 
@@ -159,18 +160,18 @@
 		}
 
 		// Set Joystick curves and force re-read of axes
-		SetSCurve(&Joystick, JOYX,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
-		SetSCurve(&Joystick, JOYY,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
+		SetSCurve(&Joystick, JOYX,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom);
+		SetSCurve(&Joystick, JOYY,		Joystick_L_DZ,	Joystick_C_DZ,	Joystick_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom);
 		DefEventHandler(EV_HID_INPUT_DATA, &Joystick, JOYX);
 		DefEventHandler(EV_HID_INPUT_DATA, &Joystick, JOYY);
 
 		// Set Rudder curve and force re-read of axis
-		SetSCurve(&TFRPRudder, TRUDDER, Rudder_L_DZ,	Rudder_C_DZ,	Rudder_R_DZ,	Joystick_Curve[profile],	Joystick_Zoom[profile]);
+		SetSCurve(&TFRPRudder, TRUDDER, Rudder_L_DZ,	Rudder_C_DZ,	Rudder_R_DZ,	Rudder_Curve[profile],	Rudder_Zoom);
 		DefEventHandler(EV_HID_INPUT_DATA, &TFRPRudder, TRUDDER);
 
 		// Set Slew Control curves and force re-read of axes 
-		SetSCurve(&Throttle, SCX, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom[profile]);
-		SetSCurve(&Throttle, SCY, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom[profile]);
+		SetSCurve(&Throttle, SCX, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom);
+		SetSCurve(&Throttle, SCY, 		Slew_L_DZ,		Slew_C_DZ,		Slew_R_DZ,		Slew_Curve[profile],		Slew_Zoom);
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, SCX);
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, SCY);
 
@@ -183,9 +184,9 @@
 			fnTextToSpeech(VoiceTxt, 0);
 		}			
 		if (print) {
-			printf("Joystick Curves[%s]	: LDZ=%d, CDZ=%d,  RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Joystick_L_DZ, Joystick_C_DZ, Joystick_R_DZ, Joystick_Curve[profile], Joystick_Zoom[profile]);
-			printf("Rudder Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Rudder_L_DZ, Rudder_C_DZ, Rudder_R_DZ, Rudder_Curve[profile], Rudder_Zoom[profile]);
-			printf("Slew Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Slew_L_DZ, Slew_C_DZ, Slew_R_DZ, Slew_Curve[profile], Slew_Zoom[profile]);
+			printf("Joystick Curves[%s]	: LDZ=%d, CDZ=%d,  RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Joystick_L_DZ, Joystick_C_DZ, Joystick_R_DZ, Joystick_Curve[profile], Joystick_Zoom);
+			printf("Rudder Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Rudder_L_DZ, Rudder_C_DZ, Rudder_R_DZ, Rudder_Curve[profile], Rudder_Zoom);
+			printf("Slew Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Slew_L_DZ, Slew_C_DZ, Slew_R_DZ, Slew_Curve[profile], Slew_Zoom);
 		}
 	}
 
@@ -195,22 +196,28 @@
 
 	int fnSetSliderCurve(int x) {
 		DXCurveSetting = x;												// Variable used in Status Printout
+		int SliderProfile;
+		
 		if (x == 0) {													// FSS Mode Radar
-			SetSCurve(&Throttle, THR_FC, 0, 0, 0, 0, 0);				// Linear progression. Low sensitivity
+			SetJCurve(&Throttle, THR_FC, 50, 50);						// Linear progression. Low sensitivity
+			SliderProfile = "FSS Mode";
 		}
 		if (x == 1)	{													// Normal flight
 			SliderCurve = LIST(0,0, 40,25, 75,50, 85,75, 100,100);
 			SetCustomCurve(&Throttle, THR_FC, SliderCurve);
+			SliderProfile = "Normal Flight";
+			
 		}
 		if (x == 2)	{													// Supercruise
 			SliderCurve = LIST(0,0, 50,10, 75,30, 90,50, 100,100);
 			SetCustomCurve(&Throttle, THR_FC, SliderCurve);
+			SliderProfile = "Supercruise";
 		}
 		
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, THR_FC);			// Forces re-read of slider axis
 
 		if (!StartupLock)
-			printf("Slider Curve Profile:	%d\x0a", x);
+			printf("Slider Curve Profile:	[%d] %s\x0a", x, SliderProfile);
 	}
 
 
@@ -418,7 +425,7 @@
 		printf("\x0a  !!! GAME STARTED !!!\x0a\x0a");
 		GameLoaded = 1;
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, THR_FC);			// Forces re-read of slider axis								
-
+		
 		fnFlashStart();
 		
 		// Align toggle switches and internal status flags if required
@@ -661,10 +668,10 @@
 			}
 			if (x == 2) {
 				ActKey(PULSE+KEYON+UseShieldCell);
-				DeferCall(250, &ActKey, PULSE+KEYON+DeployHeatSink);
-				DeferCall(3000, &ActKey, PULSE+KEYON+UseShieldCell);
 				printf("!!!    SCB  Fired    !!!\x0a");
+				DeferCall(250, &ActKey, PULSE+KEYON+DeployHeatSink);
 				printf("!!!  Heatsink Fired  !!!\x0a");
+				DeferCall(3000, &ActKey, PULSE+KEYON+UseShieldCell);
 				printf("!!!    SCB  Fired    !!!\x0a");
 			}		
 		}
@@ -717,7 +724,7 @@
 		
 		if (x == DEPLOY) {
 			fnName = "Deploy SRV";
-			if (fLanded) {												// DEPLOY
+			if (fLanded & fMainShip) {									// DEPLOY
 				ActKey(PULSE+KEYON+mDeploySRV);
 				printf("SRV:			DEPLOYED	>>\x0a");
 			}
@@ -743,6 +750,35 @@
 				fnNotValid(fnName, reason);
 			}
 		}
+	}
+	
+	
+	// FUNCTION: 	Dismiss/Recall Ship
+	
+	int fnDRShip() {
+		int fnName = "Dismiss or Recall Ship";
+		int reason;
+		int VoiceTxt;
+		
+		if(fSRV) {
+			if(ShipDismissed) {
+				VoiceTxt = "Ship recalled";
+			}
+			else {
+				VoiceTxt = "Ship dismissed";
+			}
+			ActKey(PULSE+KEYON+SRVRecallDismissShip);
+			fnTextToSpeech(VoiceTxt, 0);
+			printf("Ship status: %s\x0a", VoiceTxt);
+			ShipDismissed = !ShipDismissed;
+			fnsMyStates(SAVE);														// saves my status variables 
+			
+		}
+		else {
+			reason = "we are not in the S R V";
+			fnNotValid(fnName, reason);
+		}
+			
 	}
 
 
@@ -828,6 +864,7 @@
 		}
 
 		printf("Mode Switch Triggered\x0a");
+				
 		if (mode == 0) {
 			Mode = "Open";
 			ActKey(PULSE+KEYON+mFastModeSwitch0);												// Selects OPEN mode
