@@ -82,6 +82,7 @@ include "ED_Macros.tmh"
 		fnSetLEDs();
 		
 		fnCustomCommands();														// Initialise Custom Macros (See EDMacros.tmh)
+		fnsMyStates(LOAD);														// Load my ststaus variables
 		
 		fnsStartCheck();														// Check for vital files and game start		
 		initTextToSpeech();														// Initialise Text-To-Speech engine
@@ -194,7 +195,7 @@ include "ED_Macros.tmh"
 		MapKeyUMD(&Joystick, H2U,
 			EXEC("tgPlanetView();"),																	// U - Toggle - Front/Back view of planet
 			PULSE+SelectTargetAhead,																	// M - Target ahead
-			PULSE+SelectTargetAhead																	// D - Target ahead
+			PULSE+SelectTargetAhead																		// D - Target ahead
 			);
 			
 		MapKeyUMD(&Joystick, H2D,
@@ -263,7 +264,7 @@ include "ED_Macros.tmh"
 			);
 
 // ------------------------------------ //
-// Map Throttle STICK switches and hats //
+// Map Throttle LEVER switches and hats //
 // ------------------------------------ //
 
 //		(Slew Control Button)		// Miscellaneous
@@ -419,7 +420,8 @@ include "ED_Macros.tmh"
 //		(Engine Operate - Right)
 //		------------------------
 
-		MapKey(&Throttle, EORIGN, PULSE+SRVRecallDismissShip);							// From SRV - Recall/Dismiss Ship
+//		MapKey(&Throttle, EORIGN, PULSE+SRVRecallDismissShip);								// From SRV - Recall/Dismiss Ship
+		MapKey(&Throttle, EORIGN, EXEC("fnDRShip();"));										// From SRV - Recall/Dismiss Ship
 		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
 		MapKey(&Throttle, EORMOTOR, PULSE+HideShipGUI);										// Toggle: Ship GUI OFF
 		MapKeyR(&Throttle, EORMOTOR, PULSE+HideShipGUI);									// Toggle: Ship GUI ON
@@ -442,7 +444,7 @@ include "ED_Macros.tmh"
 		MapKeyUMD(&Throttle, EFRNORM,
 			0,																				// U - 
 			EXEC("GameLoaded = 0;"),														// U - Reset GameLoaded flag
-			EXEC("fnSetLEDs();")															// D - Reset LEDs
+			EXEC("fnSetLEDs();")															// D - Reset Status LEDs
 			);
 			
 		MapKey(&Throttle, EFROVER, 0);														// <not currently used>
