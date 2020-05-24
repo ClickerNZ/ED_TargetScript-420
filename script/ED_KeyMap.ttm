@@ -72,8 +72,8 @@
 	define SelectHighestThreat 					USB[0x1C] 				// Y
 	define SelectNextHostileShip 				USB[0x0B]				// H
 //	define SelectPrevHostileShip 				USB[0x11] 				// N
-	define SelectNextSubsystem 					USB[0x0C]				// I
-	define SelectPrevSubsystem 					USB[0x0E]				// K
+	define TargetNextSubsystem 					USB[0x0C]				// I
+	define TargetPrevSubsystem 					USB[0x0E]				// K
 	define SelectNextSystemInRoute 				USB[0x10] 				// M
 
 		// FLIGHT CONTROL //
