@@ -32,9 +32,10 @@
 //			Line 146:	mReportCrimesToggle
 //			Line 167:	mNAVBeaconWing
 //			Line 192:	mNAVBeaconOff
-//			Line 216:	mClearChatBox
-//			Line 228:	mEnterHanger
-//			Line 255:	mLaunch
+//			Line 216:	mClearAllChatBox
+//			Line 256:	mClearChatBox
+//			Line 268:	mEnterHanger
+//			Line 295:	mLaunch
 
 
 // START
@@ -212,6 +213,46 @@
 			PULSE+UIBack,
 			LOCK);
 
+		// MACRO: Send '/clear' command to clear any text in all 3 chat box windows
+		mClearAllChatBox = CHAIN(
+//			LOCK+PULSE+QuickCommsPanel, D(500),					// enter, /, c, l, e, a, r, enter
+			LOCK+PULSE+QuickCommsPanel, D(500),					// enter, enter, 2, left, enter, /, c, l, e, a, r, enter, left, down
+			PULSE+QuickCommsPanel, D(500),							// repeat 3x
+			PULSE+CommsPanel, D(500),
+			PULSE+UILeft, D(),
+			PULSE+QuickCommsPanel, D(),
+			PULSE+'\/', D(),
+			PULSE+'c', D(),
+			PULSE+'l', D(),
+			PULSE+'e', D(),
+			PULSE+'a', D(),
+			PULSE+'r', D(),
+			PULSE+QuickCommsPanel, D(500),
+			PULSE+UILeft, D(),
+			PULSE+UIDown, D(),
+			PULSE+QuickCommsPanel, D(),
+			PULSE+'\/', D(),
+			PULSE+'c', D(),
+			PULSE+'l', D(),
+			PULSE+'e', D(),
+			PULSE+'a', D(),
+			PULSE+'r', D(),
+			PULSE+QuickCommsPanel, D(500),
+			PULSE+UILeft, D(),
+			PULSE+UIDown, D(),
+			PULSE+QuickCommsPanel, D(),
+			PULSE+'\/', D(),
+			PULSE+'c', D(),
+			PULSE+'l', D(),
+			PULSE+'e', D(),
+			PULSE+'a', D(),
+			PULSE+'r', D(),
+			PULSE+QuickCommsPanel, D(500),
+			PULSE+UILeft, D(),
+			PULSE+UIDown, D(),
+			PULSE+CommsPanel, D(),			
+			LOCK);
+
 		// MACRO: Send '/clear' command to clear any text in the chat box.
 		mClearChatBox = CHAIN(
 			LOCK+PULSE+QuickCommsPanel, D(500),					// enter, /, c, l, e, a, r, enter
@@ -223,7 +264,7 @@
 			PULSE+'r', D(),
 			PULSE+QuickCommsPanel, D(500),
 			LOCK);
-			
+
 		// MACRO: Enter hanger then facilities + refuel/repair/restock
 		mEnterHanger = CHAIN(
 			LOCK,
