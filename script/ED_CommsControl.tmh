@@ -173,7 +173,7 @@
 		}
 		
 		printf("Comm Select:	%s\x0a", VoiceTxt);
-		fnTextToSpeech(VoiceTxt, 0);
+		fnTextToSpeech(VoiceTxt);
 	
 	}
 	
@@ -293,7 +293,7 @@
 		else			VoiceTxt = "PTT Mode: Toggle";
 
 		printf("%s\x0a", VoiceTxt);
-		fnTextToSpeech(VoiceTxt, 0);
+		fnTextToSpeech(VoiceTxt);
 	}
 	
 // FUNCTION: Report Comms Status
@@ -311,7 +311,7 @@
 		else			VoiceTxt = "toggle";
 		
 		sprintf(&s, "PTT Mode %s, Channel %d, mike %s", VoiceTxt, Channel, mic);
-		fnTextToSpeech(&s, 0);
+		fnTextToSpeech(&s);
 	}
 		
 // END
