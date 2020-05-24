@@ -59,7 +59,7 @@
 				EnableVoice = 0;
 			}
 			printf("%s\x0a", VoiceText);
-			fnTextToSpeech(VoiceTxt, 0);			
+			fnTextToSpeech(VoiceTxt);
 		}
 		else {
 			printf("Voice.exe is not present\x0a");
@@ -108,7 +108,7 @@
 				VoiceTxt = "Primary trigger action, hold 6.1 seconds";
 			}
 			
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 			printf("%s\x0a", VoiceTxt);
 		}
 		
@@ -121,7 +121,7 @@
 				VoiceTxt = "Secondary trigger action, hold 6.1 seconds";
 			}
 		
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 			printf("%s\x0a", VoiceTxt);
 		}
 	}
@@ -184,7 +184,7 @@
 				VoiceTxt = "Night Vision Off";
 			}
 			ActKey(PULSE+KEYON+NightVision);
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 		}
 	}
 
@@ -410,7 +410,7 @@
 			ActKey(PULSE+KEYON+FBView);
 			printf("Planet View:	TOGGLED		<>\x0a");
 			VoiceTxt = "Toggle planet view";
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 		}
 		else {
 			reason = "must be in SAA Mode";
@@ -444,7 +444,7 @@
 			printf("%s	CANCELLED	<<\x0a", EngineText);
 			ActKey(PULSE+KEYON+WarpDrive);
 			VoiceTxt = "Warp Drive Cancelled";
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 			return 0;
 		}
 		if (fFSDCooldown) {
