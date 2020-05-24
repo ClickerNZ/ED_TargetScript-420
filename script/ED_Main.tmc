@@ -44,7 +44,7 @@ include "ED_StateTracker.tmh"
 include "ED_Toggles.tmh"
 //include "ED_Macros.tmh"
 include "ED_MacrosFC.tmh"				// Enter Hanger macro changed for Fleet Carriers BETA
-include "ED_CommsControl.tmh"			// Under development
+//include "ED_CommsControl.tmh"			// Under development
 
 
 // --------------- //
@@ -108,12 +108,12 @@ include "ED_CommsControl.tmh"			// Under development
 		initJoystickAxis();
 		initThrottleAxis();														// Includes Throttle "Friction Control" Slider
 		
-//		if(EnableTFRPRudder) {
+		if(EnableTFRPRudder) {
 			initTFRPRudder();
-//		}
-//		else {
-//			printf("Rudder Axis	... disabled		");
-//		}
+		}
+		else {
+			printf("Rudder Axis	... disabled		");
+		}
 
 		fnSetJoystickCurves(MILD, NOPRINT);										// Initialise for default position of Autopilot switch
 		
@@ -357,8 +357,8 @@ include "ED_CommsControl.tmh"			// Under development
 //		(China Hat)			// Subsystem Targetting
 //		-----------
 
-		MapKey(&Throttle, CHF, PULSE+SelectNextSubsystem);
-		MapKey(&Throttle, CHB, PULSE+SelectPrevSubsystem);
+		MapKey(&Throttle, CHF, PULSE+TargetNextSubsystem);
+		MapKey(&Throttle, CHB, PULSE+TargetPrevSubsystem);
 
 // ---------------------------------------//
 // Map Throttle BASE buttons and switches //
@@ -440,7 +440,7 @@ include "ED_CommsControl.tmh"			// Under development
 
 //		MapKey(&Throttle, EORIGN, PULSE+SRVRecallDismissShip);								// From SRV - Recall/Dismiss Ship
 		MapKey(&Throttle, EORIGN, EXEC("fnDRShip();"));										// From SRV - Recall/Dismiss Ship
-//		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
+		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
 		MapKey(&Throttle, EORMOTOR, PULSE+HideShipGUI);										// Toggle: Ship GUI OFF
 		MapKeyR(&Throttle, EORMOTOR, PULSE+HideShipGUI);									// Toggle: Ship GUI ON
 
@@ -453,8 +453,8 @@ include "ED_CommsControl.tmh"			// Under development
 			 EXEC("fnModeSwitch(2);")														// D - SOLO Mode
 			 );
 			 
-//		MapKey(&Throttle, EOLNORM, 0);														// <not currently used>
-//		MapKey(&Throttle, EOLMOTOR, 0);														// <not currently used>
+		MapKey(&Throttle, EOLNORM, 0);														// <not currently used>
+		MapKey(&Throttle, EOLMOTOR, 0);														// <not currently used>
 
 //		(Engine Fuel Flow - Right)
 //		--------------------------
