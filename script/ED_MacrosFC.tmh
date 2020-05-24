@@ -41,8 +41,8 @@
 // START
 
 	int	mRequestDock, mDeploySRV, mShowGameStats, mReportCrimesToggle, mNAVBeaconWing, mNAVBeaconOff;
-	int	mFastModeSwitch0, mFastModeSwitch1, mFastModeSwitch2, mClearChatBox, mBoardShip, mEnterHanger;
-	int mLaunch;
+	int	mFastModeSwitch0, mFastModeSwitch1, mFastModeSwitch2, mClearAllChatBox, mClearChatBox, mBoardShip;
+	int mEnterHanger, mLaunch;
 
 //---------------//
 // CUSTOM MACROS //			// MACROS Include a series of automated key presses to perform a specific task.
