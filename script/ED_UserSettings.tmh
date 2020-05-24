@@ -76,7 +76,10 @@
 														// Toggled via tgTxt2Speech();
 														
 	alias	VoicePath			= "d:\\Thrustmaster\\ED_TargetScript\\voice.exe";
-	int		VoiceVolume			= 75;												// Volume set at 75%
+	
+	int		VoiceVolume			= 75;					// Default Volume set at 75% Settable via fnVoiceVolume()
+														// Note: VoiceVolume gets saved to MyStatus file when game halts and is reloaded at script start
+
 	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
 
 //------------------//
@@ -95,6 +98,25 @@
 	alias	SoundCMD			= "";
 
 
+//----------//
+// PIP Mode //
+//----------//
+
+	//	There are 6 PIPModes available.
+	//	You may set the Default mode below to one of the following values
+	//
+	//	0 = Single		1 PIPs per press
+	//	1 = Double		2 PIPs per press
+	//	2 = Attack		4 PIPs to selected system, 2 PIPs to secondary attack focussed system (ie ENG + WEP focussed) 
+	//	3 = Defend		4 PIPs to selected system, 2 PIPs to secondary defend focussed system (ie SYS + ENG focussed)
+	//	4 = Recharge	4 PIPs to selected system, 1 PIP to each of the other 2
+	//	5 = Gen Purpose	3 PIPs to selected system, 3 PIPs to secondary 
+	//
+	//	Refer fnPIPManager() function within ED_Functions for more info.
+	
+	int DefaultPIPMode			= 3;		// Set this to your preferred PIPMode. Value is set on the fly via H4P (see fnPIPMode() in ED_Functions.tmh)
+
+
 //---------//
 // Timings //
 //---------//
@@ -103,12 +125,12 @@
 	// If you find the macros are dropping characters, then the delay is too short.
 	// "LongPress" is a personal setting. I find a half second is about right for me.
 	
-	define PulseTime 			33						// PULSE+ Delay time (ms) - Used as key-hold-down time.
-	define DelayTime 			99						// D() Delay time 	 (ms) - Used in macros as the time between releasing one key and pressing the next.
-	define LongPress	 		500						// Tempo Delay 		 (ms) - Used in Tempos. ie hold switch/button for 0.5 seconds for alternate function
+	define 	PulseTime 			33						// PULSE+ Delay time (ms) - Used as key-hold-down time.
+	define 	DelayTime 			75						// D() Delay time 	 (ms) - Used in macros as the time between releasing one key and pressing the next.
+	define 	LongPress	 		500						// Tempo Delay 		 (ms) - Used in Tempos. ie hold switch/button for 0.5 seconds for alternate function
 	
-	define DiscoDelay			6100					// Discovery scanner 'hold-trigger' timer (6.1 seconds).
-
+	define 	DiscoDelay			6100					// Discovery scanner 'hold-trigger' timer (6.1 seconds)
+	
 
 //--------------------------//
 // General Status Variables //
@@ -123,6 +145,7 @@
 
 	define	FAOFFCurves				MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
 	define	CurveInfo				PRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
+	int		EnableTFRPRudder	= 1;						// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
 
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 	// The below constructs support S-Curves
