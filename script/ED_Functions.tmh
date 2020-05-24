@@ -34,23 +34,23 @@
 //			Line 288: 	int fnFlashStart()
 //			Line 314: 	int fnTextToSpeech()
 //			Line 344: 	int fnVoiceVolume()
-//			Line 398: 	int fnSoundFX()
-//			Line 419: 	int fnGameStarted()
-//			Line 473: 	int fnPIPMode()
-//			Line 524: 	int fnPIPManager()
-//			Line 561: 	int fnPIPMapper()
-//			Line 601: 	int fnAdvFireControl()
-//			Line 657: 	int fnAdvancedSCB()
-//			Line 689: 	int fnHeatsink()
-//			Line 703: 	int fnChaff()
-//			Line 721: 	int fnDeploySRV()
-//			line 758:	int fnDRShip()
-//			Line 787: 	int fnRequestDock()
-//			Line 806: 	int fnHangerServices()
-//			Line 852: 	int fnModeSwitch()
-//			Line 906: 	int fnPrintState()
-//			Line 917: 	int fnStateDump()
-//			Line 1016: 	int fnDebugStates()
+//			Line 399: 	int fnSoundFX()
+//			Line 420: 	int fnGameStarted()
+//			Line 474: 	int fnPIPMode()
+//			Line 527: 	int fnPIPManager()
+//			Line 564: 	int fnPIPMapper()
+//			Line 604: 	int fnAdvFireControl()
+//			Line 660: 	int fnAdvancedSCB()
+//			Line 692: 	int fnHeatsink()
+//			Line 706: 	int fnChaff()
+//			Line 724: 	int fnDeploySRV()
+//			line 761:	int fnDRShip()
+//			Line 790: 	int fnRequestDock()
+//			Line 809: 	int fnHangerServices()
+//			Line 855: 	int fnModeSwitch()
+//			Line 909: 	int fnPrintState()
+//			Line 920: 	int fnStateDump()
+//			Line 1019: 	int fnDebugStates()
 
 // START
 
@@ -72,14 +72,14 @@
 		
 		// Throttle mapping...
 		MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);					// Set Left Throttle. Right throttle not used.
-		printf("Throttle Axis			... done\x0a");
+		printf("Throttle Axis		... done\x0a");
 
 		// Slider Mapping...
 		MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);					// Set Friction Control Axis Curve (Sensor Range Zoom Scaling)
 		fnSetSliderCurve(1);
 		
 		// Slew Control Mapping...
-		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axi		
+		MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control X Axis		
 		MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);						// Set Slew Control Y Axis
 	}
 
@@ -131,7 +131,7 @@
 		fntxt[0] = 0;
 		sprintf(&fntxt, "%s not available at this time, %s", fnName, reason);
 		
-		fnTextToSpeech(&fntxt, 0);
+		fnTextToSpeech(&fntxt);
 		printf("!!! Function: %s !!!\x0a", &fntxt);		
 	}
 	
@@ -181,7 +181,7 @@
 			printf("-----------------------------------------------------------------------------------------------------------------------------------------------\x0a");
 		}
 		else {
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 		}			
 		if (print) {
 			printf("Joystick Curves[%s]	: LDZ=%d, CDZ=%d,  RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Joystick_L_DZ, Joystick_C_DZ, Joystick_R_DZ, Joystick_Curve[profile], Joystick_Zoom);
@@ -299,8 +299,8 @@
 	// FUNCTION: 	Text to Speech using voice.exe
 	// Requires: 	Voice.exe available in path set in ED_UserSettings (VoicePath)
 	//				VoiceCMD must also be set correctly in ED_UserSettings.tmh 
-	// Parameter:	Text string to convert to speech, 'VolumeOverride' to override current volume setting 
-	// Usage1:		fnTextToSpeech("This is test number 1", 0);	// says the text at default volume%
+	// Parameter:	Text string to convert to speech, Optional 'VolumeOverride' to override current volume setting 
+	// Usage1:		fnTextToSpeech("This is test number 1");	// says the text at current value of 'VoiceVolume' in %
 	
 	// Usage2:		int VoiceTxt = "This is test number 2";
 	//				fnTextToSpeech(VoiceTxt, 100);				// says the text at 100% volume
@@ -311,7 +311,7 @@
 	//				sprintf(&VoiceTxt, "%s number %d", tString, test);
 	//				fnTextToSpeech(&VoiceTxt, 50);				//says the text at 50% volume 
 	
-	int fnTextToSpeech(int text, int VolumeOverride) {
+	int fnTextToSpeech(int text, int VolumeOverride=0) {
 		char volume;
 		Dim (&volume, 4);
 		volume[0] = 0;
@@ -379,23 +379,24 @@
 		sprintf(&c, "Voice volume %s %d percent", VolTxt, VoiceVolume);
 		
 		printf("%s\x0a", &c);										// print our string
-		fnTextToSpeech(&c, 0);										// send to TextToSpeech
+		fnTextToSpeech(&c);											// send to TextToSpeech
 	}
 
 
 	// FUNCTION:	Play WAV file sound effects
 	// Parameter:	wavfile = Name of wav file to be played. '.wav' is optional
-	//				vol = volume% (some wav files are much quieter than others)
-	//				loops = times to play sound
+	//				vol = volume% (some wav files are much quieter than others), default = 100%
+	//				loops = times to play sound, default = 1
 	// Requires:	SoundPath alias to be correctly set in usersettings file
 	//				WAVPath alias to be correct set in usersettings file
 	//				<wavfile>.wav to exist inside WAVPath
 	//
 	// Optional:	SoundCMD alias set in usersettings for additional command line arguments
 	//
-	// Example:		fnSoundFX("wding", 100, 5);
+	// Example:		fnSoundFX("wding", 75, 5);	// will play 'wding.wav' at 75% volume 5 times
+	//				fnSoundFX("tada");			// will play 'tada.wav' at 100% volume once
 	
-	int fnSoundFX(int wavfile, int vol, int loops) {
+	int fnSoundFX(int wavfile, int vol=100, int loops=1) {
 
 		if (EnableSoundFX) {
 			Dim(&SysCmd, 255);										// Increase buffersize if required
@@ -459,7 +460,7 @@
 		printf("VoiceStatus	= %d - %s\x0a", EnableVoice, VoiceStatus);
 		printf("VoiceVolume	= %d\x0a", VoiceVolume);
 
-		fnTextToSpeech("Welcome back Commander", 0);
+		fnTextToSpeech("Welcome back Commander");
 
 		fnPrintState();
 		printf("\x0a\Script running....waiting for input...\x0a\x0a");
@@ -467,16 +468,16 @@
 	}
 
 
-	// FUNCTION: Sets PIP profiles
-	// Parameter: 0 = Reset PIPMode to 0. 1 = Increment PIPMode (0-4)
+	// FUNCTION:	Sets PIP profiles
+	// Parameter:	0 = Reset PIPMode to default. 1 = Increment PIPMode, 2 = Decrement PIPMode
 
 	int fnPIPMode(int x) {
 
 		int VoiceTxt;
 		
-		if (!StartupLock) {
+//		if (!StartupLock) {
 			if (x == 0) {
-				PIPMode = 0;
+				PIPMode = DefaultPIPMode;			// Set in ED_UserSettings.tmh
 			}
 			if (x == 1) {
 				PIPMode = PIPMode + 1;
@@ -511,15 +512,17 @@
 				PIPTxt = "GP 3+3	";
 				VoiceTxt = "Pipmode 5 3+3";
 			}
-
-			fnTextToSpeech(VoiceTxt, 0);
-			printf("PIPMode(%d):		%s	>>\x0a", PIPMode, PIPTxt);
-		}
+			if (StartupLock == 0) {
+				fnTextToSpeech(VoiceTxt);
+				printf("PIPMode(%d):		%s	>>\x0a", PIPMode, PIPTxt);
+			}
+//		}
 	}
 
 
-	// FUNCTION: Determines PIP Profile, constructs and parses PIPMapper parameters
-	// Parameters: Main PIP Power assignment
+	// FUNCTION:	Determines PIP Profile, constructs and parses PIPMapper parameters
+	// Parameters:	Main PIP Power assignment. Valid arguments are 'SYS', 'ENG' or 'WEP'
+	//				'BAL' is handled directly via pulse statement in KeyMap for H3D
 	
 	int fnPIPManager(int PwrPriority) {
 		if (PIPMode == 0) {		// Single PIP 
@@ -768,7 +771,7 @@
 				VoiceTxt = "Ship dismissed";
 			}
 			ActKey(PULSE+KEYON+SRVRecallDismissShip);
-			fnTextToSpeech(VoiceTxt, 0);
+			fnTextToSpeech(VoiceTxt);
 			printf("Ship status: %s\x0a", VoiceTxt);
 			ShipDismissed = !ShipDismissed;
 			fnsMyStates(SAVE);														// saves my status variables 
@@ -815,7 +818,7 @@
 					if(!InHanger) {
 						VoiceTxt = "Enter Hanger and Station Services";
 						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt, 0);
+						fnTextToSpeech(VoiceTxt);
 						fnPIPMapper();
 						ActKey(PULSE+KEYON+mEnterHanger);
 						InHanger = 1;
@@ -831,7 +834,7 @@
 					else {	
 						VoiceTxt = "Initiating launch sequence";
 						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt, 0);						
+						fnTextToSpeech(VoiceTxt);
 						ActKey(PULSE+KEYON+mLaunch);
 						InHanger = 0;
 					}
@@ -879,7 +882,7 @@
 		}
 
 		sprintf(&VoiceTxt, "Mode switch to %s selected, please wait for game reload", Mode);
-		fnTextToSpeech(&VoiceTxt, 0);
+		fnTextToSpeech(&VoiceTxt);
 		printf("\x0a\Wait for game to finish loading ");
 
 		if (ReverseThrust) {																	// Game always resets Reverse Thrust
