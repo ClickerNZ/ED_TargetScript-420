@@ -25,9 +25,9 @@
 //			Line 98: 	int fnsReadStatusJson()
 //			Line 171: 	int fnsGetKeyValue()
 //			Line 309: 	int fnsProcessFlags()
-//			Line 516: 	int fnsProcessGuiFocus()
-//			Line 554: 	int fnsStartCheck()
-//			line 606:	int fnsMyStates()
+//			Line 514: 	int fnsProcessGuiFocus()
+//			Line 552: 	int fnsStartCheck()
+//			line 604:	int fnsMyStates()
 	
 // START
 
@@ -309,7 +309,7 @@
 	int fnsProcessFlags(int UpdateLEDs) {
 
 		int VoiceTxt;
-
+		
 		int ll = fLatLong;												// Track in/out of orbit
 		int sc = fSupercruise;											// Track Supercruise changes
 		int wd = fsdJump;												// Track when we jump systems
@@ -336,13 +336,12 @@
 				GameLoaded = 0;
 				printf("\x0a - Game has stopped - \x0a\x0a");
 				fnSetLEDs();											// Turn off Status LEDs
-				VoiceTxt = "Game halted.";
-				fnTextToSpeech(VoiceTxt, 0);
-				DeferCall(1100, &fnsMyStates, SAVE);					// Save my status variables 
-				
+				fnTextToSpeech("Game halted");
+				fnsMyStates(SAVE);
+
 				if (ReverseThrust) {
 					ReverseThrust = !ReverseThrust;
-				}
+				}				
 			}
 		}
 		else {															// Flags != 0
@@ -397,14 +396,14 @@
 						
 						if (OrbitalCruise & !fInterdicted) {
 							VoiceTxt = "Entering Glide Mode";
-							printf("Entering Glide Mode\x0a");
+							printf("%s\x0a", VoiceTxt);
 						}
 						else { 
 							VoiceTxt = "Drop detected";
-							printf("Uninitiated Drop Detected\x0a");
+							printf("Uninitiated %s\x0a", VoiceTxt);
 						}
 						
-						fnTextToSpeech(VoiceTxt, 0);
+						fnTextToSpeech(VoiceTxt);
 						
 						if (fInterdicted | fDanger) {
 							printf("!!! DANGER DETECTED !!!\x0a");
@@ -414,8 +413,7 @@
 							if (!fHardpoints) {
 								tgHardpoints();
 							}
-							VoiceTxt = "Warning! Danger! Combat Mode Initiated";
-							fnTextToSpeech(VoiceTxt, 100);				// Sound warning 
+							fnTextToSpeech("Warning! Danger! Combat Mode Initiated", 100);				// Sound warning 
 						}
 					}
 					else {												// Initiated drop
@@ -442,7 +440,7 @@
 				else {
 					VoiceTxt = "Lift off";
 				}
-//				fnTextToSpeech(VoiceTxt, 0);
+//				fnTextToSpeech(VoiceTxt);
 				ShipDismissed = 0;
 			}
 			
@@ -458,7 +456,7 @@
 					InHanger = 0;					
 				}
 //				printf("Docked status: %s\x0a", VoiceTxt);					
-//				fnTextToSpeech(VoiceTxt, 0);
+//				fnTextToSpeech(VoiceTxt);
 			}
 									
 			if (fa != fFAOff | lt != fLights | sr != fSilentRunning | cs != fCargoScoop | lg != fLandingGear | sh != fMainShip) UpdateLEDs = 1;
@@ -594,7 +592,7 @@
 			fnsProcessFlags(0);
 		}
 		else {
-			fnSoundFX("tada", 100, 1);
+			fnSoundFX("tada");
 		}
 	}
 
@@ -654,7 +652,7 @@
 				}
 			}
 			else {
-				fnTextToSpeech("Error writing to My Status File", 0); 
+				fnTextToSpeech("Error writing to My Status File");
 				printf("Error opening file to write: %s\x0a", &MyStatusFile);
 			}		
 		}
@@ -690,7 +688,7 @@
 				}
 			}
 			else {
-				fnTextToSpeech("Non fatal error, my Status File not found or invalid, check con sole message", 0); 
+				fnTextToSpeech("Non fatal error, my Status File not found or invalid, check con sole message"); 
 				printf("\x0a\!!! Non-Fatal Error opening file to read: %s\x0a", &MyStatusFile);
 				printf("This can happen if changes were made to the variables selected for save and reload\x0a");
 			}		
