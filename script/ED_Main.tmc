@@ -28,6 +28,7 @@
 // -------------- //
 
 include "targetdx64enh.tmh"				// This is my modified version of targetdx128.tmh
+//include "target.tmh"
 
 // 'target.tmh' include is mandatory.
 // target.tmh will include defines.tmh and hid.tmh. 
@@ -41,9 +42,9 @@ include "ED_UserSettings.tmh"
 include "ED_Functions.tmh"
 include "ED_StateTracker.tmh"
 include "ED_Toggles.tmh"
-include "ED_Macros.tmh"
-// include "ED_MacrosFC.tmh"				// Enter Hanger macro changed for Fleet Carriers BETA
-// include "ED_CommsControl.tmh"			// Under development
+//include "ED_Macros.tmh"
+include "ED_MacrosFC.tmh"				// Enter Hanger macro changed for Fleet Carriers BETA
+include "ED_CommsControl.tmh"			// Under development
 
 
 // --------------- //
@@ -67,7 +68,13 @@ include "ED_Macros.tmh"
 		Exclude(&TFRPHARudder);
 		Exclude(&LMFD);
 		Exclude(&RMFD);
-		Filter(&TFRPRudder);
+		
+		if (EnableTFRPRudder) {
+			Filter(&TFRPRudder);		
+		}
+		else {
+			Exclude(&TFRPRudder);
+		}
 		
 		if(Init(&EventHandle)) return 1;
 				
@@ -82,6 +89,8 @@ include "ED_Macros.tmh"
 		fnSetLEDs();
 		
 		fnCustomCommands();														// Initialise Custom Macros (See EDMacros.tmh)
+		fnPIPMode(0);															// Reset PIPMode
+
 		fnsMyStates(LOAD);														// Load my ststaus variables
 		
 		fnsStartCheck();														// Check for vital files and game start		
@@ -98,7 +107,13 @@ include "ED_Macros.tmh"
 		
 		initJoystickAxis();
 		initThrottleAxis();														// Includes Throttle "Friction Control" Slider
-		initTFRPRudder();
+		
+//		if(EnableTFRPRudder) {
+			initTFRPRudder();
+//		}
+//		else {
+//			printf("Rudder Axis	... disabled		");
+//		}
 
 		fnSetJoystickCurves(MILD, NOPRINT);										// Initialise for default position of Autopilot switch
 		
@@ -175,11 +190,11 @@ include "ED_Macros.tmh"
 
 		MapKeyUMD(&Joystick, H1U,
 			EXEC("tgFSSMode();"),																		// U - Toggle FSS Mode
-			PULSE+NextFireGroup,																		// M - Select Previous Fire Group
+			PULSE+NextFireGroup,																		// M - Select Next Fire Group
 			PULSE+DSSModeOFF																			// D - Toggle DSSMode
 			);
 
-		MapKey(&Joystick, H1D, PULSE+PrevFireGroup);													// Select Next Fire Group
+		MapKey(&Joystick, H1D, PULSE+PrevFireGroup);													// Select Previous Fire Group
 		
 		MapKey(&Joystick, H1L, TEMPO(0, EXEC("tgLandingGear(0);"), LongPress));							// Long Press = Toggle Landing Gear (avoids accidental toggle)
 		
@@ -371,7 +386,10 @@ include "ED_Macros.tmh"
 //		(Landing Gear Horn)
 //		-------------------
 
-		MapKey(&Throttle, LDGH, PULSE+mClearChatBox);
+		MapKeyIO(&Throttle, LDGH, 
+			PULSE+mClearAllChatBox,													// Clear all 3 chat box windows
+			PULSE+mClearChatBox														// Clear currently selected chat box window
+			);
 
 //		(Autopilot Engage)
 //		------------------
@@ -422,7 +440,7 @@ include "ED_Macros.tmh"
 
 //		MapKey(&Throttle, EORIGN, PULSE+SRVRecallDismissShip);								// From SRV - Recall/Dismiss Ship
 		MapKey(&Throttle, EORIGN, EXEC("fnDRShip();"));										// From SRV - Recall/Dismiss Ship
-		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
+//		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
 		MapKey(&Throttle, EORMOTOR, PULSE+HideShipGUI);										// Toggle: Ship GUI OFF
 		MapKeyR(&Throttle, EORMOTOR, PULSE+HideShipGUI);									// Toggle: Ship GUI ON
 
@@ -435,8 +453,8 @@ include "ED_Macros.tmh"
 			 EXEC("fnModeSwitch(2);")														// D - SOLO Mode
 			 );
 			 
-		MapKey(&Throttle, EOLNORM, 0);														// <not currently used>
-		MapKey(&Throttle, EOLMOTOR, 0);														// <not currently used>
+//		MapKey(&Throttle, EOLNORM, 0);														// <not currently used>
+//		MapKey(&Throttle, EOLMOTOR, 0);														// <not currently used>
 
 //		(Engine Fuel Flow - Right)
 //		--------------------------
