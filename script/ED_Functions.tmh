@@ -14,7 +14,8 @@
 // fnsName()				refer to ED_StateTracker file
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
-// Global Defines			refer to ED_KeyMap file
+// MapKey statements		refer to ED_MapKeyAssignment file
+// Global Defines			refer to ED_Keyboard_&_DX_Map file
 // Global Variables			refer to ED_GlobalVars file
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
@@ -125,9 +126,9 @@
 
 	// FUNCTION:	Announce if function called is not valid
 	
-	int fnNotValid(int fnName, int reason) {
+	int fnNotValid(int fnName, int reason=0) {
 		char fntxt;
-		Dim(&fntxt, 100);										// Increase buffersize if required
+		Dim(&fntxt, 100);										// Increase buffersize if fntxt string exceeds 100 chars
 		fntxt[0] = 0;
 		sprintf(&fntxt, "%s not available at this time, %s", fnName, reason);
 		
@@ -378,8 +379,9 @@
 
 		sprintf(&c, "Voice volume %s %d percent", VolTxt, VoiceVolume);
 		
-		printf("%s\x0a", &c);										// print our string
-		fnTextToSpeech(&c);											// send to TextToSpeech
+//		printf("%s\x0a", &c);										// print our string
+//		fnTextToSpeech(&c);											// send to TextToSpeech
+		fnVPOutput(&c);
 	}
 
 
@@ -425,6 +427,9 @@
 
 		printf("\x0a  !!! GAME STARTED !!!\x0a\x0a");
 		GameLoaded = 1;
+		
+		MainKeyMap();													// MapKey profile for 'Game Running'
+		
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, THR_FC);			// Forces re-read of slider axis								
 		
 		fnFlashStart();
@@ -817,8 +822,9 @@
 				if(x) {	
 					if(!InHanger) {
 						VoiceTxt = "Enter Hanger and Station Services";
-						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt);
+//						printf("%s\x0a", VoiceTxt);
+//						fnTextToSpeech(VoiceTxt);
+						fnVPOutput(VoiceTxt);
 						fnPIPMapper();
 						ActKey(PULSE+KEYON+mEnterHanger);
 						InHanger = 1;
@@ -833,8 +839,9 @@
 					}
 					else {	
 						VoiceTxt = "Initiating launch sequence";
-						printf("%s\x0a", VoiceTxt);
-						fnTextToSpeech(VoiceTxt);
+//						printf("%s\x0a", VoiceTxt);
+//						fnTextToSpeech(VoiceTxt);
+						fnVPOutput(VoiceTxt);
 						ActKey(PULSE+KEYON+mLaunch);
 						InHanger = 0;
 					}
@@ -897,6 +904,15 @@
 		
 		printf("\x0a\x0a\Game has reloaded\x0a");
 		fnGameStarted();
+	}
+
+
+	// FUNCTION:	Voice + Print output
+	// Parameter:	vpOutput string to send to fnTextToSpeech() and printf
+
+	int fnVPOutput(int VPOutput, int VolumeOverride=0) {
+		fnTextToSpeech(VPOutput, VolumeOverride);
+		printf("%s\x0a", VPOutput);		
 	}
 
 
