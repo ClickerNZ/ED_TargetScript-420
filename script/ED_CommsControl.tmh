@@ -14,9 +14,10 @@
 // fnsName()				refer to ED_StateTracker file
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
-// Global Defines			refer to ED_KeyMap file
+// MapKey statements		refer to ED_MapKeyAssignment file
+// Global Defines			refer to ED_Keyboard_&_DX_Map file
 // Global Variables			refer to ED_GlobalVars file
-// User Config Settings		refer to ED_UserSettings file
+// User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
 // For the purposes of this exercise I'm going to use the following;
@@ -35,48 +36,7 @@
 //			Line 182:	fnMicControl()
 //			Line 290:	tgPTTMode()
 //			Line 301:	fnCommStatus()
-
-
-// MapKey assignments for ED_Main.tmc
-// ========================================================
-
-/*
-		// Use IO so we don't accidentally change channels when we push-to-talk
-
-		MapKeyIO(&Throttle, MSU,
-			EXEC("fnChannelSelect(CHNLUP);"),					// I - Channel Up
-			0													// O - do nothing
-			);
-			
-		MapKeyIO(&Throttle, MSD, 
-			EXEC("fnChannelSelect(CHNLDN);"),					// I - Channel Down
-			0													// O - do nothing
-			);
-			
-		// Use IO so we don't accisnetally toggle PTT mode when we push-to-talk
-			
-		MapKeyIO(&Throttle, MSL, 
-			EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-			0													// O - do nothing
-			);
-			
-		MapKeyIO(&Throttle, MSR, 
-			EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-			0													// O - do nothing
-			);
 		
-		MapKeyIO(&Throttle, MSP, 
-			EXEC("fnCommStatus();"),							// I - Announce current Comms Status
-			EXEC("fnMicControl(1);")							// O - Push to Talk
-			);
-			
-		MapKeyRIO(&Throttle, MSP, 			// RELEASE	
-			0, 													// RI - do nothing
-			EXEC("fnMicControl(0);")							// RO - Release PTT 
-			);
-*/
-		
-
 // Global Vars
 // =================================================================================================== 
 	define MuteChannel1			L_ALT+USB[0x3B]			// LALT+F2		(Map this to VoiceAttack)
@@ -288,12 +248,15 @@
 //	TOGGLE:	PTT Mode = HOLD or TOGGLE ON/OFF 
 	
 	int tgPTTMode() {
+		int VoiceTxt;
+		
 		PTTMode = !PTTMode;
 		if (PTTMode) 	VoiceTxt = "PTT Mode: HOLD";
 		else			VoiceTxt = "PTT Mode: Toggle";
 
-		printf("%s\x0a", VoiceTxt);
-		fnTextToSpeech(VoiceTxt);
+//		printf("%s\x0a", VoiceTxt);
+//		fnTextToSpeech(VoiceTxt);
+		fnVPOutput(VoiceTxt);
 	}
 	
 // FUNCTION: Report Comms Status
@@ -311,7 +274,8 @@
 		else			VoiceTxt = "toggle";
 		
 		sprintf(&s, "PTT Mode %s, Channel %d, mike %s", VoiceTxt, Channel, mic);
-		fnTextToSpeech(&s);
+//		fnTextToSpeech(&s);
+		fnVPOutput(&s);
 	}
 		
 // END
