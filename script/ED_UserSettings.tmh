@@ -14,9 +14,10 @@
 // fnsName()				refer to ED_StateTracker file
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
-// Global Defines			refer to ED_KeyMap file
+// MapKey statements		refer to ED_MapKeyAssignment file
+// Global Defines			refer to ED_Keyboard_&_DX_Map file
 // Global Variables			refer to ED_GlobalVars file
-// User Config Settings		refer to ED_UserSettings file
+// User Config Settings		refer to ED_GlobalVars file
 // ========================================================
 
 // START
@@ -27,11 +28,11 @@
 	
 	int	SetLED	 				= 43;					// Set LED Backlight Level on Throttle
 														// Level 0: 0	- 42 (off)
-														// Level 1: 43	- 85
+														// Level 1: 43	- 85 (dimmest)
 														// Level 2: 86	- 128
 														// Level 3: 129 - 171
 														// Level 4: 172	- 214
-														// Level 5: 215 - 255
+														// Level 5: 215 - 255 (brightest)
 
 //----------------//
 // Status.json    //
@@ -50,14 +51,14 @@
 	alias StatusFile			= "C:\\Users\\clicker\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
 	int StatusReadRate			= 500;	// Set Read Loop rate in milliseconds. (ie 500 = read status.json twice a second)
-										// You may see issues if this is set too small. If you do, raise this value to 750 or 1000
+										// You may see issues if this is set too small. If you do, raise this value to 750, 1000, or higher
 
 //----------------//
 // MyStatusFile   //
 //----------------//
 
 	// NOTE:		Set the 'alias' below to point to where you want to save and load script variables that are not tracked via status.json
-	//				I've included an example below but so long as you create the folder structure, you can put this anywhere
+	//				I've included an example below but so long as you create the folder structure, you can put this anywhere on your PC
 	
 	alias MyStatusFile			= "d:\\Thrustmaster\\ED_TargetScript\\MyStatusFile.json";
 
@@ -81,6 +82,9 @@
 														// Note: VoiceVolume gets saved to MyStatus file when game halts and is reloaded at script start
 
 	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
+	
+	int		TrainingEnabled		= 1;					// 0 = Disable, 1 = Enable. When game stopped pressing a button/switch announces basic function
+	int		AnnounceTraining	= 0;					// 0 = Do not annnounce training mode, 1 = Announce training mode
 
 //------------------//
 // WAV Sound Player //
