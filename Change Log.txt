@@ -1,6 +1,6 @@
 // CMDR Clicker Thrustmaster TARGET Script Change Log //
 
-v4.2.0	- Point Release
+v4.2.0	- Point Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Ported code from 4.1.0b
 		- Update Enter Hanger Macro to cater for new menus
 		- Added index section to function .tmh files
@@ -25,6 +25,10 @@ v4.2.0	- Point Release
 		- Create User setting to disable TFRP Rudder controller if not connected. Add test when Configuring and initialising devices
 		- Include 'DefaultPIPMode' in UserSettings. Reset PIPMode now resets to this deffault instead of Mode 0
 		- Create mClearAllChatBox macro to clear all three chat session windows instead of the currently selected window 
+		- Create a 'Training Mode'. Seperate Keymap profile which announces what each button or switch does 
+		- Create ED_MapKeyAssignments.tmh file and move main and training keymaps into it
+		- Rename ED_KeyMap.ttm as ED_Keyboard_&_DX_Map.ttm to try to avoid confusion
+		- Create fnVPOutput() function to send a string to both fnTextToSpeech() and printf to console. Refactor appropriate code across all files to cater 
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
