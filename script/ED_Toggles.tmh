@@ -14,11 +14,11 @@
 // fnsName()				refer to ED_StateTracker file
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
-// Global Defines			refer to ED_KeyMap file
+// MapKey statements		refer to ED_MapKeyAssignment file
+// Global Defines			refer to ED_Keyboard_&_DX_Map file
 // Global Variables			refer to ED_GlobalVars file
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
-
 
 // Index:	Line		FUNCTION
 //			Line 48: 	int tgTxt2Speech()
@@ -58,8 +58,9 @@
 				VoiceTxt = "Text to speech: Disabled";
 				EnableVoice = 0;
 			}
-			printf("%s\x0a", VoiceText);
-			fnTextToSpeech(VoiceTxt);
+//			printf("%s\x0a", VoiceText);
+//			fnTextToSpeech(VoiceTxt);
+			fnVPOutput(VoiceTxt);
 		}
 		else {
 			printf("Voice.exe is not present\x0a");
@@ -108,8 +109,9 @@
 				VoiceTxt = "Primary trigger action, hold 6.1 seconds";
 			}
 			
-			fnTextToSpeech(VoiceTxt);
-			printf("%s\x0a", VoiceTxt);
+//			fnTextToSpeech(VoiceTxt);
+//			printf("%s\x0a", VoiceTxt);
+			fnVPOutput(VoiceTxt);
 		}
 		
 		if (x == 2) {
@@ -121,8 +123,9 @@
 				VoiceTxt = "Secondary trigger action, hold 6.1 seconds";
 			}
 		
-			fnTextToSpeech(VoiceTxt);
-			printf("%s\x0a", VoiceTxt);
+//			fnTextToSpeech(VoiceTxt);
+//			printf("%s\x0a", VoiceTxt);
+			fnVPOutput(VoiceTxt);
 		}
 	}
 	
@@ -443,8 +446,7 @@
 		if (fFSDCharging) {
 			printf("%s	CANCELLED	<<\x0a", EngineText);
 			ActKey(PULSE+KEYON+WarpDrive);
-			VoiceTxt = "Warp Drive Cancelled";
-			fnTextToSpeech(VoiceTxt);
+			fnTextToSpeech("Warp Drive Cancelled");
 			return 0;
 		}
 		if (fFSDCooldown) {
