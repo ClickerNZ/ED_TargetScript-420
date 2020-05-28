@@ -14,11 +14,11 @@
 // fnsName()				refer to ED_StateTracker file
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
-// Global Defines			refer to ED_KeyMap file
+// MapKey statements		refer to ED_MapKeyAssignment file
+// Global Defines			refer to ED_Keyboard_&_DX_Map file
 // Global Variables			refer to ED_GlobalVars file
 // User Config Settings		refer to ED_GlobalVars file
 // ========================================================
-
 
 // Index:	Line		FUNCTION
 //			Line 50:	fnCustomCommands()
@@ -57,6 +57,23 @@
 		Dim(&lastJson, 512); 
 		lastJson[0]=0;
 
+		// Select MapKey Assignment profile
+		if (Flags == 0 & TrainingEnabled) {
+			TrainingKeyMap();
+			if (AnnounceTraining) {
+				DeferCall(1000, &fnTextToSpeech, "Training mode ON, press a button or switch to hear what it does");
+			}
+			printf("\x0a\Training Mode Enabled\x0a");
+		}
+		else {
+			MainKeyMap();
+			if (AnnounceTraining) {			
+				DeferCall(1000, &fnTextToSpeech, "Training mode not available, enable this feature via E D User Settings file");
+			}
+			printf("\x0a\Training Mode Disabled\x0a");
+		}
+
+		// Initialise macros
 
 		// MACRO: Auto-Docking Request
 		mRequestDock = CHAIN(
@@ -215,7 +232,6 @@
 
 		// MACRO: Send '/clear' command to clear any text in all 3 chat box windows
 		mClearAllChatBox = CHAIN(
-//			LOCK+PULSE+QuickCommsPanel, D(500),					// enter, /, c, l, e, a, r, enter
 			LOCK+PULSE+QuickCommsPanel, D(500),					// enter, enter, 2, left, enter, /, c, l, e, a, r, enter, left, down
 			PULSE+QuickCommsPanel, D(500),							// repeat 3x
 			PULSE+CommsPanel, D(500),
