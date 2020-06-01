@@ -49,9 +49,10 @@
 //			Line 790: 	int fnRequestDock()
 //			Line 809: 	int fnHangerServices()
 //			Line 855: 	int fnModeSwitch()
+//			Line 913:	int fnVPOutput()
 //			Line 909: 	int fnPrintState()
 //			Line 920: 	int fnStateDump()
-//			Line 1019: 	int fnDebugStates()
+//			Line 1019: 	int fnDebug()
 
 // START
 
@@ -141,21 +142,21 @@
 	// Parameter:	Profile = 0, 1 or 2 (see JSProfile in EDGlobalVars)
 	// Parameter:	print = 0 to supress console print of Curve settings, 1 to print
 
-	int fnSetJoystickCurves(int profile, int print) {
+	int fnSetJoystickCurves(int profile, int print=0) {
 
 		int VoiceTxt;
 
-		JSProfile = profile;
+//		JSProfile = profile;
 		
-		if (JSProfile == 0) {
+		if (profile == 0) {
 			JSCurveSetting = "NONE";
 			VoiceTxt = "Curves None";
 		}
-		if (JSProfile == 1) {
+		if (profile == 1) {
 			JSCurveSetting = "MILD";
 			VoiceTxt = "Curves mild";
 		}
-		if (JSProfile == 2) {
+		if (profile == 2) {
 			JSCurveSetting = "MEDIUM";
 			VoiceTxt = "Curves medium";			
 		}
@@ -189,6 +190,9 @@
 			printf("Rudder Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Rudder_L_DZ, Rudder_C_DZ, Rudder_R_DZ, Rudder_Curve[profile], Rudder_Zoom);
 			printf("Slew Curves[%s]	: LDZ=%d, CDZ=%d, RDZ=%d, Curve= %d, Zoom= %d\x0a", JSCurveSetting, Slew_L_DZ, Slew_C_DZ, Slew_R_DZ, Slew_Curve[profile], Slew_Zoom);
 		}
+//		else {
+//			printf(" [%d]\x0a", profile);
+//		}
 	}
 
 
@@ -198,6 +202,7 @@
 	int fnSetSliderCurve(int x) {
 		DXCurveSetting = x;												// Variable used in Status Printout
 		int SliderProfile;
+		int SliderCurve;												// Used to define the LIST and can use within EXEC
 		
 		if (x == 0) {													// FSS Mode Radar
 			SetJCurve(&Throttle, THR_FC, 50, 50);						// Linear progression. Low sensitivity
@@ -254,9 +259,10 @@
 
 	// FUNCTION: Sets Status LEDs according to state flags
 	
-	int fnSetLEDs() {
+	int fnSetLEDs(int dummy=0) {
 	
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0)); 		// set GLOBAL LED ON
+//		ActKey(PULSE+KEYON+LED(&Throttle, LED_INTENSITY, SetLED)); 				// Set overall LED back-light intensity...
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)); 		// set LED 1 OFF
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2)); 		// set LED 2 OFF
 		ActKey(PULSE+KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3)); 		// set LED 3 OFF
@@ -313,9 +319,8 @@
 	//				fnTextToSpeech(&VoiceTxt, 50);				//says the text at 50% volume 
 	
 	int fnTextToSpeech(int text, int VolumeOverride=0) {
-		char volume;
-		Dim (&volume, 4);
-		volume[0] = 0;
+		char volume; Dim (&volume, 4); volume[0] = 0;
+		char SysCmd; Dim(&SysCmd, 255); SysCmd[0] = 0;			// Increase buffersize if required
 
 		if (VolumeOverride > 0) {
 			sprintf(&volume, "%d", VolumeOverride);
@@ -325,8 +330,6 @@
 		}
 				
 		if (EnableVoice) {
-			Dim(&SysCmd, 255);										// Increase buffersize if required
-			SysCmd[0] = 0;
 			sprintf(&SysCmd, "start %s -v %s %s %s", &VoicePath, &volume, &VoiceCMD, text);
 
 			if (Debug) {
@@ -400,9 +403,10 @@
 	
 	int fnSoundFX(int wavfile, int vol=100, int loops=1) {
 
+		char SysCmd; Dim(&SysCmd, 255);	SysCmd[0] = 0;			// Increase buffersize if required
+		
 		if (EnableSoundFX) {
-			Dim(&SysCmd, 255);										// Increase buffersize if required
-			SysCmd[0] = 0;
+			
 			sprintf(&SysCmd, "start %s %s /vol %d /loop %d %s%s", &SoundPath, &SoundCMD, vol, loops, &WAVPath, wavfile);
 
 			if (Debug) {
@@ -411,8 +415,7 @@
 				printf("strlen(&SysCmd)	= %d\x0a\x0a", strlen(&SysCmd));
 			}
 			
-			system(&SysCmd);										// send command to Windows
-			
+			system(&SysCmd);										// send command to Windows			
 		}
 	}
 
@@ -424,15 +427,16 @@
 		int VA = "0";
 		int VAStatus = "";
 		int VoiceStatus = "";
-
+		
 		printf("\x0a  !!! GAME STARTED !!!\x0a\x0a");
 		GameLoaded = 1;
 		
 		MainKeyMap();													// MapKey profile for 'Game Running'
-		
+				
 		DefEventHandler(EV_HID_INPUT_DATA, &Throttle, THR_FC);			// Forces re-read of slider axis								
 		
 		fnFlashStart();
+//		DeferCall(1000, &fnSetLEDs, 0);
 		
 		// Align toggle switches and internal status flags if required
 		if (Throttle[EACON])	DeferCall(999, &tgSilentRunning, 1);		
@@ -597,9 +601,9 @@
 	// FUNCTION:	Perform Primary and Secondary trigger actions
 	// Parameter:	x = 0 (Primary Normal), x = 1 (Primary shifted), x = 2 (Secondary Normal), x = 3 (Secondary shifted)
 	// Requires:	'FireModeP' and 'FireModeS' to be set to 0 (Disco Scanner), or 1 (press2fire/press2stop)
-	// Note:		We need to use 'TriggerState' flags as we cannot use a SEQ() statement in an EXEC'd call
 
 	// Global Variables for fnAdvFireControl() function
+	// Note:		We need to use 'TriggerState' flags as we cannot use a SEQ() statement in an EXEC'd call
 	
 	int TriggerStateP = 0;
 	int TriggerStateS = 0;
@@ -798,6 +802,9 @@
 		if (!fSupercruise) {
 			ActKey(PULSE+KEYON+mRequestDock);
 			fnPIPMapper(SYS,ENG);
+			if (AutoGearDOWN & !fLandingGear) {
+				ActKey(PULSE+KEYON+LandingGear);
+			}
 			printf("\x0a=	Docking request sent	=\x0a");
 			printf("=	    Power to shields	=\x0a\x0a");
 		}
@@ -857,9 +864,15 @@
 
 	// FUNCTION:	Menulog
 	// Parameter:	'mode'. Valid = 0, 1 or 2
+	// NOTE:		Is not designed for nor should be used to 'Console Log' (CLOG)
+	
 	// WARNING:		Only works if menu selection is at home position, otherwise unpredicatable result!
 
 	int fnModeSwitch(int mode) {
+	
+		int fName = "Mode Switch";
+		int reason;
+		
 		int GUIMode;
 		int counter = 0;
 		char VoiceTxt; Dim(&VoiceTxt, 70); VoiceTxt[0] = 0;
@@ -874,36 +887,44 @@
 		}
 
 		printf("Mode Switch Triggered\x0a");
-				
-		if (mode == 0) {
-			Mode = "Open";
-			ActKey(PULSE+KEYON+mFastModeSwitch0);												// Selects OPEN mode
-		}
-		else if (mode == 1) {
-			Mode = "Private group";
-			ActKey(PULSE+KEYON+mFastModeSwitch1);												// Selects PRIVATE mode
+
+		if (fDanger | fInterdicted) {		
+			reason = "clogging is not allowed";
+			fnNotValid(fName, reason);
 		}
 		else {
-			Mode = "Solo";
-			ActKey(PULSE+KEYON+mFastModeSwitch2);												// Selects SOLO mode
-		}
+			if (mode == 0) {
+				Mode = "Open";
+				ActKey(PULSE+KEYON+mFastModeSwitch0);												// Selects OPEN mode
+			}
+			else if (mode == 1) {
+				Mode = "Private group";
+				ActKey(PULSE+KEYON+mFastModeSwitch1);												// Selects PRIVATE mode
+			}
+			else {
+				Mode = "Solo";
+				ActKey(PULSE+KEYON+mFastModeSwitch2);												// Selects SOLO mode
+			}
 
-		sprintf(&VoiceTxt, "Mode switch to %s selected, please wait for game reload", Mode);
-		fnTextToSpeech(&VoiceTxt);
-		printf("\x0a\Wait for game to finish loading ");
+			sprintf(&VoiceTxt, "Mode switch to %s selected, please wait for game reload", Mode);
+//			fnTextToSpeech(&VoiceTxt);
+//			printf("\x0a\Wait for game to finish loading ");
+			printf("\x0a");
+			fnVPOutput(&VoiceTxt);
 
-		if (ReverseThrust) {																	// Game always resets Reverse Thrust
-			ReverseThrust = 0;
+			if (ReverseThrust) {																	// Game always resets Reverse Thrust
+				ReverseThrust = 0;
+			}
+			
+			while (counter < ReloadDelay) {															// Wait for game to finish reloading
+				printf(".");
+				Sleep(1000);																		// Sleep is ok here as game is not effectively running
+				counter = counter + 1;
+			}
+			
+			printf("\x0a\x0a\- Game has reloaded -\x0a");
+			fnGameStarted();
 		}
-		
-		while (counter < ReloadDelay) {															// Wait for game to finish reloading
-			printf(".");
-			Sleep(1000);
-			counter = counter + 1;
-		}
-		
-		printf("\x0a\x0a\Game has reloaded\x0a");
-		fnGameStarted();
 	}
 
 
@@ -1029,18 +1050,29 @@
 	}
 
 
-	// FUNCTION:	Turn Debug ON/OFF then dump states
-	// Parameter:	x = 1 (DebugON) or 0 (DebugOFF)
+	// FUNCTION:	Turn Debug and ShowFlags ON/OFF 
+	// Parameter:	x = 0 - 3. Refer MapKey EFLNORM
 
-	int fnDebugStates(int x) {
-		if (x)
-			Debug = 1;
-		else
+	int fnDebug(int x) {
+	
+		if (x == 0) {
 			Debug = 0;
-			
-		ShowFlags = 1;
-		fnStateDump();
-		ShowFlags = 0;
+			ShowFlags = 0;
+			fnVPOutput("Debug and Showflags OFF");
+		}
+		if (x == 1) {
+			Debug = 1;
+			fnVPOutput("Debug ON");
+		}
+		if (x == 2) {
+			ShowFlags = 1;
+			fnVPOutput("ShowFlags ON");			
+		}
+		if (x == 3) {
+			Debug = 1;
+			ShowFlags = 1;
+			fnVPOutput("Debug and Showflags ON");
+		}	
 	}
 
 // END
