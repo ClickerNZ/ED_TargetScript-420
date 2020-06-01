@@ -24,7 +24,7 @@
 
 // Index:	Line		FUNCTION
 //			Line 38: 	int MainKeyMap()
-//			Line 461: 	int TrainingKeyMap()
+//			Line 464: 	int TrainingKeyMap()
 
 
 // START
@@ -415,9 +415,9 @@
 //		--------------------------
 
 		MapKeyUMD(&Throttle, EFRNORM,
-			0,																				// U - 
 			EXEC("GameLoaded = 0;"),														// U - Reset GameLoaded flag
-			EXEC("fnSetLEDs();")															// D - Reset Status LEDs
+			EXEC("fnSetLEDs();"),															// M - Reset Status LEDs
+			EXEC("fnPrintState();")															// D - Print Status Page
 			);
 			
 		MapKey(&Throttle, EFROVER, 0);														// <not currently used>
@@ -426,10 +426,12 @@
 //		-------------------------
 
 		MapKeyUMD(&Throttle, EFLNORM,
-			EXEC("fnDebugStates(DebugON);"),												// U - Debug tool: State Dump. Debug turned ON
-			EXEC("fnDebugStates(DebugOFF);"),												// M - Debug tool: Basic State Dump. No Debug
-			0
+			EXEC("fnDebug(2);"),															// U - Debug tool: Turn ShowFlags ON
+			EXEC("fnDebug(1);"),															// M - Debug tool: Turn Debug ON
+			EXEC("fnDebug(3);")																// D - Debug tool: Turn Debug and ShowFlags ON		
 			);
+
+		MapKeyR(&Throttle, EFLNORM, EXEC("fnDebug(0);"));									// Debug tool: Turn Debug and ShowFlags OFF 
 			
 		MapKey(&Throttle, EFLOVER, 0);														// <not currently used>
 
@@ -448,6 +450,7 @@
 	}	// end of MainKeyMap
 	
 
+// =============================================================================================================================================
 // =============================================================================================================================================
 
 
@@ -803,8 +806,8 @@
 //		--------------------------
 
 		MapKeyUMD(&Throttle, EFRNORM,
-			EXEC("fnVPOutput(\"Not mapped\");"),
 			EXEC("fnVPOutput(\"Set Gameloaded flag to off\");"),
+			EXEC("fnVPOutput(\"Print status page to console\");"),
 			EXEC("fnVPOutput(\"Reset status LEDs\");")
 			);
 			
@@ -814,12 +817,13 @@
 //		-------------------------
 
 		MapKeyUMD(&Throttle, EFLNORM,
-			EXEC("fnVPOutput(\"Dump current states to console with debug flag on\");"),
-			EXEC("fnVPOutput(\"Dump current states to console with debug flag off\");"),
-			EXEC("fnVPOutput(\"Not mapped\");")
+			EXEC("fnVPOutput(\"Turn Showflags on\");"),
+			EXEC("fnVPOutput(\"Turn Debug on\");"),
+			EXEC("fnVPOutput(\"Turn Debug and Showflags on\");")
 			);
-			
-		MapKey(&Throttle, EFLOVER, EXEC("fnVPOutput(\"Not mapped\");"));
+
+		MapKeyR(&Throttle, EFLNORM, EXEC("fnVPOutput(\"Turn Debug and Showflags off\");"));
+
 
 //		(Engine Idle - Left)
 //		--------------------
