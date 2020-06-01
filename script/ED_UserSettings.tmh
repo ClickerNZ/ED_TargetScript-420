@@ -83,7 +83,7 @@
 
 	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
 	
-	int		TrainingEnabled		= 1;					// 0 = Disable, 1 = Enable. When game stopped pressing a button/switch announces basic function
+	int		TrainingEnabled		= 0;					// 0 = Disable, 1 = Enable. When game stopped pressing a button/switch announces basic function
 	int		AnnounceTraining	= 0;					// 0 = Do not annnounce training mode, 1 = Announce training mode
 
 //------------------//
@@ -129,27 +129,30 @@
 	// If you find the macros are dropping characters, then the delay is too short.
 	// "LongPress" is a personal setting. I find a half second is about right for me.
 	
-	define 	PulseTime 			33						// PULSE+ Delay time (ms) - Used as key-hold-down time.
-	define 	DelayTime 			75						// D() Delay time 	 (ms) - Used in macros as the time between releasing one key and pressing the next.
-	define 	LongPress	 		500						// Tempo Delay 		 (ms) - Used in Tempos. ie hold switch/button for 0.5 seconds for alternate function
+	define 	PulseTime 			33							// PULSE+ Delay time (ms) - Used as key-hold-down time.
+	define 	DelayTime 			75							// D() Delay time 	 (ms) - Used in macros as the time between releasing one key and pressing the next.
+	define 	LongPress	 		500							// Tempo Delay 		 (ms) - Used in Tempos. ie hold switch/button for 0.5 seconds for alternate function
 	
-	define 	DiscoDelay			6100					// Discovery scanner 'hold-trigger' timer (6.1 seconds)
+	define 	DiscoDelay			6100						// Discovery scanner 'hold-trigger' timer (6.1 seconds)
 	
 
 //--------------------------//
 // General Status Variables //
 //--------------------------//
 
-	int		AutoHanger			= 0; //  !! TESTING !!	// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't
-	int		CommsModule			= 0; //		Required whilst ED_CommsControl not loaded
+	int		AutoHanger			= 0;				 		// !! TESTING !!	// 1 = Initiate Hanger+Station Services automatically when docked, 0 = don't
+															// !! TESTING !!	// Hanger services on Carrier is completely different to a station in the Beta
+	int		AutoGearUP			= 0; 						//	Enable to toggle landing gear when lifting off
+	int		AutoGearDOWN		= 0; 						//	Enable to toggle landing gear when request docking	
+	int		CommsModule			= 0; 						//	Required whilst ED_CommsControl not loaded
 
 //-------------//
 // Axis Curves //
 //-------------//
 
 	define	FAOFFCurves				MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
-	define	CurveInfo				PRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
-	int		EnableTFRPRudder	= 1;						// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
+	define	CurveInfo				NOPRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
+	int		EnableTFRPRudder	=	1;						// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
 
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
 	// The below constructs support S-Curves
