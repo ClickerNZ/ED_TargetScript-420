@@ -67,6 +67,7 @@
 		}
 	}
 
+
 	// TOGGLE: Flight Assist OFF/ON - LED1
 
 	int tgEnhancedFAOFF() {
@@ -75,13 +76,17 @@
 
 		if (!fSupercruise) {
 			if (fFAOff) {
-				printf("FA-ON Curves:\x0a");
+				if (CurveInfo == PRINT) {
+					printf("FA-ON Curves:\x0a");
+				}
 				if (Throttle[APPAT])	fnSetJoystickCurves(NONE, CurveInfo);
 				if (Throttle[APAH])		fnSetJoystickCurves(MILD, CurveInfo);
 				if (Throttle[APALT])	fnSetJoystickCurves(MEDIUM, CurveInfo);
 			}
 			else {
-				printf("FA-OFF Curves:\x0a");
+				if (CurveInfo == PRINT) {
+					printf("FA-OFF Curves:\x0a");
+				}
 				fnSetJoystickCurves(FAOFFCurves, CurveInfo);
 			}			
 			ActKey(PULSE+KEYON+FlightAssist);
@@ -92,7 +97,8 @@
 			fnNotValid(fnName, reason);
 		}
 	}
-	
+
+
 	// TOGGLE:		Cycle between 'Hold for 6.1 secs' and 'press to fire, press to stop'
 	// Parameter:	1 = Primary Trigger Action, 2 = Secondary Trigger Action
 	
@@ -103,10 +109,10 @@
 		if (x == 1) {
 			FireModeP = !FireModeP;
 			if(FireModeP) {
-				VoiceTxt = "Primary trigger action, press on, press off";
+				VoiceTxt = "Primary trigger action, mining laser mode";
 			}
 			else {
-				VoiceTxt = "Primary trigger action, hold 6.1 seconds";
+				VoiceTxt = "Primary trigger action, discovery scanner mode";
 			}
 			
 //			fnTextToSpeech(VoiceTxt);
@@ -117,10 +123,10 @@
 		if (x == 2) {
 			FireModeS = !FireModeS;
 			if(FireModeS) {
-				VoiceTxt = "Secondary trigger action, press on, press off";
+				VoiceTxt = "Secondary trigger action, mining laser mode";
 			}
 			else {
-				VoiceTxt = "Secondary trigger action, hold 6.1 seconds";
+				VoiceTxt = "Secondary trigger action, discovery scanner mode";
 			}
 		
 //			fnTextToSpeech(VoiceTxt);
