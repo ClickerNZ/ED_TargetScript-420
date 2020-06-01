@@ -31,20 +31,20 @@
 //----------------//
 
 	int Debug				= 0;		// Debug mode for testing. 0 = OFF, 1 = ON. Prints additional info to console
-	int ShowFlags			= 0;		// Set/Reset in fnDebugStates() and used in fnsProcessFlags()
+	int ShowFlags			= 0;		// Set/Reset in fnDebug() and used in fnsProcessFlags()
 		
 	int VoiceExists;					// Initialised here and set in initTextToSpeech()
 	int SounderExists;					// Initialised here and set in initSoundFX()
 	
-	char SysCmd;						// We build SysCmd dynamically in functions which want to send a "system(&SysCmd);"
+//	char SysCmd;						// We build SysCmd dynamically in functions which want to send a "system(&SysCmd);"
 
-	int SliderCurve;					// Used to define the LIST and can use within EXEC
+//	int SliderCurve;					// Used to define the LIST and can use within EXEC
 		
 	int StartupLock			= 1;		// Prevent triggering keystrokes during initialisation
 	int GameLoaded			= 0;		// Set in fnGameStarted() when game is detected as running (ie Flags != 0)
 	int ConnectionStatus	= 0;		// Track if "ShowConnectionStatus" is on or off to avoid accidental toggle off during mode switch
-	int SRVBeam				= 1;		// SRV Lights Flag
-	int	JSProfile 			= 1;		// Used in fnSetJoystickCurves() and fnEnhancedFAOFF() (see EDFunctions.tmh) Values = 0, 1 or 2
+//	int SRVBeam				= 1;		// SRV Lights Flag
+//	int	JSProfile 			= 1;		// Used in fnSetJoystickCurves() and fnEnhancedFAOFF() (see EDFunctions.tmh) Values = 0, 1 or 2
 	int ReverseThrust		= 0;		// Set/Reset in tgReverseThrust()
 	int SpeedbrakeDeployed	= 0;		// Set/Reset in tgReverseThrust() and used in tgLandingGear()
 	int FSSMode				= 0;		// Set/Reset in tgFSSMode()
