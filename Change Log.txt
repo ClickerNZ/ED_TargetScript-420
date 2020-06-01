@@ -9,7 +9,10 @@ v4.2.0	- Point Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Add second parameter, 'VolumeOverride' to fnTextToSpeech()
 		- Remove unused parameter from fnSetLEDs()
 		- Tweak Slew control curves
-		- Create targetdx64enh.tmh from targetdx128.tmh and add my tweaks. Move DX33-64 defines to top of script. Add ThrottleMap mappings for DX34-DX55
+		- Create targetdx64enh.tmh from targetdx128.tmh and add my tweaks. 
+				- Move DX33-64 defines to top of script.
+				- Add ThrottleMap mappings for DX34-DX55
+				- NOTE: Elite Dangerous only detects up to DX32
 		- Extend Joystick Curves to include global variables for all 3 deadzones
 		- Decouple Rudder from Joystick Curves and create independant curve variables etc.
 		- Add User Setting for FA-OFF Curves and printinfo
@@ -19,16 +22,25 @@ v4.2.0	- Point Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Create fnDRShip() function to track when Ship is dismissed or recalled
 		- Remove Zoom factors from curve arrays (static Zoom set to 0)
 		- Add and report on Slider Profile when it changes
-		- Create fnsMyStates() function to save and load non 'status.json' variables we want to track
+		- Create fnsMyStates() function to save and load non 'status.json' variables we want to be persistent
 		- Replace Sleep() with DeferCall when triggering use of FreeCamera
 		- Create bind file for No EDTracker
 		- Create User setting to disable TFRP Rudder controller if not connected. Add test when Configuring and initialising devices
-		- Include 'DefaultPIPMode' in UserSettings. Reset PIPMode now resets to this deffault instead of Mode 0
+		- Include 'DefaultPIPMode' in UserSettings. Reset PIPMode now resets to this default instead of Mode 0
 		- Create mClearAllChatBox macro to clear all three chat session windows instead of the currently selected window 
 		- Create a 'Training Mode'. Seperate Keymap profile which announces what each button or switch does 
 		- Create ED_MapKeyAssignments.tmh file and move main and training keymaps into it
-		- Rename ED_KeyMap.ttm as ED_Keyboard_&_DX_Map.ttm to try to avoid confusion
-		- Create fnVPOutput() function to send a string to both fnTextToSpeech() and printf to console. Refactor appropriate code across all files to cater 
+		- Rename ED_KeyMap.ttm to ED_KeyboardDXMap.ttm to avoid confusion
+		- Create fnVPOutput() function to send a string to both fnTextToSpeech() and printf to console. Refactor code to suit
+		- Create AutoGearUP and AutoGearDOWN flags in ED_UserSettings to enable toggle of gear when lifting off or request dock 
+		- Move several Global variables into Local context. (SysCmd, SliderCurve)
+		- Remove no longer used Globals (SRVBeam, JSProfile)
+		- Rename fnDebugStates() to fnDebug(). This function now only sets Debug and ShowFlags flags
+		- MapKeys for EFLNORM and EFRNORM better aligned and improved for Debug functions
+		- Remove several 'if (Debug) {}' code blocks
+		- Refactor several functions parameters as optional where it makes sense (eg. functions with > 1 argument can now be called via DeferCall)
+		- Add test in fnModeSwitch() function to disallow console logging during battle or interdictions
+		- Create 'ED_TargetScript User Reference Guide' PDF
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
@@ -77,7 +89,7 @@ v4.1.0 	- major change to processing status.json using GameCallBack TCP sockets
 		Create fnSoundFX() to enable sound effects via a command line .wav file player
 		
 	Maintenance, Updates & fixes:
-		Modify Voice path to more of a command to include switch usage (use alt voice as example)
+		Modify Voice path to include switch usage (use alt voice as example)
 		Add space {" ") when building SysCmd in fnTextToSpeech() between path and text 
 		Alter timings in mEnterHanger and mLaunch macros
 		Change ED_TCPCallback console output. Print time + Flags value instead of entire status.json
@@ -95,7 +107,7 @@ v4.1.0 	- major change to processing status.json using GameCallBack TCP sockets
 		Existance checks for 'StatusFile' added (Script aborts if not found)
 		Added alias for 'StatusFile' in ED_UserSettings and instructions for options
 		('fnsGetStatusFileInfo()' function now largely redundant)
-		use Sprintf() to concatenate and buid strings in place of multiple strcat() statements
+		Use sprintf() to concatenate and buid strings in place of multiple strcat() statements
 	
 v4.0.1 - mostly maintenance build 
 	Fix Reverse Thrust Toggle code
@@ -135,7 +147,7 @@ v4.0.0
 	Turn on ConnectionStatus @ game load by default 
 	Create fnHeatsink() to fix FSS Zoom IN/OUT and add console messages 
 	Create tgExtCamera() and map to Throttle LTB (Down)
-	Create ShowFlags global flag. Set/Reset in fnDebugStates and used in fnProcessFlags()
+	Create ShowFlags global flag. Set/Reset in fnDebug and used in fnProcessFlags()
 	Fix mFastModeSwitch1 macro for Private Group 
 	Create fnHangerServices(). Mapped to IDLELON/OFF. 
 		- Enters Hanger and Station Services + buys fuel, repairs, restock
@@ -244,7 +256,7 @@ v3.2.0	(Compatible with Beyond Chapter 3)
 	Delete no longer used (commented) code
 	Made user settings largely obsolete (for things I'll never change)
 	Hard coded DXSlider (still needs tweaking)
-	Implement MAPKeyUMD via S3 (IO) and PSB (UMD)
+	Implement MapKeyUMD via S3 (IO) and PSB (UMD)
 	Use MapKeyUMD instead of TEMPO for PIPManagement
 	Use MapKeyUMD in place of fnFireControl() and fnTargetDesignator() functions
 	Move Dismiss/Recall Ship to shifted S1
