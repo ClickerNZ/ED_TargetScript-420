@@ -95,6 +95,9 @@ Original script by Aussiedroid.
 Contribution and ideas lifted from Touille and Darkcyde.
 Modified target.tmh was sourced from Sedenion.
 
+If you like my work, consider spotting me the cost of a coffee via Patreon!
+https://www.patreon.com/user?u=36436459
+
 DISCLAIMER:
 This software is a work in progress. 
 No warranties are stated or implied and no responsibility will be accepted for any damage this software may
