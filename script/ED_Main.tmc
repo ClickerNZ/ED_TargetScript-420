@@ -44,7 +44,7 @@ include "targetdx64enh.tmh"				// This is my modified version of targetdx128.tmh
 // your script bundle if you have modified them.
 
 include "ED_GlobalVars.tmh"				// These six files make up my script bundle
-include "ED_Keyboard_&_DX_Map.ttm"					// The order that these are 'included' matters
+include "ED_KeyboardDXMap.ttm"			// The order that these are 'included' matters
 include "ED_UserSettings.tmh"
 include "ED_MapKeyAssignment.tmh"
 include "ED_Functions.tmh"
