@@ -45,6 +45,7 @@ PACKAGE CONTENTS:
 When publishing or sharing this script the following should be included in the zipped package;
 - This readme file
 - The license file
+- User reference guide (pdf)
 - ED_Main.tmc, ED_Functions.tmh, ED_Macros.ttm, ED_Toggles.tmh, ED_StateTracker.tmh, 
 - ED_MapKeyAssignment.tmh, ED_Keyboard_&_DX_Map.ttm, ED_GlobalVars.tmh, ED_UserSettings.tmh 
 - Voice.exe (users can find this on github and check out the source if they wish)
@@ -71,23 +72,21 @@ both VoicePath and VoiceCMD variables
 
 4) Copy Sounds folder to c:\Thrustmaster\ED_TargetScript\ and set correct path in ED_UserSettings file 
 
-5) Print out and/or study the image files within the 'Maps' folder.
+5) Print out and/or study the image files within the 'Maps' folder and have a read of the user reference guide.
 
 6) The Preferred method of running the script is via a Windows batch file.
-No longer applicable - (This is required as the script now writes the location and string length of the status.json file.)
-No longer applicable - (The scripts also uses a timeout command line modifier for TargetGUI.exe)
-
 ED_Launcher.cmd batch file is included in this package and is best copied to wherever you copied the scripts to in "step 2" above.
 I recommend you create a shortcut to this batch file on your desktop and run it as administrator.
-Please read the comments in this batch file for more information
+Please read the comments in the batch file for more information
 
 USER SETTINGS:
 All user configurable settings are in the ED_UserSettings.tmh file.
-Avoid changing anything in ED_GlobalVars or ED_KeyMap files unless you know what you are doing.
+Avoid changing anything in ED_GlobalVars or ED_KeyMap files until you become more familiar with the script itself.
 
 USAGE and SHARING: 
-If you have obtained a copy of this script, feel free to use the ideas and methods for your own use and I 
-encourage you to share these with other like minded players.
+Feel free to use the ideas and methods within my script for your own use and I encourage you to share with other like minded players.
+
+LICENSE:
 This software uses the MIT license which can be found at the root of this package/repository.
 
 CREDITS:
@@ -95,13 +94,13 @@ Original script by Aussiedroid.
 Contribution and ideas lifted from Touille and Darkcyde.
 Modified target.tmh was sourced from Sedenion.
 
-If you like my work, consider spotting me the cost of a coffee via Patreon!
-https://www.patreon.com/user?u=36436459
-
 DISCLAIMER:
 This software is a work in progress. 
 No warranties are stated or implied.
 By downloading, installing and using this software, you agree to use this at your own risk.
+
+If you like my work, consider spotting me the cost of a coffee via Patreon!
+https://www.patreon.com/user?u=36436459
 
 Fly Dangerous Commanders ... o7
 
