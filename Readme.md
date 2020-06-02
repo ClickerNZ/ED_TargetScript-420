@@ -100,8 +100,7 @@ https://www.patreon.com/user?u=36436459
 
 DISCLAIMER:
 This software is a work in progress. 
-No warranties are stated or implied and no responsibility will be accepted for any damage this software may
-cause to your hardware, sanity or marital status.
+No warranties are stated or implied.
 By downloading, installing and using this software, you agree to use this at your own risk.
 
 Fly Dangerous Commanders ... o7
