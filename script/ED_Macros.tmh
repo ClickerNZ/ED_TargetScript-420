@@ -20,22 +20,22 @@
 // User Config Settings		refer to ED_UserSettings file
 // ========================================================
 
-// Index:	Line		FUNCTION
-//			Line 50:	fnCustomCommands()
-//			Line 61:	mRequestDock 
-//			Line 74:	mDeploySRV 
-//			Line 86:	mBoardShip 
-//			Line 103:	mShowGameStats
-//			Line 108:	mFastModeSwitch0 
-//			Line 119:	mFastModeSwitch1 
-//			Line 133:	mFastModeSwitch2
-//			Line 146:	mReportCrimesToggle
-//			Line 167:	mNAVBeaconWing
-//			Line 192:	mNAVBeaconOff
-//			Line 216:	mClearAllChatBox
-//			Line 256:	mClearChatBox
-//			Line 268:	mEnterHanger
-//			Line 295:	mLaunch
+// Index:	Line			FUNCTION
+//			Line 51:		fnCustomCommands()
+//			Line 79: 		mRequestDock
+//			Line 92: 		mDeploySRV
+//			Line 104: 		mBoardShip
+//			Line 121: 		mShowGameStats
+//			Line 126: 		mFastModeSwitch0
+//			Line 137: 		mFastModeSwitch1
+//			Line 151: 		mFastModeSwitch2
+//			Line 164: 		mReportCrimesToggle
+//			Line 185: 		mNAVBeaconWing
+//			Line 210: 		mNAVBeaconOff
+//			Line 234: 		mClearAllChatBox
+//			Line 273: 		mClearChatBox
+//			Line 285: 		mEnterHanger
+//			Line 312: 		mLaunch
 
 
 // START

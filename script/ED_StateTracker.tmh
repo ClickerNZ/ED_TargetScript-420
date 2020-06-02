@@ -21,13 +21,13 @@
 // ========================================================
 
 // Index:	Line		FUNCTION
-//			Line 53: 	int fnsGetStatusFileInfo()
-//			Line 98: 	int fnsReadStatusJson()
-//			Line 171: 	int fnsGetKeyValue()
-//			Line 309: 	int fnsProcessFlags()
-//			Line 514: 	int fnsProcessGuiFocus()
-//			Line 552: 	int fnsStartCheck()
-//			line 604:	int fnsMyStates()
+//			Line 52: 	int fnsGetStatusFileInfo()
+//			Line 88: 	int fnsReadStatusJson()
+//			Line 153: 	int fnsGetKeyValue()
+//			Line 284: 	int fnsProcessFlags()
+//			Line 506: 	int fnsProcessGuiFocus()
+//			Line 545: 	int fnsStartCheck()
+//			line 597:	int fnsMyStates()
 	
 // START
 
