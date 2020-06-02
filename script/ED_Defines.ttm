@@ -46,7 +46,7 @@
 
 	define VMajor		 						4						// Script Version Major Value			ie. 2.x.x
 	define VMinor		 						2						// Script Version Minor Value			ie. x.3.x
-	define VPoint								"0_DEV"					// Script Version Point Update			ie. x.x.4
+	define VPoint								"0"						// Script Version Point Update			ie. x.x.4
 
 //----------------------------------------------------------------------//
 // BINDINGS																//
@@ -56,11 +56,8 @@
 //			This includes the commented ones!
 
 		// WEAPON CONTROL //
-	define PrimaryFire 							DX1						// JOY 1 (Also mapped to RSHIFT+1 in ED Bindings)
-//	define PrimaryFire 							R_SHIFT+USB[0x1E]		// JOY 1 (for Event Tester)
-	
+	define PrimaryFire 							DX1						// JOY 1 (Also mapped to RSHIFT+1 in ED Bindings)	
 	define SecondaryFire 						DX2						// JOY 2 (Also mapped to RSHIFT+2 in ED Bindings)
-//	define SecondaryFire 						R_SHIFT+USB[0x1F]		// JOY 2 (for Event Tester)
 	
 	define DeployHardpoints 					USB[0x18] 				// U
 	define NextFireGroup 						USB[0x36]				// ,

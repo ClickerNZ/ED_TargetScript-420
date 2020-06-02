@@ -234,50 +234,12 @@
 //		(Mike Switch)		// Communications Controller functions
 //		-------------
 
-		if (CommsModule) {
-		// Use IO so we don't accidentally change channels when we push-to-talk
-
-			MapKeyIO(&Throttle, MSU,
-				EXEC("fnChannelSelect(CHNLUP);"),					// I - Channel Up
-				0													// O - do nothing
-				);
-				
-			MapKeyIO(&Throttle, MSD, 
-				EXEC("fnChannelSelect(CHNLDN);"),					// I - Channel Down
-				0													// O - do nothing
-				);
-				
-			// Use IO so we don't accisnetally toggle PTT mode when we push-to-talk
-				
-			MapKeyIO(&Throttle, MSL, 
-				EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-				0													// O - do nothing
-				);
-				
-			MapKeyIO(&Throttle, MSR, 
-				EXEC("tgPTTMode();"), 								// I - Toggle PTT Mode
-				0													// O - do nothing
-				);
-			
-			MapKeyIO(&Throttle, MSP, 
-				EXEC("fnCommStatus();"),							// I - Announce current Comms Status
-				EXEC("fnMicControl(1);")							// O - Push to Talk
-				);
-				
-			MapKeyRIO(&Throttle, MSP, 			// RELEASE	
-				0, 													// RI - do nothing
-				EXEC("fnMicControl(0);")							// RO - Release PTT 
-				);
-		}
-		else {
+		MapKey(&Throttle, MSU, 0);								// Reserved for Communications functions
+		MapKey(&Throttle, MSD, 0);								// Reserved for Communications functions
+		MapKey(&Throttle, MSL, 0);								// Reserved for Communications functions
+		MapKey(&Throttle, MSR, 0);								// Reserved for Communications functions
+		MapKey(&Throttle, MSP, 0);								// Reserved for Communications functions
 		
-			MapKey(&Throttle, MSU, 0);								// Reserved for Communications functions
-			MapKey(&Throttle, MSD, 0);								// Reserved for Communications functions
-			MapKey(&Throttle, MSL, 0);								// Reserved for Communications functions
-			MapKey(&Throttle, MSR, 0);								// Reserved for Communications functions
-			MapKey(&Throttle, MSP, 0);								// Reserved for Communications functions
-			
-		}
 		
 //		(Speed Brake)		// Reverse Throttle function modifiers
 //		-------------
@@ -322,9 +284,9 @@
 //		(AutoPilot Select)	// JoystickCurves Selector
 //		------------------
 
-		MapKey(&Throttle, APPAT, EXEC("fnSetJoystickCurves(NONE, PRINT);"));		// Set Joystick curves = NONE
-		MapKey(&Throttle, APAH,  EXEC("fnSetJoystickCurves(MILD, PRINT);"));		// Set Joystick curves = MILD
-		MapKey(&Throttle, APALT, EXEC("fnSetJoystickCurves(MEDIUM, PRINT);"));		// Set Joystick curves = MEDIUM
+		MapKey(&Throttle, APPAT, EXEC("fnSetJoystickCurves(NONE, CurveInfo);"));		// Set Joystick curves = NONE
+		MapKey(&Throttle, APAH,  EXEC("fnSetJoystickCurves(MILD, CurveInfo);"));		// Set Joystick curves = MILD
+		MapKey(&Throttle, APALT, EXEC("fnSetJoystickCurves(MEDIUM, CurveInfo);"));		// Set Joystick curves = MEDIUM
 
 //		(Enhanced Attitude Control (EAC) Arm/Off)
 //		-----------------------------------------
@@ -393,11 +355,11 @@
 //		(Engine Operate - Right)
 //		------------------------
 
-//		MapKey(&Throttle, EORIGN, PULSE+SRVRecallDismissShip);								// From SRV - Recall/Dismiss Ship
 		MapKey(&Throttle, EORIGN, EXEC("fnDRShip();"));										// From SRV - Recall/Dismiss Ship
 		MapKey(&Throttle, EORNORM, 0);														// <not currently used>
 		MapKey(&Throttle, EORMOTOR, PULSE+HideShipGUI);										// Toggle: Ship GUI OFF
-		MapKeyR(&Throttle, EORMOTOR, PULSE+HideShipGUI);									// Toggle: Ship GUI ON
+		
+		MapKeyR(&Throttle, EORMOTOR, PULSE+HideShipGUI);	// RELEASE						// Toggle: Ship GUI ON
 
 //		(Engine Operate - Left)
 //		-----------------------
@@ -431,7 +393,7 @@
 			EXEC("fnDebug(3);")																// D - Debug tool: Turn Debug and ShowFlags ON		
 			);
 
-		MapKeyR(&Throttle, EFLNORM, EXEC("fnDebug(0);"));									// Debug tool: Turn Debug and ShowFlags OFF 
+		MapKeyR(&Throttle, EFLNORM, EXEC("fnDebug(0);"));	// RELEASE						// Debug tool: Turn Debug and ShowFlags OFF 
 			
 		MapKey(&Throttle, EFLOVER, 0);														// <not currently used>
 
@@ -640,40 +602,12 @@
 //		(Mike Switch)		// Communications Controller functions
 //		-------------
 
-		if (CommsModule) {
-			MapKeyIO(&Throttle, MSU, 
-				EXEC("fnVPOutput(\"Channel select up\");"),
-				EXEC("fnVPOutput(\"Not mapped\");")
-				);
-				
-			MapKeyIO(&Throttle, MSD, 
-				EXEC("fnVPOutput(\"Channel select down\");"),
-				EXEC("fnVPOutput(\"Not mapped\");")
-				);
-				
-			MapKeyIO(&Throttle, MSL, 
-				EXEC("fnVPOutput(\"Toggle Push-to-talk mode\");"),
-				EXEC("fnVPOutput(\"Not mapped\");")
-				);
-				
-			MapKeyIO(&Throttle, MSR, 
-				EXEC("fnVPOutput(\"Toggle push-to-talk mode\");"),
-				EXEC("fnVPOutput(\"Not mapped\");")
-				);
-				
-			MapKeyIO(&Throttle, MSP, 
-				EXEC("fnVPOutput(\"announce comms status\");"),
-				EXEC("fnVPOutput(\"Push to Talk\");")
-				);		
-		}
-		else {
-			MapKey(&Throttle, MSU, EXEC("fnVPOutput(\"Not mapped\");"));
-			MapKey(&Throttle, MSD, EXEC("fnVPOutput(\"Not mapped\");"));
-			MapKey(&Throttle, MSL, EXEC("fnVPOutput(\"Not mapped\");"));
-			MapKey(&Throttle, MSR, EXEC("fnVPOutput(\"Not mapped\");"));
-			MapKey(&Throttle, MSP, EXEC("fnVPOutput(\"Not mapped\");"));
-		}
-		
+		MapKey(&Throttle, MSU, EXEC("fnVPOutput(\"Not mapped\");"));
+		MapKey(&Throttle, MSD, EXEC("fnVPOutput(\"Not mapped\");"));
+		MapKey(&Throttle, MSL, EXEC("fnVPOutput(\"Not mapped\");"));
+		MapKey(&Throttle, MSR, EXEC("fnVPOutput(\"Not mapped\");"));
+		MapKey(&Throttle, MSP, EXEC("fnVPOutput(\"Not mapped\");"));
+	
 //		(Speed Brake)		// Reverse Throttle function modifiers
 //		-------------
 
@@ -788,7 +722,8 @@
 
 		MapKey(&Throttle, EORIGN, EXEC("fnVPOutput(\"Dismiss or recall ship\");"));
 		MapKey(&Throttle, EORMOTOR, EXEC("fnVPOutput(\"Toggle Ship GUI off\");"));
-		MapKeyR(&Throttle, EORMOTOR, EXEC("fnVPOutput(\"Toggle ship GUI on\");"));
+		
+		MapKeyR(&Throttle, EORMOTOR, EXEC("fnVPOutput(\"Toggle ship GUI on\");"));		// RELEASE
 	
 //		(Engine Operate - Left)
 //		-----------------------
@@ -800,7 +735,8 @@
 			 );
 			 
 		MapKey(&Throttle, EOLMOTOR, EXEC("fnVPOutput(\"Not mapped\");"));
-		MapKeyR(&Throttle, EOLMOTOR, EXEC("fnVPOutput(\"Not mapped\");"));
+		
+		MapKeyR(&Throttle, EOLMOTOR, EXEC("fnVPOutput(\"Not mapped\");"));				// RELEASE
 
 //		(Engine Fuel Flow - Right)
 //		--------------------------
@@ -822,7 +758,7 @@
 			EXEC("fnVPOutput(\"Turn Debug and Showflags on\");")
 			);
 
-		MapKeyR(&Throttle, EFLNORM, EXEC("fnVPOutput(\"Turn Debug and Showflags off\");"));
+		MapKeyR(&Throttle, EFLNORM, EXEC("fnVPOutput(\"Turn Debug and Showflags off\");"));		// RELEASE
 
 
 //		(Engine Idle - Left)

@@ -39,7 +39,6 @@
 	int		newJson			= 0;								// set when myJson != lastJson...we then call fnsProcessFlags();
 
 	int 	fnReturn		= 0;								// Return -1 if error
-	int 	FileIOError		= 0;								// Set if get errors reading files
 
 	// End of Global Variables
 	//============================================================================================================================
@@ -72,16 +71,7 @@
 		}
 		else {
 			printf("C:\\status.json.path.txt file not found.\x0a");
-		}
-	
-//		if (Debug) {
-//			printf("\x0a\Function: fnsGetStatusFileInfo()\x0a");
-//			printf("myResult	= %d \x0a", myResult);
-//			printf("StatusFile  = %s \x0a", &StatusFile);
-//			printf("strlen(StatusFile) = %d\x0a", strlen(&StatusFile));
-//		}
-
-		FileIOError = 0;											// if we get this far...all is well
+		}	
 	}
 
 
@@ -122,8 +112,7 @@
 				ReadErrorSent = 0;
 				strdel(&myJson, myResult-1, buf);					// removes trailing NUL/garbage
 				
-																	//ED_TCPCallback equivalent functionality
-				newJson = strcmp(&myJson, &lastJson);				// <<< from here...
+				newJson = strcmp(&myJson, &lastJson);
 				if (newJson != 0) {
 					if (Debug) {
 						printf("Function: fnsReadStatusJson();\x0a"); 
@@ -135,29 +124,18 @@
 					OldFlags = Flags;
 				}
 				
-				sprintf(&lastJson, "%s", &myJson);					// <<< ... to here
+				sprintf(&lastJson, "%s", &myJson);
 
-//				if (Debug) {
-//					printf("status.json read successfully\x0a");
-//				}
 			}
 		}
 		else {
-//			VoiceVolume = 100;
-//			VoiceTxt = "FATAL ERROR: Status.jason file not found";
-//			printf("\x0a\FATAL ERROR: Status.json file not found\x0a");
-//			fnTextToSpeech(VoiceTxt, 100);
 			printf("\x0a");
 			VPOutput("FATAL ERROR: Status.jason file not found", 100);
 			Abort();
-		}
-		
-//		if (Debug) {
-//			printf("myJson	  = %s \x0a", &myJson);
-//			printf("strlen(myJson) = %d\x0a\x0a", strlen(&myJson));	
-//		}
+		}		
 	}
-	
+
+
 	// FUNCTION:	Extract json key value from status.json:
 	// Input:		Key (pattern = string), value vtype (0=float, 1=int, 2=string)
 	// Output:		Return key value
@@ -252,10 +230,6 @@
 			if (myResult == 0 & (vtype == 0 | vtype == 1)) EndValue = 1;
 			
 			if (EndValue == 0) strcat(&keyvalue, &thischr);
-
-//			if (Debug) {
-//				printf("chrpnt = %2d thischr = %s keyvalue = %s\x0a", chrpnt, &thischr, &keyvalue);
-//			}
 			
 			while (EndValue == 0 & chrpnt < 20) {
 				chrpnt = chrpnt + 1;
@@ -278,9 +252,6 @@
 				
 				if (EndValue == 0) strcat(&keyvalue, &thischr);
 				
-//				if (Debug) {
-//					printf("chrpnt = %2d thischr = %s keyvalue = %s\x0a", chrpnt, &thischr, &keyvalue);
-//				}
 			}			
 		}
 		
@@ -310,7 +281,7 @@
 	// Input: 'UpdateLEDs', 1 = update, 0 = no update					// <<<<<<<<<<<<< Remove the "update LEDs feature once we get this all working again.
 	// Output: Flags value
 
-	int fnsProcessFlags(int UpdateLEDs) {
+	int fnsProcessFlags(int UpdateLEDs=0) {
 
 		int VoiceTxt;
 		
@@ -357,10 +328,9 @@
 				
 				fnSetLEDs();											// Turn off Status LEDs
 				fnsMyStates(SAVE);				
-//				ActKey(PULSE+KEYON+LED(&Throttle, LED_INTENSITY, 0));	// Set LED back-light OFF
 			}
 		}
-		else {															// Flags != 0
+		else {		// Flags != 0
 		
 			if (Flags < 0) {
 				fSRVHiBeam			= 1;
@@ -460,32 +430,36 @@
 					if (AutoGearUP) {
 						ActKey(PULSE+KEYON+LandingGear);
 					}
+					ShipDismissed = 0;			
 				}
-//				fnTextToSpeech(VoiceTxt);
-				ShipDismissed = 0;
 			}
 			
 			if (fDocked != dk) {		// Framework - currently testing - may not be viable in current form without additional information from journal
 				if (fDocked) {							
-					VoiceTxt = "Docked"; 
 					if (AutoHanger) {
 						DeferCall(2500, &fnHangerServices, 1);			// Cannot use Auto feature until determine if in a Starport v Carrier
 					}
-				DeferCall(1000, &ActKey, PULSE+KEYON+BalancePower);
+					DeferCall(1000, &ActKey, PULSE+KEYON+BalancePower);
 				}
 				else	{	
-					VoiceTxt = "Undocked";
 					InHanger = 0;
 					if (AutoGearUP) {
 						DeferCall(1500, &ActKey, PULSE+KEYON+LandingGear);
 					}					
 				}
-				printf("Docked status: %s\x0a", VoiceTxt);					
-//				fnTextToSpeech(VoiceTxt);
 			}
 									
 			if (fa != fFAOff | lt != fLights | sr != fSilentRunning | cs != fCargoScoop | lg != fLandingGear | sh != fMainShip) UpdateLEDs = 1;
 
+			if(GameLoaded == 0) {			// Game started...as opposed to re-started.
+				fnGameStarted();
+			}
+			else if(UpdateLEDs) {
+				fnSetLEDs();
+			}
+			
+			OldFlags = Flags;				// Keep track of last Flags Value to track when Flags Changes
+			
 			if (ShowFlags) {
 				printf("\x0a===============\x0a");
 				if (fSRVHiBeam) 			printf("SRVHiBeam\x0a");
@@ -521,14 +495,7 @@
 				if (fLanded) 				printf("Landed on planet\x0a");
 				if (fDocked) 				printf("Docked\x0a");
 				printf("===============\x0a");
-			}
-			
-			if (UpdateLEDs) fnSetLEDs();
-
-			if(GameLoaded == 0) {			// Game started...as opposed to re-started.
-				fnGameStarted();
-			}
-			OldFlags = Flags;				// Keep track of last Flags Value to track when Flags Changes
+			}			
 		}
 	}
 	// END of fnsProcessFlags()
@@ -666,8 +633,6 @@
 				fclose(fp);
 				
 				if (fpresult == 0) {
-//					fnTextToSpeech("Error writing MyStates to status file", 100);
-//					printf("Error writing MyStates to status file\x0a");
 					fnVPOutput("Error writing MyStates to status file", 100);
 				}	
 				else {
@@ -711,8 +676,6 @@
 					}					
 				}
 				else {
-//					fnTextToSpeech("Error reading MyStates from status file", 100);
-//					printf("Error reading MyStates from status file\x0a");
 					fnVPOutput("Error reading MyStates from status file", 100);
 				}
 			}
