@@ -30,7 +30,7 @@ v4.2.0	- Point Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Create mClearAllChatBox macro to clear all three chat session windows instead of the currently selected window 
 		- Create a 'Training Mode'. Seperate Keymap profile which announces what each button or switch does 
 		- Create ED_MapKeyAssignments.tmh file and move main and training keymaps into it
-		- Rename ED_KeyMap.ttm to ED_KeyboardDXMap.ttm to avoid confusion
+		- Rename ED_KeyMap.ttm to ED_Defines.ttm to avoid confusion
 		- Create fnVPOutput() function to send a string to both fnTextToSpeech() and printf to console. Refactor code to suit
 		- Create AutoGearUP and AutoGearDOWN flags in ED_UserSettings to enable toggle of gear when lifting off or request dock 
 		- Move several Global variables into Local context. (SysCmd, SliderCurve)

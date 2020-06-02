@@ -17,9 +17,9 @@
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
 // MapKey statements		refer to ED_MapKeyAssignment file
-// Global Defines			refer to ED_Keyboard_&_DX_Map file
+// Global Defines			refer to ED_Defines file
 // Global Variables			refer to ED_GlobalVars file
-// User Config Settings		refer to ED_GlobalVars file
+// User Config Settings		refer to ED_UserSettings file
 // ========================================================
 
 // Index:	Line		FUNCTION
@@ -34,17 +34,16 @@
 // included files //
 // -------------- //
 
-include "targetdx64enh.tmh"				// This is my modified version of targetdx128.tmh
-//include "target.tmh"
+include "target.tmh"
 
 // 'target.tmh' include is mandatory.
-// target.tmh will include defines.tmh and hid.tmh. 
-// hid.tmh will include sys.tmh
-// These are bundled with the TARGET software, therefore you only need to package with   
-// your script bundle if you have modified them.
+// defines.tmh and hid.tmh are included via target.tmh
+// sys.tmh is included via hid.tmh
+// These are bundled with the TARGET software.
+// You do not need to package with your script bundle unless you have modified them.
 
 include "ED_GlobalVars.tmh"				// The order that these files are 'included' matters
-include "ED_KeyboardDXMap.ttm"
+include "ED_Defines.ttm"
 include "ED_UserSettings.tmh"
 include "ED_MapKeyAssignment.tmh"
 include "ED_Functions.tmh"
@@ -60,14 +59,7 @@ include "ED_Macros.tmh"
 // --------------- //
 
 	int main() {
-	
-		//  Alternate statements:
-		// 'Exclude(&device);'		issues 'Configure(&device, MODE_EXCLUDED);' in target.tmh <- this is already in target.tmh
-		
-		//  The following two statements were created because they make sense they should be in there...
-		// 'Filter(&device);'		issues 'Configure(&device, MODE_FILTERED);' 
-		// 'KeepEnabled(&device);'	issues 'Configure(&device, MODE_KEEPENABLED);'
-		
+			
 		Exclude(&HCougar);
 		Exclude(&T16000);
 		Exclude(&T16000L);
@@ -78,7 +70,7 @@ include "ED_Macros.tmh"
 		Exclude(&RMFD);
 		
 		if (EnableTFRPRudder) {
-			Filter(&TFRPRudder);		
+			Configure(&TFRPRudder, MODE_FILTERED);
 		}
 		else {
 			Exclude(&TFRPRudder);

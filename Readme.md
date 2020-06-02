@@ -54,7 +54,7 @@ When publishing or sharing this script the following should be included in the z
 - The license file
 - User reference guide (pdf)
 - ED_Main.tmc, ED_Functions.tmh, ED_Macros.ttm, ED_Toggles.tmh, ED_StateTracker.tmh, 
-- ED_MapKeyAssignment.tmh, ED_Keyboard_&_DX_Map.ttm, ED_GlobalVars.tmh, ED_UserSettings.tmh 
+- ED_MapKeyAssignment.tmh, ED_Defines.ttm, ED_GlobalVars.tmh, ED_UserSettings.tmh 
 - Voice.exe (users can find this on github and check out the source if they wish)
 - sounder.exe (users can find this on github via the same author as voice.exe)
 - target_enhanced.tmh As of version 4.0.0, I use a modified target.tmh file which itself was modified by Sedenion

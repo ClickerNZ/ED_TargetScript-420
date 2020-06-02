@@ -17,9 +17,9 @@
 // tgName()					refer to ED_Toggles file
 // mName					refer to ED_Macros file
 // MapKey statements		refer to ED_MapKeyAssignment file
-// Global Defines			refer to ED_Keyboard_&_DX_Map file
+// Global Defines			refer to ED_Defines file
 // Global Variables			refer to ED_GlobalVars file
-// User Config Settings		refer to ED_GlobalVars file
+// User Config Settings		refer to ED_UserSettings file
 // ========================================================
 
 // Index:	Line		FUNCTION
