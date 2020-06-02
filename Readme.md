@@ -1,8 +1,8 @@
 
 Version 4.2.0
 
-STATUS: BETA
-Under development. Changes happening often.
+STATUS: Production
+Bug fixes only
 
 HISTORY:
 
