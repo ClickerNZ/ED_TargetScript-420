@@ -33,20 +33,20 @@
 
 						//   -- NOTE --   //
 
-// TARGET Script editor will sound a 'brrringg' noise if you assign ALT+F3
+// Assigning ALT+F3 results in a 'brrringg' noise in TARGET Script Editor/GUI 
 
 
 // START
 
+	define KBLayout 							KB_ENG					// Default Keyboard Layout
+
 //----------------------------------------------------------------------//
-// DEFAULT SETTINGS                                                     //
+// VERSION VARIABLES                                                    //
 //----------------------------------------------------------------------//
 
 	define VMajor		 						4						// Script Version Major Value			ie. 2.x.x
 	define VMinor		 						2						// Script Version Minor Value			ie. x.3.x
 	define VPoint								"0_DEV"					// Script Version Point Update			ie. x.x.4
-
-	define KBLayout 							KB_ENG					// Default Keyboard Layout
 
 //----------------------------------------------------------------------//
 // BINDINGS																//
