@@ -113,6 +113,7 @@ No warranties are stated or implied.
 By downloading, installing and using this software, you agree to use this at your own risk.
 
 If you like my work, consider spotting me the cost of a coffee via Patreon!
+
 https://www.patreon.com/user?u=36436459
 
 Fly Dangerous Commanders ... o7
