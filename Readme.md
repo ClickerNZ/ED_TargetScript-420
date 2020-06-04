@@ -1,8 +1,9 @@
 
 Version 4.2.0
 
-STATUS: Production
-Bug fixes only
+STATUS: 
+
+Production
 
 HISTORY:
 
