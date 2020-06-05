@@ -150,7 +150,6 @@
 // Axis Curves //
 //-------------//
 
-	define	FAOFFCurves				MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD or MEDIUM 
 	define	CurveInfo				NOPRINT					// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
 	int		EnableTFRPRudder	=	1;						// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
 
@@ -174,19 +173,21 @@
 	define	Slew_R_DZ				0						// Set Slew Right		Deadzone
 	define	Slew_Zoom				0						// Set Slew Zoom factor 
 
-	// The below curve arrays are set for "off", "mild" and "medium" and controlled via the Autopilot switch
+	// The below curve arrays are set for "off", "mild", "medium" or "slow" and controlled via the Autopilot switch
 	// Eg 	AP Switch set at APPAT	= (Curve = 0)
 	//		AP Switch set to APAH	= (Curve = 1)
-	//		AP Switch set to APALT	= (Curve = 4)
+	//		AP Switch set to APALT	= (Curve = 3)
 	// 
 
-	// Define curve & zoom arrays
-	// --------------------------   APPAT   APAH	APALT	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
-	short	Joystick_Curve[] 	= {	0,		1,		4	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	
-	short	Rudder_Curve[]		= { 0,		1,		4	};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
-	
-	short	Slew_Curve[]		= {	0,		0,		0	};	// Set Slew Curve
+	define	FAOFFCurves				MEDIUM					// Set Curve profile desired for FA-OFF. Valid settings = OFF, MILD, MEDIUM or SLOW (see below) 
 
+	// Define curve & zoom arrays
+	// --------------------------   APPAT   APAH	APALT	-	// Used within fnSetJoystickCurves() and applied to JS and Pedals (x, y & z axis)
+	short	Joystick_Curve[] 	= {	0,		1,		3,		4};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
 	
+	short	Rudder_Curve[]		= { 0,		1,		3,		4};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
+	
+	short	Slew_Curve[]		= {	0,		0,		0,		0};	// Set Slew Curve
+								//	NONE	MILD	MEDIUM 	SLOW
+
 // END
