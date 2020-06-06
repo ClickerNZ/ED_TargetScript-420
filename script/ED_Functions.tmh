@@ -48,6 +48,7 @@
 //			line 790:	int fnDRShip()
 //			Line 820: 	int fnRequestDock()
 //			Line 842: 	int fnHangerServices()
+//			Line 888:	int fnIdleLock()
 //			Line 888: 	int fnModeSwitch()
 //			Line 949:	int fnVPOutput()
 //			Line 961: 	int fnPrintState()
@@ -875,6 +876,30 @@
 				reason = "You are not docked at a station services facility";
 				fnNotValid(fnName, reason);
 			}
+		}
+	}
+
+
+	// FUNCTION:	If in Ship Enter Hanger/Lift Off Macros
+	//				if in SRV apply/release handbrake
+	// Parameter:	x, 1 = Enter Hanger Services, 0 = Lift off 
+
+	int fnIdleLock(int x) {
+		int fName = "Idle Lock";
+		
+		if (fMainShip) {
+			if (x == 1) {
+				fnHangerServices(1);				// Enters hanger services 
+			}
+			else {
+				fnHangerServices(0);				// Exit hanger services and lift off
+			}
+		}
+		else if (fSRV) {
+			ActKey(PULSE+KEYON+SRVHandbrake);		// Toggle SRV Handbrake
+		}
+		else {
+			fnNotValid(fName);		
 		}
 	}
 
