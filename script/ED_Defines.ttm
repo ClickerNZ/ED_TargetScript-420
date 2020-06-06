@@ -85,6 +85,7 @@
 //	define PitchDown							R_SHIFT+USB[0x0A]		// RSHIFT+G
 //	define YawLeft								R_SHIFT+USB[0x14]		// RSHIFT+Q
 //	define YawRight								R_SHIFT+USB[0x08]		// RSHIFT+E
+	define SwapRollYaw							USB[0x58]				// NUMPAD ENTER
 	define EngineBoost 							R_SHIFT+USB[0x05]		// RSHIFT+B
 	define FrameshiftDrive 						USB[0x0D] 				// J
 	define Supercruise 							USB[0x54]				// NUMPAD /
@@ -111,7 +112,7 @@
 
 		// SHIP SYSTEMS //
 	define CargoScoop 							USB[0x4A] 				// HOME
-//	define JettisonAllCargo 					USB[0x4D] 				// END
+	define JettisonAllCargo 					USB[0x4D] 				// END
 	define LandingGear 							USB[0x0F] 				// L
 	define ShipLights 							USB[0x49] 				// INSERT
 	define NightVision							L_ALT+USB[0x49]			// LALT+INSERT
