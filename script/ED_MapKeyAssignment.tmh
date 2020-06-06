@@ -297,7 +297,15 @@
 //		(Radar Altimeter)
 //		-----------------
 
-		MapKey(&Throttle, RDRNRM, EXEC("tgCargoScoop(DEPLOY);"));
+		MapKeyIOUMD(&Throttle, RDRNRM,
+			PULSE+JettisonAllCargo,															// IU - About as safe as I can make it!
+			0,																				// OU
+			0,																				// IM
+			EXEC("tgCargoScoop(DEPLOY);"),													// OM - Deploy Cargo Scoop
+			0,																				// ID
+			0																				// OD
+		);
+		
 		MapKey(&Throttle, RDRDIS, EXEC("tgCargoScoop(RETRACT);"));
 
 //		(Landing Gear Horn)
@@ -400,8 +408,10 @@
 //		(Engine Idle - Left)
 //		--------------------
 
-		MapKey(&Throttle, IDLELON, EXEC("fnHangerServices(1);"));							// Enter Hanger and Station Services
-		MapKey(&Throttle, IDLELOFF, EXEC("fnHangerServices(0);"));							// Exit Hanger, Lift off.
+//		MapKey(&Throttle, IDLELON, EXEC("fnHangerServices(1);"));							// Enter Hanger and Station Services
+//		MapKey(&Throttle, IDLELOFF, EXEC("fnHangerServices(0);"));							// Exit Hanger, Lift off.
+		MapKey(&Throttle, IDLELON, EXEC("fnIdleLock(1);"));									// Enter Hanger and Station Services if Ship else Handbrake if SRV
+		MapKey(&Throttle, IDLELOFF, EXEC("fnIdleLock(0);"));								// Exit Hanger, Lift off if in Ship, else Handbrake off if in SRV
 
 //		(Engine Idle - Right)
 //		---------------------
