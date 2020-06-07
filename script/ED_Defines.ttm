@@ -134,7 +134,7 @@
 		// COOLING & COUNTERMEASURES //
 	define SilentRunning 						USB[0x4C] 				// DELETE (called "ToggleButtonUpInput" within the .bind file)
 	define DeployHeatSink 						USB[0x19] 				// V
-	define FireChaffLauncher 					USB[0x06] 				// C
+	define FireChaff		 					USB[0x06] 				// C
 	define UseShieldCell 						USB[0x34]				// '
 	define ChargeECM 							R_SHIFT+USB[0x06]		// RSHIFT+C
 
@@ -170,7 +170,7 @@
 	define UIEscape 							USB[0x29] 				// Escape
 	define MenuLog								USB[0x13]				// P
 	define SystemMap 							USB[0x33] 				// ;
-	define GalaxyMap 							R_SHIFT+USB[0x33] 		// RSHIFT+:
+	define GalMap 								R_SHIFT+USB[0x33] 		// RSHIFT+:
 //	define FriendsView									 				// <not mapped>
 
 		// MULTICREW //							(Note: These are not currently mapped in ED)
@@ -194,18 +194,18 @@
 //	define GalNetAudioClearQueue				R_ALT+USB[0x42]			// RALT+F9
 
 		// GALAXY MAP //						(Note: These are mapped in ED Bindings directly)
-//	define GalaxyMapPitchUp						USB[0x17]				// T
-//	define GalaxyMapPitchDown					USB[0x0A]				// G
-//	define GalaxyMapYawLeft						USB[0x14]				// Q
-//	define GalaxyMapYawRight					USB[0x08]				// E
-//	define GalaxyMapTranslateForward			USB[0x1A]				// W
-//	define GalaxyMapTranslateBack				USB[0x16]				// S
-//	define GalaxyMapTranslateLeft				USB[0x04]				// A
-//	define GalaxyMapTranslateRight				USB[0x07]				// D
-//	define GalaxyMapTranslateUp					USB[0x15]				// R
-//	define GalaxyMapTranslateDown				USB[0x09]				// F
-//	define GalaxyMapZoomIn						USB[0x1D]				// Z
-//	define GalaxyMapZoomOut						USB[0x1B]				// X
+//	define GalMapPitchUp						USB[0x17]				// T
+//	define GalMapPitchDown						USB[0x0A]				// G
+//	define GalMapYawLeft						USB[0x14]				// Q
+//	define GalMapYawRight						USB[0x08]				// E
+//	define GalMapTranslateForward				USB[0x1A]				// W
+//	define GalMapTranslateBack					USB[0x16]				// S
+//	define GalMapTranslateLeft					USB[0x04]				// A
+//	define GalMapTranslateRight					USB[0x07]				// D
+//	define GalMapTranslateUp					USB[0x15]				// R
+//	define GalMapTranslateDown					USB[0x09]				// F
+//	define GalMapZoomIn							USB[0x1D]				// Z
+//	define GalMapZoomOut						USB[0x1B]				// X
 
 		// HEADLOOK //
 //	define LookUp 										 				// <not mapped>
