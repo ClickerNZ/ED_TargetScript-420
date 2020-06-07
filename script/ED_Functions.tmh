@@ -738,7 +738,7 @@
 		int reason;
 		
 		if(!fSupercruise) {
-			ActKey(PULSE+KEYON+FireChaffLauncher);
+			ActKey(PULSE+KEYON+FireChaff);
 			printf("!!!   Chaff  Fired   !!!\x0a");
 		}
 		else {
