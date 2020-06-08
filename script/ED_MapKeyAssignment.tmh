@@ -24,7 +24,7 @@
 
 // Index:	Line		FUNCTION
 //			Line 38: 	int MainKeyMap()
-//			Line 426: 	int TrainingKeyMap()
+//			Line 426: 	int TrainingMain()
 
 
 // START
@@ -330,13 +330,13 @@
 
 		MapKeyUMD(&Throttle, FLAPU,
 			EXEC("fnVoiceVolume(INCREASE);"),												// U - Increase TextToSpeech volume
-			PULSE+GalaxyMap,																// M - Galaxy Map - ON
+			PULSE+GalMap,																	// M - Galaxy Map - ON
 			0																				// D - 
 			);
 			
 		MapKeyRUMD(&Throttle, FLAPU,				// RELEASE
 			0,																				// RU -
-			PULSE+GalaxyMap,																// RM - Galaxy View - OFF
+			PULSE+GalMap,																	// RM - Galaxy View - OFF
 			0																				// RD -
 			);
 			
@@ -408,8 +408,6 @@
 //		(Engine Idle - Left)
 //		--------------------
 
-//		MapKey(&Throttle, IDLELON, EXEC("fnHangerServices(1);"));							// Enter Hanger and Station Services
-//		MapKey(&Throttle, IDLELOFF, EXEC("fnHangerServices(0);"));							// Exit Hanger, Lift off.
 		MapKey(&Throttle, IDLELON, EXEC("fnIdleLock(1);"));									// Enter Hanger and Station Services if Ship else Handbrake if SRV
 		MapKey(&Throttle, IDLELOFF, EXEC("fnIdleLock(0);"));								// Exit Hanger, Lift off if in Ship, else Handbrake off if in SRV
 
@@ -433,7 +431,7 @@
 	// FUNCTION:	This MapKey set is called at startup if game is not running and user setting 'TrainingEnabled' is set to 1
 	//				Also called from fnsProcessFlags() when we detect Game has halted
 
-	int TrainingKeyMap() {
+	int TrainingMain() {
 
 // ---------------------------------------- //
 // Map Joystick triggers, switches and hats //
@@ -595,11 +593,12 @@
 			EXEC("fnVPOutput(\"Not mapped\");")
 			);
 
-//		(Pinky Switch)		// Shift Modifier Switch
+//		(Pinky Switch)		// Modifier Switch
 //		--------------
 
-		MapKey(&Throttle, PSF, TEMPO(EXEC("fnVPOutput(\"Up Layer modifier\");"), 0, LongPress));
-		MapKey(&Throttle, PSB, TEMPO(EXEC("fnVPOutput(\"Down Layer modifier\");"), 0, LongPress));
+		MapKey(&Throttle, PSF, EXEC("fnVPOutput(\"U M D Layer Forward\");"));
+		MapKey(&Throttle, PSM, EXEC("fnVPOutput(\"U M D Layer Middle\");"));
+		MapKey(&Throttle, PSB, EXEC("fnVPOutput(\"U M D Layer Back\");"));
 
 //		(Coolie Switch)		// Frame Shift Drive functions
 //		---------------
@@ -651,6 +650,7 @@
 
 		MapKey(&Throttle, CHF, EXEC("fnVPOutput(\"Target Next Subsystem\");"));
 		MapKey(&Throttle, CHB, EXEC("fnVPOutput(\"Target Previous Subsystem\");"));
+		
 
 // ---------------------------------------//
 // Map Throttle BASE buttons and switches //
@@ -672,7 +672,15 @@
 //		(Radar Altimeter)
 //		-----------------
 
-		MapKey(&Throttle, RDRNRM, EXEC("fnVPOutput(\"Deploy cargo scoop\");"));
+		MapKeyIOUMD(&Throttle, RDRNRM, 
+			EXEC("fnVPOutput(\"Jettison Cargo\");"),
+			EXEC("fnVPOutput(\"Not mapped\");"),
+			EXEC("fnVPOutput(\"Not mapped\");"),			
+			EXEC("fnVPOutput(\"Deploy cargo scoop\");"),
+			EXEC("fnVPOutput(\"Not mapped\");"),
+			EXEC("fnVPOutput(\"Not mapped\");")
+		);
+		
 		MapKey(&Throttle, RDRDIS, EXEC("fnVPOutput(\"Retract cargo scoop\");"));
 
 //		(Landing Gear Horn)
@@ -702,9 +710,9 @@
 			);
 
 		MapKeyRUMD(&Throttle, FLAPU,		// RELEASE
-			0,
+			EXEC("fnVPOutput(\"Not mapped\");"),
 			EXEC("fnVPOutput(\"Close Galaxy Map\");"),
-			0
+			EXEC("fnVPOutput(\"Not mapped\");")
 			);
 
 
@@ -715,7 +723,7 @@
 			);
 
 		MapKeyRUMD(&Throttle, FLAPD,		// RELEASE
-			0,
+			EXEC("fnVPOutput(\"Not mapped\");"),
 			EXEC("fnVPOutput(\"Close System Map\");"),
 			EXEC("fnVPOutput(\"Turn Throttle LEDs on\");")
 			);
@@ -774,8 +782,8 @@
 //		(Engine Idle - Left)
 //		--------------------
 
-		MapKey(&Throttle, IDLELON, EXEC("fnVPOutput(\"Enter hanger services\");"));
-		MapKey(&Throttle, IDLELOFF, EXEC("fnVPOutput(\"Exit Hanger services and lift off\");"));
+		MapKey(&Throttle, IDLELON, EXEC("fnVPOutput(\"If in ship, Enter hanger services. If in SRV, handbrake\");"));
+		MapKey(&Throttle, IDLELOFF, EXEC("fnVPOutput(\"If in ship, Exit Hanger services and lift off. If in SRV release handbrake\");"));
 
 //		(Engine Idle - Right)
 //		---------------------
@@ -783,5 +791,5 @@
 		MapKey(&Throttle, IDLERON, 0);
 		MapKey(&Throttle, IDLEROFF, 0);
 	
-	}	// end of TrainingKeyMap
+	}	// end of TrainingMain
 
