@@ -45,11 +45,11 @@ include "target.tmh"
 include "ED_GlobalVars.tmh"				// The order that these files are 'included' matters
 include "ED_Defines.ttm"
 include "ED_UserSettings.tmh"
+include "ED_Macros.tmh"
 include "ED_MapKeyAssignment.tmh"
 include "ED_Functions.tmh"
 include "ED_StateTracker.tmh"
 include "ED_Toggles.tmh"
-include "ED_Macros.tmh"
 //include "ED_MacrosFC.tmh"				// Enter Hanger macro changed for Fleet Carriers BETA
 
 
@@ -110,7 +110,7 @@ include "ED_Macros.tmh"
 			printf("Rudder Axis	... disabled		");
 		}
 		
-		StartupLock = 0;														// Set in EDSettings.tmh. Reset now initialisation is complete
+//		StartupLock = 0;		// Move to fnGameStarted						// Set in EDSettings.tmh. Reset now initialisation is complete
 		
 		if(Flags == 0) printf("\x0aWaiting for Game to load...\x0a");
 
