@@ -59,19 +59,22 @@
 
 		// Select MapKey Assignment profile
 		if (Flags == 0 & TrainingEnabled) {
-			TrainingKeyMap();
+			printf("\x0a\Training Mode Enabled\x0a");		
 			if (AnnounceTraining) {
-				DeferCall(1000, &fnTextToSpeech, "Training mode ON, press a button or switch to hear what it does");
+//				DeferCall(1000, &fnTextToSpeech, "Training mode ON, press a button or switch to hear what it does");
+				fnTextToSpeech("Training mode ON, press a button or switch to hear what it does");
 			}
-			printf("\x0a\Training Mode Enabled\x0a");
+			TrainingMain();
 		}
 		else {
-			MainKeyMap();
-			if (AnnounceTraining) {			
-				DeferCall(1000, &fnTextToSpeech, "Training mode not available, enable this feature via E D User Settings file");
+			printf("\x0a\Training Mode Disabled\x0a");			
+			if (AnnounceTraining) {
+//				DeferCall(1000, &fnTextToSpeech, "Training mode not available, enable this feature via E D User Settings file");
+				fnTextToSpeech("Training mode not available, enable this feature via E D User Settings file");
 			}
-			printf("\x0a\Training Mode Disabled\x0a");
+			MainKeyMap();
 		}
+		
 
 		// Initialise macros
 
