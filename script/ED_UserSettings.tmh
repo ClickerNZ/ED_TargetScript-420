@@ -152,7 +152,7 @@
 //-------------//
 
 	define	CurveInfo			NOPRINT						// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
-	define	EnableTFRPRudder	1							// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
+	define	EnableTFRPRudder	0							// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
 	define	SwapRoll4Yaw		0							// Set to 1 if you wish to swap Roll and Yaw Axes
 
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
@@ -189,7 +189,7 @@
 	
 	short	Rudder_Curve[]		= { 0,		1,		3,		4};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
 	
-	short	Slew_Curve[]		= {	0,		0,		0,		0};	// Set Slew Curve
+	short	Slew_Curve[]		= {	0,		1,		1,		1};	// Set Slew Curve
 								//	NONE	MILD	MEDIUM 	SLOW
 
 // END
