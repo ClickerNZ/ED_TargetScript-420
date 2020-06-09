@@ -176,7 +176,7 @@ v4.0.0
 v3.4.0 
 	New Minor Version
 	Fix macros due to April 2019 Update (v3.4 ?)
-		- NAV Beacon ON/OFF
+		- Wingman Beacon WING/OFF
 		- Report Crimes ON/OFF
 		- Menulog OPEN/PG/SOLO
 	Rename file extensions for EDMacros (.tmh) and EDKeymap (.ttm)
