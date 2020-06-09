@@ -61,16 +61,14 @@
 		if (Flags == 0 & TrainingEnabled) {
 			printf("\x0a\Training Mode Enabled\x0a");		
 			if (AnnounceTraining) {
-//				DeferCall(1000, &fnTextToSpeech, "Training mode ON, press a button or switch to hear what it does");
-				fnTextToSpeech("Training mode ON, press a button or switch to hear what it does");
+				fnTextToSpeech("Training mode enabled, press a button or switch to hear what it does");
 			}
 			TrainingMain();
 		}
 		else {
 			printf("\x0a\Training Mode Disabled\x0a");			
 			if (AnnounceTraining) {
-//				DeferCall(1000, &fnTextToSpeech, "Training mode not available, enable this feature via E D User Settings file");
-				fnTextToSpeech("Training mode not available, enable this feature via E D User Settings file");
+				fnTextToSpeech("Training mode disabled. Enable this feature via E D User Settings file");
 			}
 			MainKeyMap();
 		}
@@ -184,7 +182,7 @@
 			PULSE+UIBack,
 			LOCK);
 
-		// MACRO: Toggle 'NAV Beacon' ON
+		// MACRO: Toggle 'Wingman Beacon' - WING
 		mNAVBeaconWing = CHAIN(
 			LOCK+PULSE+SystemPanel, D(500),						// 4, e, e, e, right, down, down, down, down, spc, down, spc, up, up, up, up, left, q, q, q, 4
 			PULSE+UINextPanel, D(),								// Limitation: This will only work correctly if Target Panel cursor in
@@ -209,7 +207,7 @@
 			PULSE+UIBack,
 			LOCK);
 
-		// MACRO: Toggle 'NAV Beacon' OFF
+		// MACRO: Toggle 'Wingman Beacon' - OFF
 		mNAVBeaconOff = CHAIN(
 			LOCK+PULSE+SystemPanel, D(500),						// 4, e, e, e, right, down, down, down, down, spc, spc, up, up, up, up, left, q, q, q, 4
 			PULSE+UINextPanel, D(),								// Limitation: This will only work correctly if Target Panel cursor in
