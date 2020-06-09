@@ -70,7 +70,7 @@
 		MapKeyUMD(&Joystick, S1,
 			EXEC("tgHUDMode();"),																			// U - Toggle - Analysis/Combat Mode
 			EXEC("tgHardpoints();"),																		// M - Deploy/Retract Hard-points
-			0																								// D -
+			PULSE+SwapRollYaw																				// D - Toggle Joystick X-Axis between Roll and Yaw
 			);
 
 //		(Weapons Release Button - Secondary Fire)
@@ -234,10 +234,19 @@
 //		(Mike Switch)		// Communications Controller functions
 //		-------------
 
-		MapKey(&Throttle, MSU, 0);								// Reserved for Communications functions
-		MapKey(&Throttle, MSD, 0);								// Reserved for Communications functions
-		MapKey(&Throttle, MSL, 0);								// Reserved for Communications functions
-		MapKey(&Throttle, MSR, 0);								// Reserved for Communications functions
+		if (EnableTFRPRudder == 0) {
+			MapKey(&Throttle, MSU, RollLeft);						// Alternate Roll Control - Counter Clockwise
+			MapKey(&Throttle, MSD, RollRight);						// Alternate Roll Control - Clockwise
+			MapKey(&Throttle, MSL, YawRight);						// Alternate Yaw Control - Left 
+			MapKey(&Throttle, MSR, YawLeft);						// Alternate Yaw Control - Right 
+		}
+		else {
+			MapKey(&Throttle, MSU, 0);								// <not mapped>
+			MapKey(&Throttle, MSD, 0);								// <not mapped>
+			MapKey(&Throttle, MSL, 0);								// <not mapped>
+			MapKey(&Throttle, MSR, 0);								// <not mapped>
+		}
+			
 		MapKey(&Throttle, MSP, 0);								// Reserved for Communications functions
 		
 		
@@ -458,7 +467,7 @@
 		MapKeyUMD(&Joystick, S1, 
 			EXEC("fnVPOutput(\"Toggle HUD Mode\");"),
 			EXEC("fnVPOutput(\"Toggle Hardpoints\");"),
-			EXEC("fnVPOutput(\"Not mapped\");")
+			EXEC("fnVPOutput(\"Toggle Joystick X Axis between Roll and Yaw\");")
 			);
 
 //		(Weapons Release Button - Secondary Fire)
@@ -611,10 +620,19 @@
 //		(Mike Switch)		// Communications Controller functions
 //		-------------
 
-		MapKey(&Throttle, MSU, EXEC("fnVPOutput(\"Not mapped\");"));
-		MapKey(&Throttle, MSD, EXEC("fnVPOutput(\"Not mapped\");"));
-		MapKey(&Throttle, MSL, EXEC("fnVPOutput(\"Not mapped\");"));
-		MapKey(&Throttle, MSR, EXEC("fnVPOutput(\"Not mapped\");"));
+		if (EnableTFRPRudder == 0) {
+			MapKey(&Throttle, MSU, EXEC("fnVPOutput(\"Alternate Roll Control Left\");"));
+			MapKey(&Throttle, MSD, EXEC("fnVPOutput(\"Alternate Roll Control Right\");"));
+			MapKey(&Throttle, MSL, EXEC("fnVPOutput(\"Alternate Yaw Control Right\");"));
+			MapKey(&Throttle, MSR, EXEC("fnVPOutput(\"Alternate Yaw Control Left\");"));
+		}
+		else {
+			MapKey(&Throttle, MSU, EXEC("fnVPOutput(\"Not mapped\");"));
+			MapKey(&Throttle, MSD, EXEC("fnVPOutput(\"Not mapped\");"));
+			MapKey(&Throttle, MSL, EXEC("fnVPOutput(\"Not mapped\");"));
+			MapKey(&Throttle, MSR, EXEC("fnVPOutput(\"Not mapped\");"));		
+		}
+		
 		MapKey(&Throttle, MSP, EXEC("fnVPOutput(\"Not mapped\");"));
 	
 //		(Speed Brake)		// Reverse Throttle function modifiers
@@ -634,7 +652,7 @@
 //		-------------
 
 		MapKeyUMD(&Throttle, BSF, 
-			EXEC("fnVPOutput(\"Toggle NAV Beacon on and off\");"),
+			EXEC("fnVPOutput(\"Toggle Wingman Beacon between Wing and off\");"),
 			EXEC("fnVPOutput(\"Not mapped\");"),
 			EXEC("fnVPOutput(\"Toggle Text to speech function off and on\");")
 			);
