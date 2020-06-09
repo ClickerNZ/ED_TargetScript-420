@@ -83,8 +83,10 @@
 //	define ThrustBack									 				// <not mapped>
 //	define PitchUp								R_SHIFT+USB[0x17]		// RSHIFT+T
 //	define PitchDown							R_SHIFT+USB[0x0A]		// RSHIFT+G
-//	define YawLeft								R_SHIFT+USB[0x14]		// RSHIFT+Q
-//	define YawRight								R_SHIFT+USB[0x08]		// RSHIFT+E
+	define RollLeft								R_SHIFT+USB[0x1A]		// RSHIFT+W 
+	define RollRight							R_SHIFT+USB[0x16]		// RSHIFT+S 
+	define YawLeft								R_SHIFT+USB[0x14]		// RSHIFT+Q
+	define YawRight								R_SHIFT+USB[0x08]		// RSHIFT+E
 	define SwapRollYaw							USB[0x58]				// NUMPAD ENTER
 	define EngineBoost 							R_SHIFT+USB[0x05]		// RSHIFT+B
 	define FrameshiftDrive 						USB[0x0D] 				// J
