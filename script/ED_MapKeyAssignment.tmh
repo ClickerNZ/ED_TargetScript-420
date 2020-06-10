@@ -235,16 +235,16 @@
 //		-------------
 
 		if (EnableTFRPRudder == 0) {
-			MapKey(&Throttle, MSU, RollLeft);						// Alternate Roll Control - Counter Clockwise
-			MapKey(&Throttle, MSD, RollRight);						// Alternate Roll Control - Clockwise
-			MapKey(&Throttle, MSL, YawRight);						// Alternate Yaw Control - Left 
-			MapKey(&Throttle, MSR, YawLeft);						// Alternate Yaw Control - Right 
+			MapKey(&Throttle, MSU, RollLeft);					// Alternate Roll Control - Counter Clockwise
+			MapKey(&Throttle, MSD, RollRight);					// Alternate Roll Control - Clockwise
+			MapKey(&Throttle, MSL, YawRight);					// Alternate Yaw Control - Left 
+			MapKey(&Throttle, MSR, YawLeft);					// Alternate Yaw Control - Right 
 		}
 		else {
-			MapKey(&Throttle, MSU, 0);								// <not mapped>
-			MapKey(&Throttle, MSD, 0);								// <not mapped>
-			MapKey(&Throttle, MSL, 0);								// <not mapped>
-			MapKey(&Throttle, MSR, 0);								// <not mapped>
+			MapKey(&Throttle, MSU, 0);							// <not mapped>
+			MapKey(&Throttle, MSD, 0);							// <not mapped>
+			MapKey(&Throttle, MSL, 0);							// <not mapped>
+			MapKey(&Throttle, MSR, 0);							// <not mapped>
 		}
 			
 		MapKey(&Throttle, MSP, 0);								// Reserved for Communications functions
