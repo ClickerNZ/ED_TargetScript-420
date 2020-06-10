@@ -22,13 +22,13 @@
 	<YawLeftButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</YawLeftButton>
 	<YawRightButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</YawRightButton>
 	<YawToRollMode Value="Bindings_YawIntoRollNone" />
@@ -47,13 +47,13 @@
 	<RollLeftButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_W">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</RollLeftButton>
 	<RollRightButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_S">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</RollRightButton>
 	<PitchAxisRaw>
@@ -64,13 +64,13 @@
 	<PitchUpButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_T">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</PitchUpButton>
 	<PitchDownButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_G">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</PitchDownButton>
 	<LateralThrustRaw>
@@ -285,7 +285,7 @@
 	<UseBoostJuice>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_B">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</UseBoostJuice>
 	<HyperSuperCombination>
@@ -368,13 +368,13 @@
 	<PrimaryFire>
 		<Primary Device="ThrustMasterWarthogCombined" Key="Joy_1" />
 		<Secondary Device="Keyboard" Key="Key_1">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</PrimaryFire>
 	<SecondaryFire>
 		<Primary Device="ThrustMasterWarthogCombined" Key="Joy_2" />
 		<Secondary Device="Keyboard" Key="Key_2">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</SecondaryFire>
 	<CycleFireGroupNext>
@@ -419,25 +419,25 @@
 	<IncreaseEnginesPower>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_UpArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseEnginesPower>
 	<IncreaseWeaponsPower>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_RightArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseWeaponsPower>
 	<IncreaseSystemsPower>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_LeftArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseSystemsPower>
 	<ResetPowerDistribution>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_DownArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ResetPowerDistribution>
 	<HMDReset>
@@ -477,7 +477,7 @@
 	<ChargeECM>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_C">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ChargeECM>
 	<EnableRumbleTrigger Value="1" />
@@ -535,7 +535,7 @@
 	<GalaxyMapOpen>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_SemiColon">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</GalaxyMapOpen>
 	<SystemMapOpen>
@@ -571,7 +571,7 @@
 	<ExplorationFSSEnter>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Slash">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ExplorationFSSEnter>
 	<UI_Up>
@@ -608,7 +608,7 @@
 	</CycleNextPanel>
 	<CyclePreviousPanel>
 		<Primary Device="Keyboard" Key="Key_Tab">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Primary>
 		<Secondary Device="Keyboard" Key="Key_Q" />
 	</CyclePreviousPanel>
@@ -670,13 +670,13 @@
 	<CamPitchUp>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_T">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamPitchUp>
 	<CamPitchDown>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_G">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamPitchDown>
 	<CamYawAxis>
@@ -687,13 +687,13 @@
 	<CamYawLeft>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamYawLeft>
 	<CamYawRight>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamYawRight>
 	<CamTranslateYAxis>
@@ -704,13 +704,13 @@
 	<CamTranslateForward>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_W">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateForward>
 	<CamTranslateBackward>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_S">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateBackward>
 	<CamTranslateXAxis>
@@ -721,13 +721,13 @@
 	<CamTranslateLeft>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_A">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateLeft>
 	<CamTranslateRight>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_D">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateRight>
 	<CamTranslateZAxis>
@@ -738,13 +738,13 @@
 	<CamTranslateUp>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_R">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateUp>
 	<CamTranslateDown>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_F">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamTranslateDown>
 	<CamZoomAxis>
@@ -755,13 +755,13 @@
 	<CamZoomIn>
 		<Primary Device="Mouse" Key="Neg_Mouse_ZAxis" />
 		<Secondary Device="Keyboard" Key="Key_Z">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamZoomIn>
 	<CamZoomOut>
 		<Primary Device="Mouse" Key="Pos_Mouse_ZAxis" />
 		<Secondary Device="Keyboard" Key="Key_X">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</CamZoomOut>
 	<CamTranslateZHold>
@@ -793,13 +793,13 @@
 	<SteerLeftButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</SteerLeftButton>
 	<SteerRightButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</SteerRightButton>
 	<BuggyRollAxisRaw>
@@ -810,13 +810,13 @@
 	<BuggyRollLeftButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_W">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</BuggyRollLeftButton>
 	<BuggyRollRightButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_S">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</BuggyRollRightButton>
 	<BuggyPitchAxis>
@@ -840,13 +840,13 @@
 	<BuggyPrimaryFireButton>
 		<Primary Device="ThrustMasterWarthogCombined" Key="Joy_1" />
 		<Secondary Device="Keyboard" Key="Key_1">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</BuggyPrimaryFireButton>
 	<BuggySecondaryFireButton>
 		<Primary Device="ThrustMasterWarthogCombined" Key="Joy_2" />
 		<Secondary Device="Keyboard" Key="Key_2">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</BuggySecondaryFireButton>
 	<AutoBreakBuggyButton>
@@ -940,25 +940,25 @@
 	<IncreaseEnginesPower_Buggy>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_UpArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseEnginesPower_Buggy>
 	<IncreaseWeaponsPower_Buggy>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_RightArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseWeaponsPower_Buggy>
 	<IncreaseSystemsPower_Buggy>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_LeftArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</IncreaseSystemsPower_Buggy>
 	<ResetPowerDistribution_Buggy>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_DownArrow">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ResetPowerDistribution_Buggy>
 	<ToggleCargoScoop_Buggy>
@@ -1003,7 +1003,7 @@
 	<GalaxyMapOpen_Buggy>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_SemiColon">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</GalaxyMapOpen_Buggy>
 	<SystemMapOpen_Buggy>
@@ -1294,13 +1294,13 @@
 	<YawCameraLeft>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</YawCameraLeft>
 	<YawCameraRight>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</YawCameraRight>
 	<RollCamera>
@@ -1311,13 +1311,13 @@
 	<RollCameraLeft>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_W">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</RollCameraLeft>
 	<RollCameraRight>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_S">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</RollCameraRight>
 	<ToggleRotationLock>
@@ -1351,7 +1351,7 @@
 	<FStopDec>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_C">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</FStopDec>
 	<FStopInc>
@@ -1403,25 +1403,25 @@
 	</CommanderCreator_Rotation>
 	<GalnetAudio_Play_Pause>
 		<Primary Device="Keyboard" Key="Key_F11">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Primary>
 		<Secondary Device="{NoDevice}" Key="" />
 	</GalnetAudio_Play_Pause>
 	<GalnetAudio_SkipForward>
 		<Primary Device="Keyboard" Key="Key_F12">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Primary>
 		<Secondary Device="{NoDevice}" Key="" />
 	</GalnetAudio_SkipForward>
 	<GalnetAudio_SkipBackward>
 		<Primary Device="Keyboard" Key="Key_F10">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Primary>
 		<Secondary Device="{NoDevice}" Key="" />
 	</GalnetAudio_SkipBackward>
 	<GalnetAudio_ClearQueue>
 		<Primary Device="Keyboard" Key="Key_F9">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Primary>
 		<Secondary Device="{NoDevice}" Key="" />
 	</GalnetAudio_ClearQueue>
@@ -1446,13 +1446,13 @@
 	<ExplorationFSSCameraYawIncreaseButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ExplorationFSSCameraYawIncreaseButton>
 	<ExplorationFSSCameraYawDecreaseButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ExplorationFSSCameraYawDecreaseButton>
 	<ExplorationFSSZoomIn>
@@ -1469,7 +1469,7 @@
 	</ExplorationFSSMiniZoomIn>
 	<ExplorationFSSMiniZoomOut>
 		<Primary Device="{NoDevice}" Key="" />
-		<Secondary Device="Keyboard" Key="Key_RightShift">
+		<Secondary Device="Keyboard" Key="Key_LeftShift">
 			<Modifier Device="Keyboard" Key="Key_C" />
 		</Secondary>
 	</ExplorationFSSMiniZoomOut>
@@ -1499,7 +1499,7 @@
 	<ExplorationFSSQuit>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Slash">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</ExplorationFSSQuit>
 	<FSSMouseXMode Value="Bindings_MouseYaw" />
@@ -1539,13 +1539,13 @@
 	<SAAThirdPersonYawLeftButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_Q">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</SAAThirdPersonYawLeftButton>
 	<SAAThirdPersonYawRightButton>
 		<Primary Device="{NoDevice}" Key="" />
 		<Secondary Device="Keyboard" Key="Key_E">
-			<Modifier Device="Keyboard" Key="Key_RightShift" />
+			<Modifier Device="Keyboard" Key="Key_LeftShift" />
 		</Secondary>
 	</SAAThirdPersonYawRightButton>
 	<SAAThirdPersonPitchAxisRaw>
