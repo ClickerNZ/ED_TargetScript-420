@@ -22,19 +22,19 @@
 
 // Index:	Line			FUNCTION
 //			Line 51:		fnCustomCommands()
-//			Line 79: 		mRequestDock
-//			Line 92: 		mDeploySRV
-//			Line 104: 		mBoardShip
-//			Line 121: 		mShowGameStats
-//			Line 126: 		mFastModeSwitch0
-//			Line 137: 		mFastModeSwitch1
-//			Line 151: 		mFastModeSwitch2
-//			Line 164: 		mReportCrimesToggle
-//			Line 185: 		mNAVBeaconWing
-//			Line 210: 		mNAVBeaconOff
-//			Line 234: 		mClearAllChatBox
-//			Line 273: 		mClearChatBox
-//			Line 285: 		mEnterHanger
+//			Line 80: 		mRequestDock
+//			Line 93: 		mDeploySRV
+//			Line 105: 		mBoardShip
+//			Line 122: 		mShowGameStats
+//			Line 127: 		mFastModeSwitch0
+//			Line 138: 		mFastModeSwitch1
+//			Line 152: 		mFastModeSwitch2
+//			Line 165: 		mReportCrimesToggle
+//			Line 186: 		mNAVBeaconWing
+//			Line 211: 		mNAVBeaconOff
+//			Line 235: 		mClearAllChatBox
+//			Line 274: 		mClearChatBox
+//			Line 286: 		mEnterHanger
 //			Line 312: 		mLaunch
 
 
@@ -90,7 +90,7 @@
 			LOCK);
 
 		// MACRO: SRV - Deploy
-		mDeploySRV = CHAIN (
+		mDeploySRV = CHAIN(
 			LOCK+PULSE+RolePanel, D(500),						// 3, down, spc, down, down, up, up, spc
 			PULSE+UIDown, D(),
 			PULSE+UISelect, D(500),
@@ -102,7 +102,7 @@
 			LOCK);
 
 		// MACRO: SRV - Board Ship
-		mBoardShip = CHAIN (
+		mBoardShip = CHAIN(
 			LOCK+PULSE+RolePanel, D(250),						// 3, spc, down, down, down, down, down, up, up, spc
 			PULSE+UISelect, D(1500),
 			PULSE+UIDown, D(200),
