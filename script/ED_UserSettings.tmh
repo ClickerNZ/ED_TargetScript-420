@@ -47,7 +47,8 @@
 	
 //	alias StatusFile			= "C:\\Users\\<username>\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 
-//	example...
+//	here's mine as an example...
+
 	alias	StatusFile			= "C:\\Users\\clicker\\Saved Games\\Frontier Developments\\Elite Dangerous\\status.json";
 	
 	define	StatusReadRate		500		// Set Read Loop rate in milliseconds. (ie 500 = read status.json twice a second)
@@ -81,7 +82,8 @@
 	int		VoiceVolume			= 75;					// Default Volume set at 75% Settable via fnVoiceVolume()
 														// Note: VoiceVolume gets saved to MyStatus file when game halts and is reloaded at script start
 
-	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
+//	alias	VoiceCMD			= "-r 0 -n \"Microsoft Catherine\"";
+	alias	VoiceCMD			= "";
 	
 	define	TrainingEnabled		1						// 0 = Disable, 1 = Enable. When game stopped pressing a button/switch announces basic function
 	define	AnnounceTraining	1						// 0 = Do not annnounce training mode, 1 = Announce training mode
@@ -152,7 +154,7 @@
 //-------------//
 
 	define	CurveInfo			NOPRINT						// Set if you want curve info printed to console each time we change. Valid settings = PRINT or NOPRINT
-	define	EnableTFRPRudder	0							// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
+	define	EnableTFRPRudder	1							// Set to 0 if you do not have a Thrustmaster TFRP Rudder.
 	define	SwapRoll4Yaw		0							// Set to 1 if you wish to swap Roll and Yaw Axes
 
 	// Refer "Axes" chapter (p27) in the Target Script Editor Basics v1.5 manual for more detail
@@ -189,7 +191,7 @@
 	
 	short	Rudder_Curve[]		= { 0,		1,		3,		4};	// Set via the Autopilot Switch	(Up is most aggresive joystick response, down is least aggressive)
 	
-	short	Slew_Curve[]		= {	0,		1,		1,		1};	// Set Slew Curve
+	short	Slew_Curve[]		= {	0,		2,		2,		2};	// Set Slew Curve
 								//	NONE	MILD	MEDIUM 	SLOW
 
 // END
