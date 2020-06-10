@@ -56,8 +56,11 @@
 //			This includes the commented ones!
 
 		// WEAPON CONTROL //
-	define PrimaryFire 							DX1						// JOY 1 (Also mapped to RSHIFT+1 in ED Bindings)	
-	define SecondaryFire 						DX2						// JOY 2 (Also mapped to RSHIFT+2 in ED Bindings)
+	define PrimaryFire 							DX1						// JOY 1 (Also mapped to LSHIFT+1 in ED Bindings)	
+//	define PrimaryFire 							'!'						// LSHIFT+1 - FOR TESTING VIA EVENT TESTER
+	
+	define SecondaryFire 						DX2						// JOY 2 (Also mapped to LSHIFT+2 in ED Bindings)
+//	define SecondaryFire 						'@'						// LSHIFT+2 - FOR TESTING VIA EVENT TESTER
 	
 	define DeployHardpoints 					USB[0x18] 				// U
 	define NextFireGroup 						USB[0x36]				// ,
@@ -81,14 +84,14 @@
 //	define ThrustRight 							USB[0x08]				// E
 //	define ThrustForward								 				// <not mapped>
 //	define ThrustBack									 				// <not mapped>
-//	define PitchUp								R_SHIFT+USB[0x17]		// RSHIFT+T
-//	define PitchDown							R_SHIFT+USB[0x0A]		// RSHIFT+G
-	define RollLeft								R_SHIFT+USB[0x1A]		// RSHIFT+W 
-	define RollRight							R_SHIFT+USB[0x16]		// RSHIFT+S 
-	define YawLeft								R_SHIFT+USB[0x14]		// RSHIFT+Q
-	define YawRight								R_SHIFT+USB[0x08]		// RSHIFT+E
+//	define PitchUp								'T'						// LSHIFT+T
+//	define PitchDown							'G'						// LSHIFT+G
+	define RollLeft								'W'						// LSHIFT+W 
+	define RollRight							'S'						// LSHIFT+S 
+	define YawLeft								'Q'						// LSHIFT+Q
+	define YawRight								'E'						// LSHIFT+E
 	define SwapRollYaw							USB[0x58]				// NUMPAD ENTER
-	define EngineBoost 							R_SHIFT+USB[0x05]		// RSHIFT+B
+	define EngineBoost 							'B'						// LSHIFT+B
 	define FrameshiftDrive 						USB[0x0D] 				// J
 	define Supercruise 							USB[0x54]				// NUMPAD /
 //	define SetSpeedNeg100 						USB[0x56] 				// NUMPAD -
@@ -119,17 +122,17 @@
 	define ShipLights 							USB[0x49] 				// INSERT
 	define NightVision							L_ALT+USB[0x49]			// LALT+INSERT
 	define HUDMode								USB[0x38]				// /
-	define FSSModeON							R_SHIFT+USB[0x38]		// RSHIFT+/
-	define FSSModeOFF							R_SHIFT+USB[0x38]		// RSHIFT+/
+	define FSSModeON							'?'						// LSHIFT+/
+	define FSSModeOFF							'?'						// LSHIFT+/
 	define FSSZoomIN 							USB[0x30]				// ]	(same as CameraZoomIn)
 	define FSSZoomOUT 							USB[0x2F] 				// [	(same as CameraZoomOut)
 	define DSSModeON							USB[0x2D]				// -  (should be USB[0x38] '/' ??)
 	define DSSModeOFF							USB[0x2A]				// BACKSPACE
-	define FBView								R_SHIFT+USB[0x31]		// RSHIFT+\
-	define PowerEng 							R_SHIFT+USB[0x52]		// RSHIFT+UP Arrow
-	define PowerWep 							R_SHIFT+USB[0x4F]		// RSHIFT+RIGHT Arrow
-	define PowerSys 							R_SHIFT+USB[0x50]		// RSHIFT+LEFT Arrow
-	define BalancePower 						R_SHIFT+USB[0x51]		// RSHIFT+DOWN Arrow
+	define FBView								'|'						// LSHIFT+\
+	define PowerEng 							L_SHIFT+USB[0x52]		// LSHIFT+UP Arrow
+	define PowerWep 							L_SHIFT+USB[0x4F]		// LSHIFT+RIGHT Arrow
+	define PowerSys 							L_SHIFT+USB[0x50]		// LSHIFT+LEFT Arrow
+	define BalancePower 						L_SHIFT+USB[0x51]		// LSHIFT+DOWN Arrow
 	define SensorZoomUP		 					USB[0x4B] 				// PAGE UP		(PGUP)
 	define SensorZoomDN 						USB[0x4E] 				// PAGE DOWN	(PGDN)
 
@@ -138,7 +141,7 @@
 	define DeployHeatSink 						USB[0x19] 				// V
 	define FireChaff		 					USB[0x06] 				// C
 	define UseShieldCell 						USB[0x34]				// '
-	define ChargeECM 							R_SHIFT+USB[0x06]		// RSHIFT+C
+	define ChargeECM 							'C'						// LSHIFT+C
 
 		// WINGS & FIGHTERS //
 	define SelectWingman1 						USB[0x25] 				// 8
@@ -172,7 +175,7 @@
 	define UIEscape 							USB[0x29] 				// Escape
 	define MenuLog								USB[0x13]				// P
 	define SystemMap 							USB[0x33] 				// ;
-	define GalMap 								R_SHIFT+USB[0x33] 		// RSHIFT+:
+	define GalMap 								':'				 		// LSHIFT+:
 //	define FriendsView									 				// <not mapped>
 
 		// MULTICREW //							(Note: These are not currently mapped in ED)
@@ -247,7 +250,7 @@
 //	define CameraWorldLock 									 			// <not mapped>
 //	define CameraZoomDOFToggle											// Mouse3
 	define CameraBlurIn 						USB[0x06] 				// C
-	define CameraBlurOut 						R_SHIFT+USB[0x06]		// RSHIFT+C
+	define CameraBlurOut 						'C'						// LSHIFT+C
 //	define CameraFocusIn												// Same as ZoomIn
 //	define CameraFocusOut												// Same as ZoomOut
 
