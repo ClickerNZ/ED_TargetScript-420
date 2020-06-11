@@ -321,17 +321,16 @@
 //		-------------------
 
 		MapKeyIO(&Throttle, LDGH, 
-			PULSE+mClearAllChatBox,													// Clear all 3 chat box windows
-			PULSE+mClearChatBox														// Clear currently selected chat box window
+			PULSE+mClearAllChatBox,															// Clear all 3 chat box windows
+			PULSE+mClearChatBox																// Clear currently selected chat box window
 			);
 
 //		(Autopilot Engage)
 //		------------------
 
-		MapKeyUMD(&Throttle, APENG, 
-			0,																				// U -
-			EXEC("fnRequestDock();"),														// M - Request Docking
-			EXEC("fnHangerServices(1);")													// D - Hanger Services
+		MapKeyIO(&Throttle, APENG, 
+			EXEC("fnHangerServices(1);"),													// I - Hanger Services
+			EXEC("fnRequestDock();")														// O - Request Docking
 			);
 
 //		(Flaps)
@@ -712,10 +711,9 @@
 //		(Autopilot Engage)
 //		------------------
 
-		MapKeyUMD(&Throttle, APENG, 
-			EXEC("fnVPOutput(\"Not mapped\");"),
-			EXEC("fnVPOutput(\"Request docking permission\");"),
-			EXEC("fnVPOutput(\"Enter Hanger services\");")
+		MapKeyIO(&Throttle, APENG,
+			EXEC("fnVPOutput(\"Enter Hanger services\");"),
+			EXEC("fnVPOutput(\"Request docking permission\");")
 			);
 
 //		(Flaps)
