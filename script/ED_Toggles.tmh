@@ -443,7 +443,7 @@
 		if (JumpType) {
 			fnName = "Warp Drive";
 			EngineText = "Warp Drive:	";
-			WarpDrive = FrameshiftDrive;		// USB[0x0D] = "J"
+			WarpDrive = HyperJump;		// USB[0x0D] = "J"
 		}
 		else {
 			fnName = "Supercruise";
