@@ -56,11 +56,11 @@
 //			This includes the commented ones!
 
 		// WEAPON CONTROL //
-	define PrimaryFire 							DX1						// JOY 1 (Also mapped to LSHIFT+1 in ED Bindings)	
-//	define PrimaryFire 							'!'						// LSHIFT+1 - FOR TESTING VIA EVENT TESTER
+//	define PrimaryFire 							DX1						// JOY 1 (Also mapped to LSHIFT+1 in ED Bindings)	
+	define PrimaryFire 							'!'						// LSHIFT+1 - FOR TESTING VIA EVENT TESTER
 	
-	define SecondaryFire 						DX2						// JOY 2 (Also mapped to LSHIFT+2 in ED Bindings)
-//	define SecondaryFire 						'@'						// LSHIFT+2 - FOR TESTING VIA EVENT TESTER
+//	define SecondaryFire 						DX2						// JOY 2 (Also mapped to LSHIFT+2 in ED Bindings)
+	define SecondaryFire 						'@'						// LSHIFT+2 - FOR TESTING VIA EVENT TESTER
 	
 	define DeployHardpoints 					USB[0x18] 				// U
 	define NextFireGroup 						USB[0x36]				// ,
@@ -92,7 +92,7 @@
 	define YawRight								'E'						// LSHIFT+E
 	define SwapRollYaw							USB[0x58]				// NUMPAD ENTER
 	define EngineBoost 							'B'						// LSHIFT+B
-	define FrameshiftDrive 						USB[0x0D] 				// J
+	define HyperJump 							USB[0x0D] 				// J
 	define Supercruise 							USB[0x54]				// NUMPAD /
 //	define SetSpeedNeg100 						USB[0x56] 				// NUMPAD -
 //	define SetSpeedNeg75 						USB[0x61] 				// NUMPAD 9
