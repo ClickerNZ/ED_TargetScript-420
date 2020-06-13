@@ -68,6 +68,9 @@
 	define TRUE				1
 	define FALSE			0
 
+	define BASIC			0
+	define FULL				1
+	
 	define DEPLOY			1
 	define RETRACT			0
 	define RECOVER			0
