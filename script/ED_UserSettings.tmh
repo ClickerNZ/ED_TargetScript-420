@@ -22,6 +22,14 @@
 
 // START
 
+//----------------//
+// MapKey Profile //
+//----------------//
+
+	define	MapKeyProfile		FULL					// Valid Settings are FULL or BASIC 
+														// FULL uses all the advanced functions available for Axis, Switches, Triggers and Buttons
+														// BASIC sends simple, plain keystrokes...no macro or function calls, no smarts...great for beginners
+
 //---------------//
 // LED intensity //
 //---------------//
