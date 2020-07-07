@@ -46,6 +46,7 @@ v4.2.0	- New Minor Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Create EnableTFRPRudder define so user can indicate if they have rudder pedals 
 		- Add mapping to enable alternate Roll/Yaw via Mike switch if EnableTFRPRudder=0
 		- Tidy up.
+		- Fix typo in fnStateDump()
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
