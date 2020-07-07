@@ -1030,7 +1030,7 @@
 		if (fLights)				SL = "ON";			else	SL = "OFF";
 		if (fNightVision)			NV = "ON";			else	NV = "OFF";
 		if (fHardpoints)			HP = "DEPLOYED";	else	HP = "RETRACTED";
-		if (fFAOff)		 			FA = "ON"; 			else 	FA = "OFF";
+		if (fFAOff)		 			FA = "OFF";			else 	FA = "ON";
 		if (fHUDAnalysis) 			HM = "ANALYSIS";	else 	HM = "COMBAT";
 		if (FSSMode) 				FM = "ON"; 			else 	FM = "OFF";
 		if (ReverseThrust) 			RT = "REVERSE"; 	else	RT = "FORWARD";
