@@ -24,10 +24,10 @@
 //			Line 52: 	int fnsGetStatusFileInfo()
 //			Line 88: 	int fnsReadStatusJson()
 //			Line 153: 	int fnsGetKeyValue()
-//			Line 284: 	int fnsProcessFlags()
-//			Line 506: 	int fnsProcessGuiFocus()
-//			Line 545: 	int fnsStartCheck()
-//			line 597:	int fnsMyStates()
+//			Line 281: 	int fnsProcessFlags()
+//			Line 503: 	int fnsProcessGuiFocus()
+//			Line 542: 	int fnsStartCheck()
+//			line 594:	int fnsMyStates()
 	
 // START
 
