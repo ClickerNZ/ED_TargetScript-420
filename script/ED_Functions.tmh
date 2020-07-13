@@ -445,8 +445,6 @@
 		
 		printf("\x0a  !!! GAME STARTED !!!\x0a\x0a");
 		
-		MainKeyMap();													// MapKey profile for 'Game Running'
-		
 		if (SwapRoll4Yaw) {
 			DeferCall(1000, &ActKey, PULSE+KEYON+SwapRollYaw);			// Give above 'MainKeyMap()' call a chance to finish
 		}
@@ -461,9 +459,9 @@
 		DeferCall(1000, &fnSetLEDs, 0);
 		
 		// Align toggle switches and internal status flags if required
-		if (Throttle[EACON])	DeferCall(999, &tgSilentRunning, 1);		
-		if (Throttle[RDRNRM])	DeferCall(999, &tgCargoScoop, 1);
-		if (Throttle[SPDF])		DeferCall(999, &tgReverseThrust, 0);
+		if (Throttle[EACON])	DeferCall(1500, &tgSilentRunning, 1);		
+		if (Throttle[RDRNRM])	DeferCall(1500, &tgCargoScoop, 1);
+		if (Throttle[SPDF])		DeferCall(1500, &tgReverseThrust, 0);
 
 		// Align Joystick curves
 		if (Throttle[APPAT])	fnSetJoystickCurves(NONE, NOPRINT, 0);
@@ -508,6 +506,8 @@
 
 		fnPrintState();
 		printf("\x0a\Script running....waiting for input...\x0a\x0a");
+		
+		MainKeyMap();													// MapKey profile for 'Game Running'
 				
 	}
 
