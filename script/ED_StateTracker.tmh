@@ -110,7 +110,7 @@
 			else {
 				ReadErrorCount = 0;
 				ReadErrorSent = 0;
-				strdel(&myJson, myResult-1, buf);					// removes trailing NUL/garbage
+				myJson[myResult]=0;							// terminates char array with nul
 				
 				newJson = strcmp(&myJson, &lastJson);
 				if (newJson != 0) {
@@ -156,7 +156,6 @@
 			printf("\x0a\Function: fnsGetKeyValue(\"%s\", %d))\x0a", &pattern, vtype);
 		}
 		
-		int 	keystart;
 		int 	PatLen = strlen(&pattern);
 				
 		int 	valstart	= 0;									// string position of where the key value starts
@@ -173,9 +172,7 @@
 		int		ikeyvalue;
 		int		PseudoText = "";
 
-		int 	buf;
 		int		myResult;
-		int		DimSize = 0;		
 		
 		// Find the Key (pattern) ...
 		
