@@ -48,6 +48,8 @@ v4.2.0	- New Minor Release (Elite Dangerous 3.7 - Fleet Carriers)
 		- Tidy up.
 		- Fix typo in fnStateDump()
 		- Revert PrimaryFire and SecondaryFire to DX1 and DX2 respectively
+		- Fix Cargo Scoop timing on game restart
+		- Fix status.json char arrays
 
 v4.1.0b	- created forked branch - this version uses REXEC to read status.json in the background every 500ms.
 		- (it no longer uses TCPCallback)
