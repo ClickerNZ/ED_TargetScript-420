@@ -101,8 +101,8 @@
 			PULSE+UISelect, D(500),
 			LOCK);
 
-		// MACRO: SRV - Board Ship
-		mBoardShip = CHAIN(
+		// MACRO: SRV - Board Ship								// Sometimes scrolling down past the "back" option wraps back to top and sometimes it doesn't
+		mBoardShip = CHAIN(	
 			LOCK+PULSE+RolePanel, D(250),						// 3, spc, down, down, down, down, down, up, up, spc
 			PULSE+UISelect, D(1500),
 			PULSE+UIDown, D(200),
@@ -110,12 +110,14 @@
 			PULSE+UIDown, D(200),
 			PULSE+UIDown, D(200),
 			PULSE+UIDown, D(200),
-			PULSE+UIDown, D(200),								// sticking in 3 extra 'down' to try to get this macro reliable!
+			PULSE+UIDown, D(200),								// adding 5 extra 'down' in case the selector wraps back to top 
+			PULSE+UIDown, D(200),
+			PULSE+UIDown, D(200),
 			PULSE+UIDown, D(200),
 			PULSE+UIDown, D(200),
 			PULSE+UIUp, D(200),
-			PULSE+UIUp, D(200),
-			PULSE+UISelect, D(500),			// Testing...until the macro is reliable
+			PULSE+UIUp, D(200),									// should now be positioned at 'Board Ship'
+//			PULSE+UISelect, D(500),								// remove comment if macro is reliable for you
 			LOCK);
 
 		// MACRO: Display the combined OSD FPS & Bandwidth meters
